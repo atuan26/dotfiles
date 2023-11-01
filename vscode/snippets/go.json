@@ -1,0 +1,9 @@
+{
+  "print": {
+    "prefix": "print",
+    "body": [
+      "fmt.Printf(\"\\x1b[%dm%s\\x1b[0m\\n%+v\\n\", 46, \"[i][i][i] $1 : \", $1)\n$0"
+    ],
+    "description": "Debug struct"
+  }
+}
