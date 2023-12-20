@@ -10,7 +10,7 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
@@ -37,7 +37,6 @@
   // "vim.statusBarColors.easymotioninputmode": "#007ACC",
   // "vim.statusBarColors.surroundinputmode": "#007ACC",
   "black-formatter.args": ["--line-length=88"],
-  "breadcrumbs.enabled": false,
   "conventionalCommits.promptBody": false,
   "conventionalCommits.promptFooter": false,
   "conventionalCommits.scopes": ["build"],
@@ -47,8 +46,7 @@
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.cursorBlinking": "blink",
   "editor.cursorSmoothCaretAnimation": "on",
-  // "editor.cursorSurroundingLines": 10,
-  // "editor.cursorSurroundingLinesStyle": "default",
+  "editor.cursorSurroundingLines": 8,
   "editor.fastScrollSensitivity": 5,
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
@@ -59,19 +57,17 @@
   "editor.guides.highlightActiveIndentation": true,
   "editor.guides.indentation": true,
   "editor.hover.delay": 300,
-  "editor.hover.delay": 300,
   "editor.lineNumbers": "relative",
   "editor.minimap.autohide": true,
   "editor.minimap.renderCharacters": false,
   "editor.minimap.scale": 1,
   "editor.minimap.showSlider": "mouseover",
   "editor.minimap.side": "right",
-  "editor.occurrencesHighlight": true,
+  "editor.occurrencesHighlight": "singleFile",
   "editor.quickSuggestions": {
     "strings": true
   },
   "editor.smoothScrolling": true,
-  "editor.stickyScroll.enabled": true,
   "editor.stickyScroll.enabled": true,
   "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
@@ -146,6 +142,7 @@
     "<C-x>": false
   },
   "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "#a9dc7660",
   "vim.incsearch": true,
   "vim.insertModeKeyBindings": [
     {
@@ -165,8 +162,16 @@
       "before": ["<C-v>"]
     },
     {
-      "before": ["<leader>", "m"],
+      "before": ["<leader>", "b", "t"],
       "commands": ["bookmarks.toggle"]
+    },
+    {
+      "before": ["<leader>", "b", "l"],
+      "commands": ["bookmarks.list"]
+    },
+    {
+      "before": ["<leader>", "g", "c"],
+      "commands": ["git.openChange"]
     },
     {
       "before": ["<leader>", "q"],
@@ -175,10 +180,6 @@
           "command": "workbench.action.closeActiveEditor"
         }
       ]
-    },
-    {
-      "before": ["<leader>", "b"],
-      "commands": ["bookmarks.list"]
     },
     {
       "before": ["<leader>", "p"],
@@ -200,12 +201,61 @@
       ]
     },
     {
+      "before": ["[", "P"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["]", "P"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "p"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    //
+    {
+      "before": ["]", "p"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
       "before": ["<leader>", "e"],
       "commands": ["workbench.view.explorer"]
     },
     {
       "before": ["<leader>", "w"],
       "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["g", "p", "d"],
+      "commands": ["editor.action.peekDefinition"]
+    },
+    {
+      "before": ["g", "h"],
+      "commands": ["editor.action.showDefinitionPreviewHover"]
+    },
+    {
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["g", "p", "i"],
+      "commands": ["editor.action.peekImplementation"]
+    },
+    {
+      "before": ["g", "q"],
+      "commands": ["editor.action.quickFix"]
+    },
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
+    },
+    {
+      "before": ["g", "t"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["g", "p", "t"],
+      "commands": ["editor.action.peekTypeDefinition"]
     }
   ],
   "vim.smartRelativeLine": true,
@@ -221,7 +271,6 @@
     }
   ],
   "window.titleBarStyle": "custom",
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     // "statusBar.background": "#BF616A",
     // "statusBar.foreground": "#434C5E",
@@ -252,11 +301,24 @@
   "workbench.colorTheme": "Dracula",
   "workbench.editor.tabCloseButton": "off",
   "workbench.hover.delay": 1,
-  "workbench.hover.delay": 1,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.layoutControl.enabled": false,
   "workbench.layoutControl.type": "menu",
   "workbench.list.smoothScrolling": true,
   "workbench.startupEditor": "none",
-  "zenMode.hideLineNumbers": false
+  "zenMode.hideLineNumbers": false,
+  "gitlens.changes.locations": ["gutter", "line", "overview"],
+  "gitlens.hovers.changesDiff": "hunk",
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "git.showActionButton": {
+    "commit": false,
+    "publish": false,
+    "sync": false
+  },
+  "scm.showActionButton": false,
+  "scm.showInputActionButton": false,
+  "git.showCommitInput": false,
+  "git.defaultBranchName": "master",
+  "git.openDiffOnClick": false
 }
