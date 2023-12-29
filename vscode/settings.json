@@ -42,7 +42,7 @@
   "conventionalCommits.scopes": ["build"],
   "conventionalCommits.showNewVersionNotes": false,
   "editor.accessibilitySupport": "off",
-  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.enabled": false,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.cursorBlinking": "blink",
   "editor.cursorSmoothCaretAnimation": "on",
@@ -54,7 +54,6 @@
   "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveBracketPair": true,
-  "editor.guides.highlightActiveIndentation": true,
   "editor.guides.indentation": true,
   "editor.hover.delay": 300,
   "editor.lineNumbers": "relative",
@@ -63,13 +62,12 @@
   "editor.minimap.scale": 1,
   "editor.minimap.showSlider": "mouseover",
   "editor.minimap.side": "right",
-  "editor.occurrencesHighlight": "singleFile",
+  "editor.occurrencesHighlight": "off",
   "editor.quickSuggestions": {
     "strings": true
   },
   "editor.smoothScrolling": true,
   "editor.stickyScroll.enabled": true,
-  "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
@@ -320,5 +318,6 @@
   "scm.showInputActionButton": false,
   "git.showCommitInput": false,
   "git.defaultBranchName": "master",
-  "git.openDiffOnClick": false
+  "scm.showOutgoingChanges": "never",
+  "scm.showIncomingChanges": "never"
 }
