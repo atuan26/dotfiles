@@ -148,8 +148,28 @@
       "before": ["j", "k"]
     }
   ],
-  "vim.insertModeKeyBindingsNonRecursive": [],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-l>"],
+      "after": [
+        "<c-g>",
+        "u",
+        "<Esc>",
+        "[",
+        "s",
+        "1",
+        "z",
+        "=",
+        "`",
+        "]",
+        "a",
+        "<c-g>",
+        "u"
+      ]
+    }
+  ],
   "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [],
   "vim.normalModeKeyBindings": [
     {
       "after": ["\"", "+", "y"],
@@ -170,6 +190,26 @@
     {
       "before": ["<leader>", "g", "c"],
       "commands": ["git.openChange"]
+    },
+    {
+      "before": ["<leader>", "g", "s"],
+      "commands": ["git.stage"]
+    },
+    {
+      "before": ["<leader>", "g", "u"],
+      "commands": ["git.unstage"]
+    },
+    {
+      "before": ["<leader>", "g", "b"],
+      "commands": ["gitlens.toggleFileBlame"]
+    },
+    {
+      "before": ["<leader>", "g", "["],
+      "commands": ["gitlens.diffWithPreviousInDiffRight"]
+    },
+    {
+      "before": ["<leader>", "g", "]"],
+      "commands": ["gitlens.diffWithNextInDiffRight"]
     },
     {
       "before": ["<leader>", "q"],
@@ -222,6 +262,10 @@
     {
       "before": ["<leader>", "w"],
       "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["g", "l"],
+      "commands": ["editor.action.openLink"]
     },
     {
       "before": ["g", "p", "d"],
@@ -319,5 +363,6 @@
   "git.showCommitInput": false,
   "git.defaultBranchName": "master",
   "scm.showOutgoingChanges": "never",
-  "scm.showIncomingChanges": "never"
+  "scm.showIncomingChanges": "never",
+  "vsicons.dontShowNewVersionMessage": true
 }
