@@ -131,7 +131,7 @@
     "<C-b>": false,
     "<C-c>": false,
     "<C-d>": false,
-    // "<C-s>": false,
+    "<C-n>": false,
     "<C-f>": false,
     "<C-j>": false,
     "<C-p>": false,
@@ -186,6 +186,10 @@
     {
       "before": ["<leader>", "b", "l"],
       "commands": ["bookmarks.list"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["workbench.action.experimental.quickTextSearch"]
     },
     {
       "before": ["<leader>", "g", "c"],
