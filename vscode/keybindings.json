@@ -168,10 +168,6 @@
     "when": "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /blameable/"
   },
   {
-    "key": "ctrl+tab",
-    "command": "workbench.action.showAllEditors"
-  },
-  {
     "key": "ctrl+k ctrl+p",
     "command": "-workbench.action.showAllEditors"
   }

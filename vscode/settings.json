@@ -192,6 +192,10 @@
       "commands": ["workbench.action.experimental.quickTextSearch"]
     },
     {
+      "before": ["<leader>", "<tab>"],
+      "commands": ["workbench.action.showAllEditors"]
+    },
+    {
       "before": ["<leader>", "g", "c"],
       "commands": ["git.openChange"]
     },
