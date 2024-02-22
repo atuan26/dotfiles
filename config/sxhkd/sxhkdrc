@@ -1,0 +1,8 @@
+alt + shift + x
+  exec warpd --hint2
+
+alt + shift + c
+  warpd --normal
+
+alt + shift + g
+  warpd --grid

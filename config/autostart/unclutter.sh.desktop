@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/bin/unclutter
+Icon=dialog-scripts
+Name=unclutter.sh
+Path=
+Type=Application
+X-KDE-AutostartScript=true
