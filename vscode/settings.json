@@ -269,7 +269,7 @@
     },
     {
       "before": ["<leader>", "w"],
-      "commands": ["workbench.action.files.save"]
+      "commands": ["workbench.action.files.saveWithoutFormatting"]
     },
     {
       "before": ["g", "l"],
@@ -371,6 +371,5 @@
   "git.showCommitInput": false,
   "git.defaultBranchName": "master",
   "scm.showOutgoingChanges": "never",
-  "scm.showIncomingChanges": "never",
-  "vsicons.dontShowNewVersionMessage": true
+  "scm.showIncomingChanges": "never"
 }

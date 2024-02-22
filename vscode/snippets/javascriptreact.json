@@ -1,0 +1,21 @@
+{
+"Log object": {
+    "prefix": ["log", "clg"],
+    "body": ["console.log('${2}${1:object} = ', ${1:object})", "$0"],
+    "description": "Log output to console"
+  },
+  "function component": {
+    "prefix": "rafce",
+    "body": [
+      "import React from 'react'",
+      "",
+      "",
+      "const ${1:Component} = (props) => {",
+      "\treturn <div>$0</div>",
+      "}",
+      "",
+      "",
+      "export default ${1:Component}"
+    ]
+  }
+}
