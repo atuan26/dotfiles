@@ -174,10 +174,31 @@
   {
     "key": "ctrl+shift+\\",
     "command": "-editor.action.jumpToBracket",
-    "when": "editorTextFocus"
+    "when": "isLinux && editorTextFocus"
   },
   {
     "key": "ctrl+shift+\\",
-    "command": "workbench.action.splitEditorDown"
+    "command": "workbench.action.splitEditorDown",
+    "when": "isLinux && editorTextFocus"
+  },
+  {
+    "key": "meta+shift+\\",
+    "command": "-editor.action.jumpToBracket",
+    "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "meta+shift+\\",
+    "command": "workbench.action.splitEditorDown",
+    "when": "isMac && editorTextFocus"
+  },
+  {
+    "key": "meta+shift+g",
+    "command": "workbench.view.scm",
+    "when": "isMac && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "-workbench.view.scm",
+    "when": "isMac && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   }
 ]
