@@ -4,26 +4,16 @@
 ## Linux
 
 ### Ubuntu
-1. Requirement
-- Install `apt-clone`:
-    ```bash
-    sudo apt install apt-clone
-    ```
-2. Backup:
-   - Backup installed packages:
-     ```
-     sudo apt-clone clone --with-dpkg-repack backup-$(date '+%Y-%m-%d-%H-%M-%S')
-     ```
-   - View backup file details:
-     ```
-     apt-clone info <apt-clone.tar.gz> 
-     ```
-3. Restore:
-    - Show diff: `apt-clone show-diff <apt-clone.tar.gz>`
-    - Restore installed packages:
-        ```
-        sudo apt-clone restore <apt-clone-state.tar.gz>
-        ```
+
+- apt-clone:
+  -Install: `sudo apt install apt-clone`
+  - Backup installed packages: `sudo apt-clone clone --with-dpkg-repack backup-$(date '+%Y-%m-%d-%H-%M-%S')`
+  - View backup file details:`apt-clone info <apt-clone.tar.gz>`
+  - Show diff: `apt-clone show-diff <apt-clone.tar.gz>`
+  - Restore installed packages: `sudo apt-clone restore <apt-clone-state.tar.gz>`
+- Gnome
+  - Backup: `dconf dump / > gnome-settings.dconf`
+  - Restore: `dconf load -f / < gnome-settings.dconf`
 
 
 ## MacOS
@@ -35,6 +25,4 @@ brew bundle dump
 
 ## VSCode
 
-```
-code --install-extension golf1052.code-sync
-```
+- Install Code sync: `code --install-extension golf1052.code-sync`
