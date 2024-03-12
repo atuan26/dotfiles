@@ -62,10 +62,6 @@
     "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
   },
   {
-    "key": "alt+t",
-    "command": "workbench.action.toggleTabsVisibility"
-  },
-  {
     "key": "alt+[",
     "command": "runCommands",
     "args": {
@@ -200,5 +196,22 @@
     "key": "ctrl+shift+g",
     "command": "-workbench.view.scm",
     "when": "isMac && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "alt+m",
+    "command": "workbench.action.toggleMenuBar"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "workbench.action.hideEditorTabs"
+  },
+  {
+    "key": "alt+t",
+    "command": "workbench.action.showMultipleEditorTabs"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "notifications.focusToasts",
+    "when": "notificationToastsVisible"
   }
 ]

@@ -306,6 +306,15 @@
     {
       "before": ["g", "p", "t"],
       "commands": ["editor.action.peekTypeDefinition"]
+    },
+    {
+      // TODO: go to next, prev function
+      "before": ["g", "f"],
+      "after": [""]
+    },
+    {
+      "before": ["g", "F"],
+      "after": [""]
     }
   ],
   "vim.smartRelativeLine": true,
@@ -352,7 +361,6 @@
   "workbench.editor.tabCloseButton": "off",
   "workbench.hover.delay": 1,
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.layoutControl.enabled": false,
   "workbench.layoutControl.type": "menu",
   "workbench.list.smoothScrolling": true,
   "workbench.startupEditor": "none",
@@ -371,5 +379,11 @@
   "git.showCommitInput": false,
   "git.defaultBranchName": "master",
   "scm.showOutgoingChanges": "never",
-  "scm.showIncomingChanges": "never"
+  "scm.showIncomingChanges": "never",
+  "window.customTitleBarVisibility": "auto",
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "compact",
+  "workbench.editor.showTabs": "none",
+  "keyboard.dispatch": "keyCode",
+  "breadcrumbs.enabled": false
 }
