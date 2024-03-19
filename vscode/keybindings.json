@@ -28,7 +28,6 @@
   },
   {
     "key": "meta+r",
-    "when": "isLinux",
     "command": "workbench.action.openRecent"
   },
   {
@@ -190,7 +189,7 @@
   {
     "key": "meta+shift+g",
     "command": "workbench.view.scm",
-    "when": "isMac && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+    "when": "workbench.scm.active"
   },
   {
     "key": "ctrl+shift+g",
