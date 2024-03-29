@@ -3,6 +3,15 @@
 
 ## Linux
 
+### KDE
+
+- [config](https://github.com/shalva97/kde-configuration-files)
+
+- Install [konsave](https://github.com/Prayag2/konsave): `python -m pip install konsave`
+- Save profile: `konsave --save <profile name>`
+- Apply profile: `konsave --apply <profile name>`
+
+
 ### Ubuntu
 
 - apt-clone:

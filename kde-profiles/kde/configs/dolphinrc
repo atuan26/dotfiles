@@ -1,0 +1,29 @@
+[CompactMode]
+FontWeight=50
+
+[DetailsMode]
+FontWeight=50
+PreviewSize=22
+
+[General]
+GlobalViewProps=false
+Version=201
+ViewPropsTimestamp=2023,12,19,16,48,30.406
+
+[IconsMode]
+FontWeight=50
+
+[KPropertiesDialog]
+HDMI-2 Height 1920x1080=583
+HDMI-2 Width 1920x1080=464
+
+[MainWindow]
+HDMI-2 Height 1920x1080=648
+HDMI-2 Width 1920x1080=1061
+HDMI-2 XPosition 1920x1080=253
+HDMI-2 YPosition 1920x1080=299
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs

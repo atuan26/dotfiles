@@ -1,0 +1,16 @@
+[$Version]
+update_info=kscreenlocker.upd:0.1-autolock
+
+[Daemon]
+LockGrace=10
+Timeout=15
+
+[Greeter]
+WallpaperPlugin=org.kde.color
+
+[Greeter][LnF][General]
+alwaysShowClock=false
+showMediaControls=false
+
+[Greeter][Wallpaper][org.kde.color][General]
+Color=0,0,0
