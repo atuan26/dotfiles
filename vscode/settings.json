@@ -10,19 +10,19 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+      "source.organizeImports": "never"
     },
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": false,
     "editor.formatOnType": false
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   // "vim.statusBarColorControl": false,
   // "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
@@ -50,7 +50,7 @@
   "editor.fastScrollSensitivity": 5,
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveBracketPair": true,
@@ -188,8 +188,16 @@
       "commands": ["bookmarks.list"]
     },
     {
-      "before": ["<leader>", "f"],
+      "before": ["<leader>", "s"],
       "commands": ["workbench.action.experimental.quickTextSearch"]
+    },
+    {
+      "before": ["<leader>", "f", "d"],
+      "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["<leader>", "f", "i"],
+      "commands": ["ruff.executeOrganizeImports"]
     },
     {
       "before": ["<leader>", "<tab>"],
@@ -383,7 +391,5 @@
   "window.customTitleBarVisibility": "auto",
   "window.commandCenter": false,
   "window.menuBarVisibility": "compact",
-  "workbench.editor.showTabs": "none",
-  "keyboard.dispatch": "keyCode",
-  "breadcrumbs.enabled": false
+  "keyboard.dispatch": "keyCode"
 }
