@@ -212,5 +212,10 @@
     "key": "ctrl+tab",
     "command": "notifications.focusToasts",
     "when": "notificationToastsVisible"
+  },
+  {
+    "key": "ctrl+k ctrl+f",
+    "command": "-editor.action.formatSelection",
+    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
   }
 ]

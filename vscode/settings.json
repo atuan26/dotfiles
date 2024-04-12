@@ -12,7 +12,7 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "never"
     },
-    "editor.defaultFormatter": "charliermarsh.ruff",
+    // "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": false,
     "editor.formatOnType": false
   },
@@ -335,6 +335,10 @@
     {
       "after": ["\"", "+", "p"],
       "before": ["<C-v>"]
+    },
+    {
+      "before": ["<leader>", "f", "d"],
+      "commands": ["editor.action.formatSelection"]
     }
   ],
   "window.titleBarStyle": "custom",
@@ -375,7 +379,6 @@
   "zenMode.hideLineNumbers": false,
   "gitlens.changes.locations": ["gutter", "line", "overview"],
   "gitlens.hovers.changesDiff": "hunk",
-  "workbench.activityBar.location": "hidden",
   "workbench.editor.tabActionCloseVisibility": false,
   "git.showActionButton": {
     "commit": false,
