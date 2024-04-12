@@ -6,21 +6,43 @@ OpenGLIsUnsafe=false
 
 [Desktops]
 Id_1=2c4f0a54-635a-40a2-9249-5612ed55e0a3
-Number=1
+Id_2=a1561f05-72c2-4019-91c6-b5783bc9844a
+Id_3=74b9bfc7-cd13-4c64-9ea8-615933070b7b
+Id_4=0ba53a59-3594-46ce-9809-5d2c0c3d8273
+Id_5=06646290-3f45-4084-98f9-0f13e90df9f7
+Name_1=Main Desktop.....
+Name_2=Code.....
+Name_3=Terminal.....
+Name_4=Other (Notes,...).....
+Name_5=New Desktop.....
+Number=5
 Rows=1
 
 [Effect-Slide]
-Duration=10
-SlideBackground=false
+Duration=30
+SlideDocks=true
 
 [ElectricBorders]
+BottomLeft=ApplicationLauncher
 BottomRight=ShowDesktop
+TopRight=KRunner
 
 [Plugins]
+desktopchangeosdEnabled=true
 forceblurEnabled=true
+kwin4_effect_fadedesktopEnabled=true
+slideEnabled=false
 
-[TabBox]
-LayoutName=org.kde.breeze.desktop
+[Script-desktopchangeosd]
+PopupHideDelay=900
+TextOnly=true
+
+[SubSession: c1edbf06-e7f3-4048-992d-b06ca88cf71a]
+active=-1
+count=0
+
+[Windows]
+ElectricBorderCooldown=250
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=S

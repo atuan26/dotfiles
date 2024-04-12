@@ -6,8 +6,8 @@ wheel:Vertical;NoModifier=org.kde.switchdesktop
 RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][1]
-ItemGeometries-1920x1080=Applet-32:1232,32,192,240,0;Applet-31:1440,32,192,240,0;Applet-29:1648,32,192,240,0;Applet-30:48,656,288,288,0;Applet-33:1232,272,608,176,0;
-ItemGeometriesHorizontal=Applet-32:1232,32,192,240,0;Applet-31:1440,32,192,240,0;Applet-29:1648,32,192,240,0;Applet-30:48,656,288,288,0;Applet-33:1232,272,608,176,0;
+ItemGeometries-1920x1080=Applet-32:1232,32,192,240,0;Applet-31:1440,32,192,240,0;Applet-29:1648,32,192,240,0;Applet-30:48,656,384,384,0;Applet-33:1232,272,608,176,0;
+ItemGeometriesHorizontal=Applet-32:1232,32,192,240,0;Applet-31:1440,32,192,240,0;Applet-29:1648,32,192,240,0;Applet-30:48,656,384,384,0;Applet-33:1232,272,608,176,0;
 activityId=4640c75d-b6b1-491d-8667-082d3dc42eab
 formfactor=0
 immutability=1
@@ -164,7 +164,7 @@ immutability=1
 plugin=org.kde.milou
 
 [Containments][2][Applets][45][Configuration]
-PreloadWeight=55
+PreloadWeight=60
 
 [Containments][2][Applets][46]
 immutability=1
@@ -187,15 +187,6 @@ PreloadWeight=0
 
 [Containments][2][General]
 AppletOrder=42;45;28;7;46
-
-[Containments][34]
-activityId=c1edbf06-e7f3-4048-992d-b06ca88cf71a
-formfactor=0
-immutability=1
-lastScreen=0
-location=0
-plugin=org.kde.plasma.folder
-wallpaperplugin=org.kde.image
 
 [Containments][8]
 activityId=
@@ -253,7 +244,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][8][Applets][15][Configuration]
-PreloadWeight=25
+PreloadWeight=35
 
 [Containments][8][Applets][18]
 immutability=1
@@ -299,5 +290,5 @@ launchers=applications:google-chrome.desktop,file:///snap/code/148/usr/share/cod
 maxStripes=1
 
 [ScreenMapping]
-itemsOnDisabledScreens=
-screenMapping=desktop:/proxy.desktop,0,desktop:/dbForge Studio for MySQL.desktop,0,desktop:/dbForge Studio for MySQL.lnk,0,desktop:/dbForge Studio for SQL Server.desktop,0,desktop:/dbForge Studio for SQL Server.lnk,0
+itemsOnDisabledScreens=0,5,desktop:/dbForge Studio for MySQL.lnk,desktop:/dbForge Studio for MySQL.desktop,desktop:/dbForge Studio for SQL Server.desktop,desktop:/proxy.desktop,desktop:/dbForge Studio for SQL Server.lnk
+screenMapping=

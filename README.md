@@ -8,8 +8,8 @@
 - [config](https://github.com/shalva97/kde-configuration-files)
 
 - Install [konsave](https://github.com/Prayag2/konsave): `python -m pip install konsave`
-- Save profile: `konsave --save <profile name>`
-- Apply profile: `konsave --apply <profile name>`
+- Save profile: `konsave --save <profile name>`. Eg: `konsave --save kde-profiles/kde`
+- Apply profile: `konsave --apply <profile name>`. Eg: `konsave --apply kde-profiles/kde`
 
 
 ### Ubuntu

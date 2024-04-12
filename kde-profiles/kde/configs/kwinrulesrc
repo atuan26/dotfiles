@@ -1,6 +1,54 @@
 [$Version]
 update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
 
+[01fe7bca-3b9f-4064-a78c-679fb49defb1]
+Description=VScode on Desktop 2
+above=true
+aboverule=3
+desktops=a1561f05-72c2-4019-91c6-b5783bc9844a
+desktopsrule=2
+fullscreen=true
+fullscreenrule=3
+size=1920,1080
+sizerule=3
+wmclass=code code
+wmclasscomplete=true
+wmclassmatch=1
+
+[6a87feae-075c-4572-8c6f-c3c7d6765954]
+Description=Chrome on Desktop 1
+aboverule=3
+desktops=2c4f0a54-635a-40a2-9249-5612ed55e0a3
+desktopsrule=2
+typerule=2
+windowrole=browser
+wmclass=google-chrome google-chrome
+wmclasscomplete=true
+wmclassmatch=1
+
+[868936fe-8645-4c7a-aabd-99d8ba959bc1]
+Description=Settings for ibus
+types=4
+wmclass=ibus
+wmclassmatch=1
+
+[General]
+count=4
+rules=6a87feae-075c-4572-8c6f-c3c7d6765954,01fe7bca-3b9f-4064-a78c-679fb49defb1,fb633785-9031-4244-85bc-47da1cc60f07,868936fe-8645-4c7a-aabd-99d8ba959bc1
+
 [b8a339ca-46f2-451e-9272-c0d612927273]
 Description=New window settings
+wmclassmatch=1
+
+[fb633785-9031-4244-85bc-47da1cc60f07]
+Description=Terminal in Desktop 3
+above=true
+aboverule=3
+desktops=74b9bfc7-cd13-4c64-9ea8-615933070b7b
+desktopsrule=2
+fullscreen=true
+fullscreenrule=3
+title=Hyper
+wmclass=hyper hyper
+wmclasscomplete=true
 wmclassmatch=1

@@ -2,9 +2,6 @@
 HDMI-2 Height 1920x1080=453
 HDMI-2 Width 1920x1080=437
 
-[PlasmaTransientsConfig]
-PreloadWeight=0
-
 [PlasmaViews][Panel 2]
 alignment=132
 panelOpacity=0

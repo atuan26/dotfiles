@@ -1,6 +1,9 @@
 [$Version]
 update_info=ksmserver_update_loginMode_value.upd:ksmserver_update_loginMode_value_default_enum
 
+[General]
+loginMode=restoreSavedSession
+
 [LegacySession: saved at previous logout]
 count=0
 
@@ -21,3 +24,6 @@ restartStyleHint3=0
 userId1=tuanna
 userId2=tuanna
 userId3=tuanna
+
+[SubSession: c1edbf06-e7f3-4048-992d-b06ca88cf71a]
+count=0
