@@ -151,10 +151,12 @@
   },
   {
     "key": "alt+right",
+    "when": "isLinux && editorTextFocus",
     "command": "workbench.action.nextEditor"
   },
   {
     "key": "alt+left",
+    "when": "isLinux && editorTextFocus",
     "command": "workbench.action.previousEditor"
   },
   {

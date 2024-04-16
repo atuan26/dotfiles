@@ -394,5 +394,6 @@
   "window.customTitleBarVisibility": "auto",
   "window.commandCenter": false,
   "window.menuBarVisibility": "compact",
-  "keyboard.dispatch": "keyCode"
+  "keyboard.dispatch": "keyCode",
+  "workbench.activityBar.location": "hidden"
 }
