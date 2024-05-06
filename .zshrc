@@ -105,7 +105,6 @@ alias py="python3"
 alias python="python3"
 alias cls="clear"
 alias catt=bat
-alias ls='exa'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

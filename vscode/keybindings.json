@@ -264,18 +264,18 @@
     "key": "ctrl+k ctrl+f",
     "command": "-editor.action.formatSelection",
     "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
-},
-{
+  },
+  {
     "key": "cmd+o",
     "command": "-workbench.action.files.openFile",
     "when": "false"
-},
-{
+  },
+  {
     "key": "cmd+o",
     "command": "-workbench.action.files.openFolderViaWorkspace",
     "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
-},
-{
+  },
+  {
     "key": "cmd+o",
     "command": "-workbench.action.files.openFileFolder",
     "when": "isMacNative && openFolderWorkspaceSupport"

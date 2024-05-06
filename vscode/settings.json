@@ -358,7 +358,7 @@
       "commands": ["editor.action.formatSelection"]
     }
   ],
-  //   "window.titleBarStyle": "native",
+  "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
     "statusBar.background": "#261d36",
     // "statusBar.foreground": "#434C5E",
@@ -443,14 +443,12 @@
     // ".monaco-scrollable-element > .shadow.top": "display: none !important",
     // ".monaco-split-view2 > .monaco-scrollable-element > .split-view-container": "background: #191521 !important"
   },
-  "animations.Install-Method": "Apc Customize UI++",
   "material-icon-theme.hidesExplorerArrows": true,
   "workbench.tree.renderIndentGuides": "none",
   "workbench.sideBar.location": "right",
   "workbench.editor.showTabs": "none",
   "workbench.layoutControl.enabled": false,
   "workbench.tips.enabled": false,
-  "editor.hover.enabled": false,
   "editor.showFoldingControls": "never",
   "editor.detectIndentation": false,
   "editor.fontSize": 14,
@@ -463,7 +461,6 @@
   "terminal.integrated.lineHeight": 1.5,
   "terminal.integrated.fontSize": 14,
   "workbench.activityBar.location": "hidden",
-  "animations.Enabled": true,
   "whichkey.delay": 200,
   "whichkey.bindings": [
     {
@@ -899,5 +896,8 @@
         }
       ]
     }
+  ],
+  "apc.imports": [
+    "file://${userHome}/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.2/dist/updateHandler.js"
   ]
 }
