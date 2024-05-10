@@ -181,11 +181,11 @@
       "before": ["<C-v>"]
     },
     {
-      "before": ["<leader>", "b", "t"],
+      "before": ["<leader>", "m", "t"],
       "commands": ["bookmarks.toggle"]
     },
     {
-      "before": ["<leader>", "b", "l"],
+      "before": ["<leader>", "m", "l"],
       "commands": ["bookmarks.list"]
     },
     {
@@ -198,7 +198,7 @@
     },
     {
       "before": ["<leader>", "f", "i"],
-      "commands": ["ruff.executeOrganizeImports"]
+      "commands": ["editor.action.organizeImports"]
     },
     {
       "before": ["<leader>", "<tab>"],
@@ -545,9 +545,9 @@
       "bindings": [
         {
           "key": "s",
-          "name": "Save file",
+          "name": "Search text in project",
           "type": "command",
-          "command": "workbench.action.files.save"
+          "command": "workbench.action.quickTextSearch"
         },
         {
           "key": "S",
@@ -577,6 +577,12 @@
           "command": "workbench.action.files.copyPathOfActiveFile"
         },
         {
+            "key": "i",
+            "name": "Organize Imports",
+            "type": "command",
+            "command": "editor.action.organizeImports"
+        },
+        {
           "key": "f",
           "name": "Format file",
           "type": "command",
@@ -597,9 +603,9 @@
         },
         {
           "key": "c",
-          "name": "Commit",
+          "name": "Open Change",
           "type": "command",
-          "command": "git.commit"
+          "command": "git.openChange"
         },
         {
           "key": "d",
@@ -621,15 +627,39 @@
         },
         {
           "key": "s",
-          "name": "Status",
+          "name": "Stage selected",
           "type": "command",
-          "command": "workbench.view.scm"
+          "command": "git.stageSelectedRanges"
         },
         {
-          "key": "g",
-          "name": "Gitlens Graph",
-          "type": "command",
-          "command": "gitlens.showGraphPage"
+            "key": "S",
+            "name": "Stage file",
+            "type": "command",
+            "command": "git.stage"
+        },
+        {
+            "key": "r",
+            "name": "Revert selected",
+            "type": "command",
+            "command": "git.revertSelectedRanges"
+        },        
+        {
+            "key": "u",
+            "name": "Unstage file",
+            "type": "command",
+            "command": "git.unstage"
+        },
+        {
+            "key": "[",
+            "name": "Diff with Prev",
+            "type": "command",
+            "command": "gitlens.diffWithPreviousInDiffRight"
+        },
+        {
+            "key": "]",
+            "name": "Diff with Next",
+            "type": "command",
+            "command": "gitlens.diffWithNextInDiffRight"
         }
       ]
     },

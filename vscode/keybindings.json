@@ -120,72 +120,72 @@
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
   },
   {
-    "key": "ctrl+j",
+    "key": "ctrl+shift+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+k",
+    "key": "ctrl+shift+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+l",
+    "key": "ctrl+shift+l",
     "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+h",
+    "key": "ctrl+shift+h",
     "command": "workbench.action.closeQuickOpen",
     "when": "inQuickOpen"
   },
   {
-    "key": "cmd+j",
+    "key": "cmd+shift+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "isMac && inQuickOpen"
   },
   {
-    "key": "cmd+k",
+    "key": "cmd+shift+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "isMac && inQuickOpen"
   },
   {
-    "key": "cmd+l",
+    "key": "cmd+shift+l",
     "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen"
   },
   {
-    "key": "cmd+h",
+    "key": "cmd+shift+h",
     "command": "workbench.action.closeQuickOpen",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+j",
+    "key": "ctrl+shift+j",
     "command": "selectNextSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "ctrl+k",
+    "key": "ctrl+shift+k",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "ctrl+l",
+    "key": "ctrl+shift+l",
     "command": "acceptSelectedSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+j",
+    "key": "cmd+shift+j",
     "command": "selectNextSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+k",
+    "key": "cmd+shift+k",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+l",
+    "key": "cmd+shift+l",
     "command": "acceptSelectedSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
@@ -279,5 +279,25 @@
     "key": "cmd+o",
     "command": "-workbench.action.files.openFileFolder",
     "when": "isMacNative && openFolderWorkspaceSupport"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "ctrl+,",
+    "command": "workbench.action.togglePanel"
   }
 ]
