@@ -439,7 +439,8 @@
     ".panel .composite.title": "visibility: hidden !important; height: 0px",
     ".title.show-file-icons .label-container .monaco-icon-label.file-icon": "padding-bottom: 6px !important",
     ".sidebar .title-label h2": "line-height: 2.8 !important",
-    ".monaco-editor .scroll-decoration": "display: none !important"
+    ".monaco-editor .scroll-decoration": "display: none !important",
+    "div.monaco-grid-view > div > div > div.monaco-scrollable-element.mac > div.split-view-container > div:nth-child(3) > div > div > div.monaco-scrollable-element.mac > div.split-view-container > div.split-view-view.visible > div > div > div.sash-container > div" : "border-top: 1px solid #6272a4 !important"
     // ".monaco-scrollable-element > .shadow.top": "display: none !important",
     // ".monaco-split-view2 > .monaco-scrollable-element > .split-view-container": "background: #191521 !important"
   },

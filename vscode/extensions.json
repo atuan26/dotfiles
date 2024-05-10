@@ -2,10 +2,11 @@
     "extensions": [
         "albert.TabOut",
         "alefragnani.Bookmarks",
-        "be5invis.vscode-custom-css",
+        "charliermarsh.ruff",
         "csstools.postcss",
         "donjayamanne.githistory",
         "dracula-theme.theme-dracula",
+        "drcika.apc-extension",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "formulahendry.auto-close-tag",
