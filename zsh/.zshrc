@@ -231,17 +231,41 @@ _fzf_complete_doge() {
 
 complete -F _fzf_complete_doge -o default -o bashdefault doge
 
-_fzf_complete_pass() {
-  local pwdir="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-  _fzf_complete  '+m' --reverse --prompt="Select password: " -- "$@" < <(
-    find "$pwdir" -name "*.gpg" -type f -exec basename {} \; |
-    sed -e 's/\.gpg$//'
-  )
-}
+# _fzf_complete_pass() {
+#   local pwdir="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+#   _fzf_complete  '+m' --reverse --prompt="Select password: " -- "$@" < <(
+#     find "$pwdir" -name "*.gpg" -type f -exec basename {} \; |
+#     sed -e 's/\.gpg$//'
+#   )
+# }
+# 
+# complete -F _fzf_complete_pass  -o default pass
+fpath=($ZDOTDIR/external $fpath)
+autoload -U compinit && compinit
 
-complete -F _fzf_complete_pass  -o default pass
+_comp_options+=(globdots)
 
-source ~/.fzf-conventional-commit/function.sh
+source "$XDG_CONFIG_HOME/zsh/aliases"
+
+bindkey -v
+export KEYTIMEOUT=1
+autoload -Uz cursor_mode && cursor_mode
+
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+
+# make search up and down work, so partially type and hit up/down to find relevant stuff
+bindkey '^[[A' up-line-or-search                                                
+bindkey '^[[B' down-line-or-search
+
 
 PATH="$HOME/.local/bin:$PATH"
+eval "$(fzf --zsh)"
 eval "$(fnm env --use-on-cd)"
+eval "$(zoxide init zsh)"
+
+source $DOTFILES/zsh/external/.fzf-conventional-commit/function.sh
