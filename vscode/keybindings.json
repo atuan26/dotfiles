@@ -16,6 +16,26 @@
     "when": "isLinux && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   },
   {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "ctrl+g",
+    "command": "workbench.action.togglePanel"
+  },
+  {
     "key": "alt+a",
     "command": "workbench.action.toggleActivityBarVisibility"
   },
@@ -120,72 +140,72 @@
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
   },
   {
-    "key": "ctrl+shift+j",
+    "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+shift+k",
+    "key": "ctrl+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+shift+l",
+    "key": "ctrl+l",
     "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+shift+h",
+    "key": "ctrl+h",
     "command": "workbench.action.closeQuickOpen",
     "when": "inQuickOpen"
   },
   {
-    "key": "cmd+shift+j",
+    "key": "cmd+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "isMac && inQuickOpen"
   },
   {
-    "key": "cmd+shift+k",
+    "key": "cmd+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "isMac && inQuickOpen"
   },
   {
-    "key": "cmd+shift+l",
+    "key": "cmd+l",
     "command": "workbench.action.acceptSelectedQuickOpenItem",
     "when": "inQuickOpen"
   },
   {
-    "key": "cmd+shift+h",
+    "key": "cmd+h",
     "command": "workbench.action.closeQuickOpen",
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+shift+j",
+    "key": "ctrl+j",
     "command": "selectNextSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "ctrl+shift+k",
+    "key": "ctrl+k",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "ctrl+shift+l",
+    "key": "ctrl+l",
     "command": "acceptSelectedSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+shift+j",
+    "key": "cmd+j",
     "command": "selectNextSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+shift+k",
+    "key": "cmd+k",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
   {
-    "key": "cmd+shift+l",
+    "key": "cmd+l",
     "command": "acceptSelectedSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
   },
@@ -280,24 +300,4 @@
     "command": "-workbench.action.files.openFileFolder",
     "when": "isMacNative && openFolderWorkspaceSupport"
   },
-  {
-    "key": "ctrl+h",
-    "command": "workbench.action.navigateLeft"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "workbench.action.navigateRight"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "workbench.action.navigateUp"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "workbench.action.navigateDown"
-  },
-  {
-    "key": "ctrl+,",
-    "command": "workbench.action.togglePanel"
-  }
 ]
