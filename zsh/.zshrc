@@ -149,7 +149,7 @@ if [ -f '/Users/pro/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/U
 
 export PATH="$PATH:~/.local/bin/"
 eval $(thefuck --alias)
-
+# --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up'
 export FZF_DEFAULT_OPTS="--bind '?:change-preview-window:up|' --preview 'bat -n --color=always {}' --preview-window hidden"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
 
@@ -262,6 +262,10 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey '^[[A' up-line-or-search                                                
 bindkey '^[[B' down-line-or-search
 
+# change clear shell from C-l to C-g
+bindkey -r '^l'
+bindkey -r '^g'
+bindkey -s '^g' 'clear\n'
 
 PATH="$HOME/.local/bin:$PATH"
 eval "$(fzf --zsh)"
@@ -269,3 +273,4 @@ eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
 
 source $DOTFILES/zsh/external/.fzf-conventional-commit/function.sh
+source $DOTFILES/zsh/scripts.sh

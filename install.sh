@@ -276,9 +276,23 @@
 # echo -e
 # success "Done."
 DOTFILES="$(pwd)"
+##########
+# zsh    #
+##########
 mkdir -p "$HOME/.config/zsh"
 ln -sf "$HOME/dotfiles/zsh/.zshenv" "$HOME"
 ln -sf "$HOME/dotfiles/zsh/.zshrc" "$HOME/.config/zsh"
 ln -sf "$HOME/dotfiles/zsh/aliases" "$HOME/.config/zsh/aliases"
 rm -rf "$HOME/.config/zsh/external"
 ln -sf "$HOME/dotfiles/zsh/external" "$HOME/.config/zsh"
+
+########
+# tmux #
+########
+mkdir -p "$XDG_CONFIG_HOME/tmux"
+ln -sf "$DOTFILES/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
+
+[ ! -d "$XDG_CONFIG_HOME/tmux/plugins/tpm" ] \
+&& git clone https://github.com/tmux-plugins/tpm \
+"$XDG_CONFIG_HOME/tmux/plugins/tpm"
+
