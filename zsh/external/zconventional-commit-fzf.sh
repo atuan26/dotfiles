@@ -1,7 +1,8 @@
+# source this last to prevent conflict
 fzf_conventional_commit-widget() {
-    commit_type=("${(f)"$(grep -vE '^#' ~/.fzf-conventional-commit/commit-type)"}")
+    commit_type=("${(f)"$(grep -vE '^#' $DOTFILES/zsh/external/fzf-conventional-commit/commit-type)"}")
 
-    commit_emoji=("${(f)"$(grep -vE '^#' ~/.fzf-conventional-commit/commit-emoji)"}")
+    commit_emoji=("${(f)"$(grep -vE '^#' $DOTFILES/zsh/external/fzf-conventional-commit/commit-emoji)"}")
 
     temp_option=""
     local selected
