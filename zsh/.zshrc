@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 source ~/.bash_profile
@@ -17,27 +14,16 @@ ZSH_THEME="custom"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract";$PREVIEW \$in"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-# zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract";$PREVIEW \$in"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -72,7 +58,7 @@ ZSH_THEME="custom"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting fzf-tab fzf fzf-docker)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions fzf-tab fzf fzf-docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -164,7 +150,11 @@ setopt hist_find_no_dups
 export PATH="$PATH:~/.local/bin/"
 eval $(thefuck --alias)
 # --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up'
-export FZF_DEFAULT_OPTS="--bind '?:change-preview-window:up|' --preview 'bat -n --color=always {}' --preview-window hidden"
+export FZF_DEFAULT_OPTS="
+	 --bind '?:toggle-preview' 
+	--preview 'bat -n --color=always {}' 
+	--header '?: toggle preview'
+"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
 
 export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
@@ -172,6 +162,7 @@ export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}'
   --bind 'F2:change-preview-window(right|hidden|)'
   --bind 'ctrl-d:reload(fd --type d --hidden --follow --exclude '.git' --exclude 'node_modules'),ctrl-f:reload(eval "$FZF_CTRL_T_COMMAND")'
+  --header 'F2: change preview window'
   "
 
 export FZF_CTRL_R_OPTS="
@@ -179,7 +170,7 @@ export FZF_CTRL_R_OPTS="
   --bind 'F2:toggle-preview'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+  --header 'CTRL-Y: copy command into clipboard; F2: toggle preview'"
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'
   --header 'Choose directory to cd'"
@@ -204,24 +195,6 @@ _conda_activate() {
 
 complete -o default -o bashdefault -F _conda_activate conda
 
-_fzf_docker_exec() {
-    local containers=$(docker ps --format "ID: {{.ID}} | Image: {{.Image}} | Status: {{.Status}} | Name: {{.Names}}")
-    local container=$(echo "$containers" | fzf +s +m --height=50% --reverse)
-    local container_name=$(echo "$container" | awk -F '|' '{print $4}' | sed -e 's/^[[:space:]]*Name:[[:space:]]*//' -e 's/[[:space:]]*$//')
-    if [[ -n "$container_name" ]]; then
-        COMPREPLY=("$container_name")
-    fi
-}
-
-_docker_exec() {
-    local cur_word=${COMP_WORDS[COMP_CWORD]}
-    if [[ "$cur_word" == "" ]]; then
-        _fzf_docker_exec
-    fi
-}
-
-# complete -o default -o bashdefault -F _docker_exec docker
-
 _fzf_comprun() {
   local command=$1
   shift
@@ -245,25 +218,10 @@ _fzf_complete_doge() {
 
 complete -F _fzf_complete_doge -o default -o bashdefault doge
 
-# _fzf_complete_pass() {
-#   local pwdir="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-#   _fzf_complete  '+m' --reverse --prompt="Select password: " -- "$@" < <(
-#     find "$pwdir" -name "*.gpg" -type f -exec basename {} \; |
-#     sed -e 's/\.gpg$//'
-#   )
-# }
-# 
-# complete -F _fzf_complete_pass  -o default pass
 fpath=($ZDOTDIR/external $fpath)
 autoload -U compinit && compinit
 
 _comp_options+=(globdots)
-
-source "$XDG_CONFIG_HOME/zsh/aliases"
-
-bindkey -v
-export KEYTIMEOUT=1
-autoload -Uz cursor_mode && cursor_mode
 
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
@@ -286,5 +244,8 @@ eval "$(fzf --zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
 
-source $DOTFILES/zsh/external/.fzf-conventional-commit/function.sh
-source $DOTFILES/zsh/scripts.sh
+source "$XDG_CONFIG_HOME/zsh/aliases"
+for file in $DOTFILES/zsh/external/*; do
+    source "$file"
+done
+
