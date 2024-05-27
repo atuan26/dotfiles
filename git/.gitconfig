@@ -1,0 +1,496 @@
+[user]
+	name = atuan26
+	email = natuann26@gmail.com
+	signingkey = 8A2F41A5D60CBE54
+[commit]
+	gpgsign = false
+[init]
+	defaultBranch = master
+[core]
+    pager = delta
+    editor = nvim
+    pager = delta --line-numbers --side-by-side
+    excludesfile = ~/.gitignore
+
+
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    tab = 4
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+
+[diff]
+	context = 4
+	colorMoved = default
+	renameLimit = 8192
+
+[alias]
+	please = !"                                                                                                            \
+		function git_push_with_lease() {                                                                                   \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                    \
+			local ref=\"${1:-HEAD}\";                                                                                      \
+			local remote tracking;                                                                                         \
+			remote=\"$(git config branch.$(git rev-parse --abbrev-ref \"$ref\").remote)\";                                 \
+			tracking=\"$(git config branch.$(git rev-parse --abbrev-ref \"$ref\").merge | sed \"s/^refs\\/heads\\///\")\"; \
+			git push --force-with-lease \"$remote\" \"+$tracking\";                                                        \
+		};                                                                                                                 \
+		git_push_with_lease                                                                                                \
+	"
+	commend = commit --amend --no-edit
+	it = !git init && git commit -m "root" --allow-empty
+	st = stash
+	stsh = stash --keep-index
+	staash = stash --include-untracked
+	staaash = stash --all
+	now = status --short --branch
+	pn = !"                                                                                                      \
+		function git_push_new() {                                                                                \
+			set -eo pipefail; shopt -s inherit_errexit;                                                          \
+			local remote;                                                                                        \
+			[[ -z \"$(git remote | rg '^origin$')\" ]] && remote=\"$(git remote | head -1)\" || remote='origin'; \
+			git push \"$@\" -u \"$remote\" \"$(git branch --show-current)\";                                     \
+		};                                                                                                       \
+		git_push_new                                                                                             \
+	"
+	pt = !"                                                                                                  \
+		function git_push_tag() {                                                                            \
+			set -eo pipefail; shopt -s inherit_errexit;                                                      \
+			local sha=\"${1:-HEAD}\";                                                                        \
+			local -a tags;                                                                                   \
+			readarray -d $'\n' -t tags <<<\"$(git tag --points-at \"$sha\")\";                               \
+			if [[ \"${#tags[@]}\" -eq 0 ]]; then                                                             \
+				printf 'No tags found\n';                                                                    \
+				exit 1;                                                                                      \
+			fi;                                                                                              \
+			if [[ \"${#tags[@]}\" -gt 1 ]]; then                                                             \
+				printf 'Too many tags: %s\n' \"${tags[*]}\";                                                 \
+				exit 1;                                                                                      \
+			fi;                                                                                              \
+			printf 'Gonna push tag %s, which points to %s, to origin, sure? [y/n] ' \"${tags[0]}\" \"$sha\"; \
+			read -n 1 -r; printf '\\n';                                                                      \
+			if [[ \"$REPLY\" != 'y' ]]; then                                                                 \
+				exit 0;                                                                                      \
+			fi;                                                                                              \
+			git push origin \"${tags[0]}\";                                                                  \
+		};                                                                                                   \
+		git_push_tag                                                                                         \
+	"
+	lg = !"                                                                                                                                                                                                          \
+		function git_log_graph() {                                                                                                                                                                                   \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                                                                                                              \
+			cd -- \"${GIT_PREFIX:-.}\";                                                                                                                                                                              \
+			git log --color=always --graph --abbrev-commit                                                                                                                                                           \
+				--format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) (%xFFGPG_%G?%xFF) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\" \"$@\" | \
+			sed -e 's/\\xFFGPG_G\\xFF/'\"$(printf '\\e[1;32mG\\e[0m')\"'/g' -e 's/\\xFFGPG_B\\xFF/'\"$(printf '\\e[1;41mB\\e[0m')\"'/g'                                                                              \
+				-e 's/\\xFFGPG_U\\xFF/'\"$(printf '\\e[1;36mU\\e[0m')\"'/g' -e 's/\\xFFGPG_X\\xFF/'\"$(printf '\\e[1;31mX\\e[0m')\"'/g'                                                                              \
+				-e 's/\\xFFGPG_Y\\xFF/'\"$(printf '\\e[1;31mY\\e[0m')\"'/g' -e 's/\\xFFGPG_R\\xFF/'\"$(printf '\\e[1;31mR\\e[0m')\"'/g'                                                                              \
+				-e 's/\\xFFGPG_E\\xFF/'\"$(printf '\\e[1;35mE\\e[0m')\"'/g' -e 's/\\xFFGPG_N\\xFF/'\"$(printf '\\e[1;30mN\\e[0m')\"'/g' |                                                                            \
+			less -F -S -R -i;                                                                                                                                                                                        \
+		};                                                                                                                                                                                                           \
+		git_log_graph                                                                                                                                                                                                \
+	"
+	doom = !"                                                                                                                        \
+		function git_doom() {                                                                                                        \
+			local RED='\\033[0;31m';                                                                                                 \
+			local NC='\\033[0m';                                                                                                     \
+			if [[ \"$(ps -o comm= $PPID)\" =~ (/|^)n?vim$ ]] || [[ \"$(tput colors)\" != \"256\" ]]; then                            \
+				RED='~'; NC='~';                                                                                                     \
+			fi;                                                                                                                      \
+			local branch remote tracking last;                                                                                       \
+			branch=\"$(git branch --show-current)\";                                                                                 \
+			if [[ -z \"$branch\" ]]; then                                                                                            \
+				printf 'Detached, no current branch\\n';                                                                             \
+				exit 1;                                                                                                              \
+			fi;                                                                                                                      \
+			case \"$branch\" in                                                                                                      \
+				\"master\"|\"main\"|\"develop\")                                                                                     \
+					printf 'Not allowed to doom %b%s%b branch\\n' \"$RED\" \"$branch\" \"$NC\";                                      \
+					exit 1;                                                                                                          \
+					;;                                                                                                               \
+				*)                                                                                                                   \
+					;;                                                                                                               \
+			esac;                                                                                                                    \
+			remote=\"$(git config branch.$branch.remote)\";                                                                          \
+			tracking=\"$(git config branch.$branch.merge)\";                                                                         \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                              \
+			if [[ -z \"$remote\" ]] || [[ -z \"$tracking\" ]]; then                                                                  \
+				printf 'Branch %b%s%b does not exist in remote\\n' \"$RED\" \"$branch\" \"$NC\";                                     \
+				exit 1;                                                                                                              \
+			fi;                                                                                                                      \
+			last=\"$(git reflog | rg 'checkout: moving from' | sed -n 1p | sed 's/.*checkout: moving from \\([^ ]*\\) to.*/\\1/')\"; \
+			if [[ -z \"$last\" ]]; then                                                                                              \
+				printf 'Cannot find last branch\\n';                                                                                 \
+				exit 1;                                                                                                              \
+			fi;                                                                                                                      \
+			if ! git show \"$last\" >/dev/null 2>&1; then                                                                            \
+				printf 'Last branch %s does not exist\\n' \"$last\";                                                                 \
+				exit 1;                                                                                                              \
+			fi;                                                                                                                      \
+			printf 'Gonna checkout %b%s%b then remove local branch %b%s%b and remote branch %b%s/%s%b, sure? [y/n] '                 \
+				\"$RED\" \"$last\" \"$NC\" \"$RED\" \"$branch\" \"$NC\" \"$RED\" \"$remote\" \"$tracking\" \"$NC\";                  \
+			read -n 1 -r; printf '\\n';                                                                                              \
+			if [[ \"$REPLY\" != 'y' ]]; then                                                                                         \
+				exit 0;                                                                                                              \
+			fi;                                                                                                                      \
+			git checkout \"$last\";                                                                                                  \
+			git branch -D \"$branch\";                                                                                               \
+			git push \"$remote\" -d \"$tracking\";                                                                                   \
+		};                                                                                                                           \
+		git_doom                                                                                                                     \
+	"
+	https-remote = !"                                                                                                    \
+		function git_https_remote() {                                                                                    \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                  \
+			local push remote;                                                                                           \
+			if [[ \"$1\" == \"--push\" ]]; then                                                                          \
+				push=\"--push\";                                                                                         \
+				shift;                                                                                                   \
+			fi;                                                                                                          \
+			remote=\"$1\";                                                                                               \
+			if [[ -z \"$remote\" ]]; then                                                                                \
+				printf 'Missing remote name\\n';                                                                         \
+				exit 1;                                                                                                  \
+			fi;                                                                                                          \
+			local old_url new_url;                                                                                       \
+			old_url=\"$(git remote get-url $push \"$remote\")\";                                                         \
+			new_url=\"$(sed 's|^\\(ssh://\\)\\?git@\\(.*\\):\\(.*\\)/\\(.*\\)$|https://\\2/\\3/\\4|' <<<\"$old_url\")\"; \
+			git remote set-url $push \"$remote\" \"$new_url\";                                                           \
+			git remote -v;                                                                                               \
+		};                                                                                                               \
+		git_https_remote                                                                                                 \
+	"
+	ssh-remote = !"                                                                                          \
+		function git_ssh_remote() {                                                                          \
+			set -eo pipefail; shopt -s inherit_errexit;                                                      \
+			local push remote;                                                                               \
+			if [[ \"$1\" == \"--push\" ]]; then                                                              \
+				push=\"--push\";                                                                             \
+				shift;                                                                                       \
+			fi;                                                                                              \
+			remote=\"$1\";                                                                                   \
+			if [[ -z \"$remote\" ]]; then                                                                    \
+				printf 'Missing remote name\\n';                                                             \
+				exit 1;                                                                                      \
+			fi;                                                                                              \
+			local old_url new_url;                                                                           \
+			old_url=\"$(git remote get-url $push \"$remote\")\";                                             \
+			new_url=\"$(sed 's|^https\\?://\\(.*\\)/\\(.*\\)/\\(.*\\)$|git@\\1:\\2/\\3|' <<<\"$old_url\")\"; \
+			git remote set-url $push \"$remote\" \"$new_url\";                                               \
+			git remote -v;                                                                                   \
+		};                                                                                                   \
+		git_ssh_remote                                                                                       \
+	"
+	lga = !git lg --glob="refs/heads/*"
+	lgaa = !git lg --glob="refs/heads/*" --all
+	lgl = !"cd -- \"${GIT_PREFIX:-.}\"; git log --color=always --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\""
+	fzf = !"                                                                                                                                                                              \
+		function git_fzf() {                                                                                                                                                              \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                                                                                   \
+			cd -- \"${GIT_PREFIX:-.}\";                                                                                                                                                   \
+			local -a args=( \"$@\" );                                                                                                                                                     \
+			if [[ \"${#args[@]}\" -eq 0 ]]; then                                                                                                                                          \
+				args+=( \"--graph\" --glob=\"refs/heads/*\" );                                                                                                                            \
+			fi;                                                                                                                                                                           \
+			local -a show_filter;                                                                                                                                                         \
+			while [[ \"$#\" -gt 0 ]]; do                                                                                                                                                  \
+				if [[ \"$1\" == \"--\" ]] || [[ \"${#show_filter[@]}\" -gt 0 ]]; then                                                                                                     \
+					show_filter+=( \"$1\" );                                                                                                                                              \
+				fi;                                                                                                                                                                       \
+				shift;                                                                                                                                                                    \
+			done;                                                                                                                                                                         \
+			if [[ \"${show_filter[0]}\" == '--' ]]; then                                                                                                                                  \
+				show_filter=( \"${show_filter[@]:1}\" );                                                                                                                                  \
+			fi;                                                                                                                                                                           \
+			export LESS='-R';                                                                                                                                                             \
+			export BAT_PAGER='less -S -R -M -i';                                                                                                                                          \
+			export DELTA_PAGER='less -S -R -M -i';                                                                                                                                        \
+			git log                                                                                                                                                                       \
+				--color=always --abbrev=7                                                                                                                                                 \
+				--format=format:\"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)\" \"${args[@]}\" |       \
+					fzf --ansi --no-sort --layout=reverse --tiebreak=index                                                                                                                \
+						--preview=\"f() {                                                                                                                                                 \
+								set -- \\$(echo -- \\$@ | rg -o '\\b[a-f0-9]{7,}\\b');                                                                                                    \
+								[ \\$# -eq 0 ] || git show --color=always --format=fuller \\$1 -- \"\\${show_filter[@]}\" | delta --line-numbers;                                         \
+							};                                                                                                                                                            \
+							f {}\"                                                                                                                                                        \
+						--bind=\"ctrl-j:preview-down,ctrl-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up\"                                                                  \
+						--bind=\"ctrl-m:execute:                                                                                                                                          \
+								(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | xargs -I % -- git show --color=always %) << 'FZFEOF'\n                                                            \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"alt-h:execute-silent:                                                                                                                                    \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								[[ -n \\$TMUX ]] && tmux display -d0 \\\"#[bg=blue,italics] Branches #[none,fg=black,bg=default] \\$(git branch --contains \\$1 | sed 's/^\\*\\?\\s\\+//' \
+								| sort | paste -sd, - | sed 's/,/, /g')\\\"; }; f) << 'FZFEOF'\n                                                                                          \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"alt-H:execute-silent:                                                                                                                                    \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								SUMMARY=\\\"\\$(git show --format='%s' \\$1 | head -1)\\\";                                                                                               \
+								[[ -n \\$TMUX ]] && tmux display -d0 \\\"#[bg=blue,italics] Branches (Grep) #[none,fg=black,bg=default] \\$(git log --all --format='%H' -F                \
+								--grep=\\\"\\$SUMMARY\\\" | xargs -I{} -- git branch --contains {}                                                                                        \
+								| sed 's/^\\*\\?\\s\\+//' | sort | uniq | paste -sd, - | sed 's/,/, /g')\\\"; }; f) << 'FZFEOF'\n                                                         \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"alt-n:execute-silent:                                                                                                                                    \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								[[ -n \\$TMUX ]] && tmux display -d0 \\\"#[bg=blue,italics] Tags #[none,fg=black,bg=default] \\$(git tag --contains \\$1 | sed 's/^\\*\\?\\s\\+//'        \
+								| sort | paste -sd, - | sed 's/,/, /g')\\\"; }; f) << 'FZFEOF'\n                                                                                          \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"alt-N:execute-silent:                                                                                                                                    \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								SUMMARY=\\\"\\$(git show --format='%s' \\$1 | head -1)\\\";                                                                                               \
+								[[ -n \\$TMUX ]] && tmux display -d0 \\\"#[bg=blue,italics] Tags (Grep) #[none,fg=black,bg=default] \\$(git log --all --format='%H' -F                    \
+								--grep=\\\"\\$SUMMARY\\\" | xargs -I{} -- git tag --contains {}                                                                                           \
+								| sed 's/^\\*\\?\\s\\+//' | sort | uniq | paste -sd, - | sed 's/,/, /g')\\\"; }; f) << 'FZFEOF'\n                                                         \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"ctrl-y:execute-silent:                                                                                                                                   \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								printf '%s' \\$1 | clipboard; [[ -n \\$TMUX ]] && tmux display \\\"#[bg=blue,italics] Yanked #[none,fg=black,bg=default] \\$1\\\"; }; f) << 'FZFEOF'\n    \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"alt-y:execute-silent:                                                                                                                                    \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n' | xargs git rev-parse);                                                           \
+								printf '%s' \\$1 | clipboard; [[ -n \\$TMUX ]] && tmux display \\\"#[bg=blue,italics] Yanked #[none,fg=black,bg=default] \\$1\\\"; }; f) << 'FZFEOF'\n    \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"ctrl-s:execute-silent:                                                                                                                                   \
+								(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n');                                                                                 \
+								SUMMARY=\\\"\\$(git show --format='%s' \\$1 | head -1)\\\";                                                                                               \
+								printf '%s' \\\"\\$SUMMARY\\\" | clipboard;                                                                                                               \
+								[[ -n \\$TMUX ]] && tmux display \\\"#[bg=blue,italics] Yanked #[none,fg=black,bg=default] \\$SUMMARY\\\"; }; f) << 'FZFEOF'\n                            \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--bind=\"ctrl-l:execute:(f() { set -- \\$(rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n'); git lgl | less -p \\$1 +'u'; }; f) << 'FZFEOF'\n                \
+								{}                                                                                                                                                        \
+								\nFZFEOF\"                                                                                                                                                \
+						--preview-window=right:60%;                                                                                                                                       \
+		};                                                                                                                                                                                \
+		git_fzf                                                                                                                                                                           \
+	"
+	co = checkout
+	cot = checkout --track
+	pm = !git pull $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote) $(git config branch.$(git rev-parse --abbrev-ref HEAD).merge | sed \"s/^refs\\/heads\\///\")
+	fm = !git fetch $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote) $(git config branch.$(git rev-parse --abbrev-ref HEAD).merge | sed \"s/^refs\\/heads\\///\")
+	dr = !"                                                                              \
+		function git_diff_remote() {                                                     \
+			set -eo pipefail; shopt -s inherit_errexit;                                  \
+			local tracking;                                                              \
+			tracking=\"$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})\"; \
+			git diff HEAD \"$tracking\";                                                 \
+		};                                                                               \
+		git_diff_remote                                                                  \
+	"
+	align = !"                                                                        \
+		function git_align() {                                                        \
+			set -eo pipefail; shopt -s inherit_errexit;                               \
+			local branch=\"$1\";                                                      \
+			local current_branch; current_branch=\"$(git branch --show-current)\";    \
+			if [[ -z \"$branch\" ]] || [[ \"$branch\" == \"$current_branch\" ]]; then \
+				git reset --merge @{upstream};                                        \
+			else                                                                      \
+				git branch -f \"$branch\" \"$branch@{upstream}\";                     \
+			fi;                                                                       \
+		};                                                                            \
+		git_align                                                                     \
+		"
+	mpr = !"                                                                                                                                                \
+		function git_merge_github_pr() {                                                                                                                    \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                                                     \
+			local RED='\\033[0;31m';                                                                                                                        \
+			local NC='\\033[0m';                                                                                                                            \
+			if [[ \"$(ps -o comm= $PPID)\" =~ (/|^)n?vim$ ]] || [[ \"$(tput colors)\" != \"256\" ]]; then                                                   \
+				RED='~'; NC='~';                                                                                                                            \
+			fi;                                                                                                                                             \
+			local pr_stats;                                                                                                                                 \
+			pr_stats=\"$(gh pr status --json number,baseRefName,headRefName,headRepositoryOwner --jq .currentBranch)\";                                     \
+			if [[ -z \"$pr_stats\" ]]; then                                                                                                                 \
+				printf 'Failed to find PR for current branch!\n';                                                                                           \
+				exit 1;                                                                                                                                     \
+			fi;                                                                                                                                             \
+			local pr_number pr_base_ref pr_head_ref pr_head_owner pr_merge_subject;                                                                         \
+			pr_number=\"$(jq -r .number <<<\"$pr_stats\")\";                                                                                                \
+			pr_base_ref=\"$(jq -r .baseRefName <<<\"$pr_stats\")\";                                                                                         \
+			pr_head_ref=\"$(jq -r .headRefName <<<\"$pr_stats\")\";                                                                                         \
+			pr_head_owner=\"$(jq -r .headRepositoryOwner.login <<<\"$pr_stats\")\";                                                                         \
+			pr_merge_subject=\"$(printf 'Merge pull request #%d from %s/%s into %s' \"$pr_number\" \"$pr_head_owner\" \"$pr_head_ref\" \"$pr_base_ref\")\"; \
+			printf 'Gonna merge current branch with subject %b%s%b, sure? [y/n] ' \"$RED\" \"$pr_merge_subject\" \"$NC\";                                   \
+			read -n 1 -r; printf '\\n';                                                                                                                     \
+			if [[ \"$REPLY\" != 'y' ]]; then                                                                                                                \
+				exit 0;                                                                                                                                     \
+			fi;                                                                                                                                             \
+			git checkout \"$pr_base_ref\";                                                                                                                  \
+			git merge --no-ff --log -m \"$pr_merge_subject\" \"$pr_head_ref\";                                                                              \
+		};                                                                                                                                                  \
+		git_merge_github_pr                                                                                                                                 \
+	"
+	rea = !"                                             \
+		function git_revert_apply() {                    \
+			set -eo pipefail; shopt -s inherit_errexit;  \
+			local ref=\"$1\";                            \
+			git show \"$ref\" | git apply -R;            \
+		};                                               \
+		git_revert_apply                                 \
+	"
+	fa = fetch --all --prune --tags --jobs=10
+	mne = merge --no-edit --log
+	com = commit
+	reb = rebase
+	ria = rebase --interactive --autosquash
+	riaa = rebase --interactive --autosquash --autostash
+	reroll = !"                                                                                            \
+		function git_reroll() {                                                                            \
+			set -eo pipefail; shopt -s inherit_errexit;                                                    \
+			local base=\"${1:-origin/HEAD}\";                                                              \
+			local branch=\"$2\";                                                                           \
+			local current_branch; current_branch=\"$(git branch --show-current)\";                         \
+			: \"${branch:=\"$current_branch\"}\";                                                          \
+			local fork_point;                                                                              \
+			fork_point=\"$(git find-fork-point \"$branch\" \"$base\")\";                                   \
+			if [[ -z \"$fork_point\" ]]; then                                                              \
+				printf 'Branch %s is up to date\\n' \"$branch\";                                           \
+				exit 0;                                                                                    \
+			fi;                                                                                            \
+			git rebase --no-ff --interactive --rebase-merges --onto=\"$base\" \"$fork_point\" \"$branch\"; \
+			if [[ \"$branch\" != \"$current_branch\" ]]; then                                              \
+				git checkout \"$current_branch\";                                                          \
+			fi;                                                                                            \
+		};                                                                                                 \
+		git_reroll                                                                                         \
+	"
+	find-fork-point = !"                                                                                                     \
+		function git_find_fork_point() {                                                                                     \
+			set -o pipefail; shopt -s inherit_errexit;                                                                       \
+			local branch=\"${1:-HEAD}\";                                                                                     \
+			local base=\"${2:-origin/HEAD}\";                                                                                \
+			local merge_point=\"$(git find-merge-point \"$branch\" \"$base\")\";                                             \
+			set -e;                                                                                                          \
+			if [[ -n \"$merge_point\" ]]; then                                                                               \
+				base=\"$(git rev-parse \"$merge_point^1\")\";                                                                \
+			fi;                                                                                                              \
+			local first_branch_commit;                                                                                       \
+			first_branch_commit=\"$(git log --first-parent --reverse --format='%H' \"$branch\" \"^$base\" -- | sed -n 1p)\"; \
+			if [[ -z \"$first_branch_commit\" ]]; then                                                                       \
+				exit 1;                                                                                                      \
+			fi;                                                                                                              \
+			local fork_point;                                                                                                \
+			fork_point=\"$(git rev-parse \"$first_branch_commit^\")\";                                                       \
+			printf '%s\\n' \"$fork_point\";                                                                                  \
+		};                                                                                                                   \
+		git_find_fork_point                                                                                                  \
+	"
+	show-fork-point = !"                                                          \
+		function git_show_fork_point() {                                          \
+			set -o pipefail; shopt -s inherit_errexit;                            \
+			local commit;                                                         \
+			commit=\"$(git find-fork-point \"$1\" \"$2\")\";                      \
+			set -e;                                                               \
+			if [[ -n \"$commit\" ]]; then                                         \
+				git show \"$commit\";                                             \
+			elif [[ -n \"$2\" ]]; then                                            \
+				printf 'Branch %s is not forked from %s\\n' \"$1\" \"$2\";        \
+			elif [[ -n \"$1\" ]]; then                                            \
+				printf 'Branch %s is not forked from %s\\n' \"$1\" 'origin/HEAD'; \
+			else                                                                  \
+				printf 'Current branch is not forked from %s\\n' 'origin/HEAD';   \
+			fi;                                                                   \
+		};                                                                        \
+		git_show_fork_point                                                       \
+	"
+	find-rebase-point = !"                                                                                                  \
+		function git_find_rebase_point() {                                                                                  \
+			set -eo pipefail; shopt -s inherit_errexit;                                                                     \
+			local branch=\"${1:-HEAD}\";                                                                                    \
+			local base=\"${2:-origin/HEAD}\";                                                                               \
+			local branch_commit;                                                                                            \
+			branch_commit=\"$(git rev-parse \"$branch\")\";                                                                 \
+			local rebase_point_child;                                                                                       \
+			rebase_point_child=\"$(git log --first-parent --reverse --format='%H' \"$base\" \"^$branch\" -- | sed -n 1p)\"; \
+			if [[ -z \"$rebase_point_child\" ]]; then                                                                       \
+				exit 1;                                                                                                     \
+			fi;                                                                                                             \
+			local rebase_point;                                                                                             \
+			rebase_point=\"$(git rev-parse \"$rebase_point_child^1\")\";                                                    \
+			if [[ \"$rebase_point\" == \"$branch_commit\" ]]; then                                                          \
+				exit 1;                                                                                                     \
+			else                                                                                                            \
+				printf '%s\\n' \"$rebase_point\";                                                                           \
+			fi;                                                                                                             \
+		};                                                                                                                  \
+		git_find_rebase_point                                                                                               \
+	"
+	show-rebase-point = !"                                                                     \
+		function git_show_rebase_point() {                                                     \
+			set -o pipefail; shopt -s inherit_errexit;                                         \
+			local commit;                                                                      \
+			commit=\"$(git find-rebase-point \"$1\" \"$2\")\";                                 \
+			set -e;                                                                            \
+			if [[ -n \"$commit\" ]]; then                                                      \
+				git show \"$commit\";                                                          \
+			elif [[ -n \"$2\" ]]; then                                                         \
+				printf 'Branch %s does not have a rebase point in %s\\n' \"$1\" \"$2\";        \
+			elif [[ -n \"$1\" ]]; then                                                         \
+				printf 'Branch %s does not have a rebase point in %s\\n' \"$1\" 'origin/HEAD'; \
+			else                                                                               \
+				printf 'Current branch is not forked from %s\\n' 'origin/HEAD';                \
+			fi;                                                                                \
+		};                                                                                     \
+		git_show_rebase_point                                                                  \
+	"
+	; https://stackoverflow.com/a/30998048/2487227
+	find-merge-point = !"                                                   \
+		function git_find_merge_point() {                                   \
+			set -eo pipefail; shopt -s inherit_errexit;                     \
+			local commit=\"$1\" branch=\"${2:-HEAD}\";                      \
+			if [[ -z \"$commit\" ]]; then                                   \
+				printf 'Missing commit\n' >&2;                              \
+				exit 1;                                                     \
+			fi;                                                             \
+			(                                                               \
+				git rev-list \"$commit..$branch\" --ancestry-path | cat -n; \
+				git rev-list \"$commit..$branch\" --first-parent | cat -n;  \
+			) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2;    \
+		};                                                                  \
+		git_find_merge_point                                                \
+	"
+	show-merge-point = !"                                                       \
+		function git_show_merge_point() {                                       \
+			set -eo pipefail; shopt -s inherit_errexit;                         \
+			local commit;                                                       \
+			commit=\"$(git find-merge-point \"$1\" \"$2\")\";                   \
+			if [[ -n \"$commit\" ]]; then                                       \
+				git show \"$commit\";                                           \
+			elif [[ -n \"$2\" ]]; then                                          \
+				printf 'Branch %s is not merged into %s\\n' \"$1\" \"$2\";      \
+			else                                                                \
+				printf 'Branch %s is not merged into current branch\\n' \"$1\"; \
+			fi;                                                                 \
+		};                                                                      \
+		git_show_merge_point                                                    \
+	"
+	mer = merge
+	br = branch
+	bv = branch -vv
+	bvr = branch -vvr
+	bl = blame
+	df = diff
+	ds = diff --staged
+	pa = push --all
+	cp = cherry-pick
+	fp = format-patch --signoff --stdout -M -C
+
+

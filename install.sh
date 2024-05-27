@@ -296,3 +296,8 @@ ln -sf "$DOTFILES/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
 && git clone https://github.com/tmux-plugins/tpm \
 "$XDG_CONFIG_HOME/tmux/plugins/tpm"
 
+###########
+# git     #
+###########
+ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+
