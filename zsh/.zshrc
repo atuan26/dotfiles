@@ -149,11 +149,21 @@ setopt hist_find_no_dups
 
 export PATH="$PATH:~/.local/bin/"
 eval $(thefuck --alias)
-# --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up'
+
+# TODO: fix me
 export FZF_DEFAULT_OPTS="
-	 --bind '?:toggle-preview' 
-	--preview 'bat -n --color=always {}' 
-	--header '?: toggle preview'
+    --bind 'j:down,k:up,g:first,G:last,d:preview-half-page-down,u:preview-half-page-up,z:jump' \
+    --bind '?:toggle-preview,q:abort,D:clear-query,r:toggle-sort' \
+    --bind 'm:change-multi,space:select,ctrl-space:deselect' \
+    --bind 'tab:down,shift-tab:up' \
+    --bind 'start:toggle-search+change-prompt(Tips: j/k: navigate, d/u: navigate preview >>)' \
+    --bind 'esc:toggle-search+rebind(j)+rebind(k)+rebind(0)+rebind($)+rebind(d)+rebind(u)+rebind(z)+rebind(?)+rebind(q)+rebind(S)+rebind(m)+rebind(space)+rebind(s)+rebind(i)+rebind(a)+rebind(/)+change-prompt(Tips: j/k: navigate, d/u: navigate preview >>)' \
+    --bind 'i:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
+    --bind 'a:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
+    --bind '/:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
+    --bind 'S:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+clear-query+change-prompt(QUERY MODE / )' \
+	--header '?: toggle preview; i/a: Query mode; ESC: browser mode' \
+	--preview 'bat -n --color=always {}'
 "
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
 
