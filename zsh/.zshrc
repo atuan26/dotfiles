@@ -254,15 +254,6 @@ autoload -U compinit && compinit
 _comp_options+=(globdots)
 
 zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-
-# make search up and down work, so partially type and hit up/down to find relevant stuff
-bindkey '^[[A' up-line-or-search                                                
-bindkey '^[[B' down-line-or-search
 
 # change clear shell from C-l to C-g
 bindkey -r '^l'

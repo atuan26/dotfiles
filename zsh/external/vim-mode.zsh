@@ -3,6 +3,28 @@ bindkey -v
 # export KEYTIMEOUT=2
 autoload -Uz cursor_mode && cursor_mode
 
+bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
+# "/" vi-history-search-backward
+# "?" vi-history-search-forward
+
+bindkey -M vicmd "?" vi-history-search-backward
+bindkey -M vicmd "/" vi-history-search-forward
+
+# bindkey -M vicmd "?" history-incremental-search-backward
+# bindkey -M vicmd "/" history-incremental-search-forward
+# bindkey -M isearch '^N' history-incremental-search-backward
+# bindkey -M isearch '^R' history-incremental-search-forward
+
+# make search up and down work, so partially type and hit up/down to find relevant stuff
+bindkey '^[[A' up-line-or-search                                                
+bindkey '^[[B' down-line-or-search
+
 function vi-yank-xclip {
     zle vi-yank
     # copy to X11 clipboard
