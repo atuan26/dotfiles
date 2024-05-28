@@ -6,7 +6,7 @@ source ~/.bash_profile
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="custom"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -58,7 +58,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions fzf-tab fzf fzf-docker)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions fzf-tab fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -150,20 +150,50 @@ setopt hist_find_no_dups
 export PATH="$PATH:~/.local/bin/"
 eval $(thefuck --alias)
 
+FZF_VI_BIND_LIST=("j:down"
+            "k:up"
+            "g:first"
+            "G:last"
+            "d:preview-half-page-down"
+            "u:preview-half-page-up"
+            "z:jump"
+            "?:toggle-preview"
+            "q:abort"
+            "D:clear-query"
+            "r:toggle-sort"
+            "m:change-multi"
+            "space:select"
+            "ctrl-space:deselect"
+            "tab:down"
+            "shift-tab:up"
+)
+declare FZF_VI_BIND="" FZF_VI_REBIND="" FZF_VI_UNBIND=""
+FZF_BROWSER_MODE_PROMPT="Tips: j/k: navigate, d/u: navigate preview >>"
+FZF_QUERY_MODE_PROMPT="QUERY MODE / "
+
+for bind in "${FZF_VI_BIND_LIST[@]}" ; do
+    KEY="${bind%%:*}"
+    ACTION="${bind##*:}"
+
+    FZF_VI_BIND+="$KEY:$ACTION,"
+    FZF_VI_UNBIND+="unbind($KEY)+"
+    FZF_VI_REBIND+="rebind($KEY)+"
+done
+FZF_SWITCH_MODE="toggle-search+change-prompt($FZF_BROWSER_MODE_PROMPT)"
+FZF_VI_BIND+="enter:accept"
+FZF_VI_UNBIND+="unbind(i)+unbind(a)+unbind(/)+unbind(S)+toggle-search+change-prompt($FZF_QUERY_MODE_PROMPT)"
+FZF_VI_REBIND+="rebind(i)+rebind(a)+rebind(/)+rebind(S)+$FZF_SWITCH_MODE"
+
 # TODO: fix me
 export FZF_DEFAULT_OPTS="
-    --bind 'j:down,k:up,g:first,G:last,d:preview-half-page-down,u:preview-half-page-up,z:jump' \
-    --bind '?:toggle-preview,q:abort,D:clear-query,r:toggle-sort' \
-    --bind 'm:change-multi,space:select,ctrl-space:deselect' \
-    --bind 'tab:down,shift-tab:up' \
-    --bind 'start:toggle-search+change-prompt(Tips: j/k: navigate, d/u: navigate preview >>)' \
-    --bind 'esc:toggle-search+rebind(j)+rebind(k)+rebind(0)+rebind($)+rebind(d)+rebind(u)+rebind(z)+rebind(?)+rebind(q)+rebind(S)+rebind(m)+rebind(space)+rebind(s)+rebind(i)+rebind(a)+rebind(/)+change-prompt(Tips: j/k: navigate, d/u: navigate preview >>)' \
-    --bind 'i:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
-    --bind 'a:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
-    --bind '/:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+change-prompt(QUERY MODE / )' \
-    --bind 'S:toggle-search+unbind(j)+unbind(k)+unbind(0)+unbind($)+unbind(d)+unbind(u)+unbind(z)+unbind(?)+unbind(q)+unbind(g)+unbind(G)+unbind(S)+unbind(m)+unbind(/)+unbind(a)+unbind(i)+unbind(space)+unbind(D)+unbind(s)+clear-query+change-prompt(QUERY MODE / )' \
-	--header '?: toggle preview; i/a: Query mode; ESC: browser mode' \
-	--preview 'bat -n --color=always {}'
+    --bind '$FZF_VI_BIND' \
+    --bind 'start:$FZF_SWITCH_MODE' \
+    --bind 'esc:$FZF_VI_REBIND' \
+    --bind 'i:$FZF_VI_UNBIND' \
+    --bind 'a:$FZF_VI_UNBIND' \
+    --bind '/:$FZF_VI_UNBIND' \
+    --bind 'S:$FZF_VI_UNBIND+clear-query' \
+	--header '?: toggle preview; i/a: Query mode; ESC: browser mode'
 "
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
 
@@ -185,6 +215,7 @@ export FZF_CTRL_R_OPTS="
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'
   --header 'Choose directory to cd'"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude '.git' --exclude 'node_modules'"
+
 
 # auto complete conda activate environment
 _fzf_conda_activate() {
@@ -216,17 +247,6 @@ _fzf_comprun() {
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
   esac
 }
-
-_fzf_complete_doge() {
-  _fzf_complete --multi --reverse --prompt="doge> " -- "$@" < <(
-    echo very
-    echo wow
-    echo such
-    echo doge
-  )
-}
-
-complete -F _fzf_complete_doge -o default -o bashdefault doge
 
 fpath=($ZDOTDIR/external $fpath)
 autoload -U compinit && compinit

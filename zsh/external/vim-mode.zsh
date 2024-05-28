@@ -1,13 +1,13 @@
 # Updates editor information when the keymap changes.
 bindkey -v
-export KEYTIMEOUT=2
+# export KEYTIMEOUT=2
 autoload -Uz cursor_mode && cursor_mode
 
 function vi-yank-xclip {
     zle vi-yank
     # copy to X11 clipboard
     if command -v xsel > /dev/null 2>&1; then
-        echo "$CUTBUFFER" | xsel -i
+        echo "$CUTBUFFER" | xsel -b
     elif ! command -v xsel > /dev/null 2>&1 && command -v xclip > /dev/null 2>&1; then
         echo "$CUTBUFFER" | xclip -i
     # copy to Wayland clipboard
