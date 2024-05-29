@@ -51,6 +51,10 @@ function vi-yank-xclip {
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
 
+# Start up in command mode
+zle-line-init() { zle -K vicmd; }
+zle -N zle-line-init
+
 # function zle-keymap-select() {
 #   # update keymap variable for the prompt
 #   VI_KEYMAP=$KEYMAP
