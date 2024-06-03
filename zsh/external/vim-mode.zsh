@@ -1,7 +1,34 @@
 # Updates editor information when the keymap changes.
 bindkey -v
+
+# Remove mode switching delay.
+KEYTIMEOUT=5
 # export KEYTIMEOUT=2
-autoload -Uz cursor_mode && cursor_mode
+
+# See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursors
+cursor_block='\e[2 q'
+cursor_beam='\e[6 q'
+
+function zle-keymap-select {
+    # echo ${KEYMAP}
+    # echo $1
+    case $KEYMAP in
+      vicmd)      echo -ne $cursor_block;; # block cursor
+      viins|main|'') echo -ne $cursor_beam;; # line cursor
+    esac
+
+    zle reset-prompt
+    zle -R
+}
+
+# Start up in command mode
+zle-line-init() {
+    zle -K vicmd;
+    echo -ne $cursor_block
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 bindkey -M menuselect 'h' vi-backward-char
 # bindkey -M menuselect 'k' vi-up-line-or-history
@@ -51,9 +78,7 @@ function vi-yank-xclip {
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
 
-# Start up in command mode
-zle-line-init() { zle -K vicmd; }
-zle -N zle-line-init
+# # Remove binding for execute-named-cmd,  : in normal mode # bindkey -e -r '^[x' # bindkey -a -r ':'
 
 # function zle-keymap-select() {
 #   # update keymap variable for the prompt
