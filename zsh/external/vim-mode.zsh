@@ -6,8 +6,17 @@ KEYTIMEOUT=5
 # export KEYTIMEOUT=2
 
 # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursors
-cursor_block='\e[2 q'
-cursor_beam='\e[6 q'
+# block blinking: '\e[1 q'
+# beam blinking: '\e[5 q'
+# \e[0 q: Default
+# \e[1 q: blinking block.
+# \e[2 q: Block
+# \e[3 q: blinking underline
+# \e[4 q: underline
+# \e[5 q: blinking bar
+# \e[6 q: bar
+cursor_block='\e[1 q'
+cursor_beam='\e[5 q'
 
 function zle-keymap-select {
     # echo ${KEYMAP}

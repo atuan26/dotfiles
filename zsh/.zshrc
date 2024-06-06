@@ -181,9 +181,11 @@ FZF_VI_BIND_LIST=("j:down"
             "shift-tab:up"
 )
 declare FZF_VI_BIND="" FZF_VI_REBIND="" FZF_VI_UNBIND=""
-FZF_BROWSER_MODE_PROMPT="Tips: j/k: navigate, d/u: navigate preview >>"
-FZF_QUERY_MODE_PROMPT="QUERY MODE / "
+FZF_BROWSER_MODE_PROMPT="Tips: j/k: navigate, d/u: navigate preview 🪄️ "
+FZF_QUERY_MODE_PROMPT="QUERY MODE 🔎 "
 
+cursor_block='\e[0 q'
+cursor_beam='\e[5 q'
 for bind in "${FZF_VI_BIND_LIST[@]}" ; do
     KEY="${bind%%:*}"
     ACTION="${bind##*:}"
@@ -192,9 +194,9 @@ for bind in "${FZF_VI_BIND_LIST[@]}" ; do
     FZF_VI_UNBIND+="unbind($KEY)+"
     FZF_VI_REBIND+="rebind($KEY)+"
 done
-FZF_SWITCH_MODE="toggle-search+change-prompt($FZF_BROWSER_MODE_PROMPT)"
+FZF_SWITCH_MODE="toggle-search+change-prompt($FZF_BROWSER_MODE_PROMPT)+execute-silent(echo \"$cursor_block\")"
 FZF_VI_BIND+="enter:accept"
-FZF_VI_UNBIND+="unbind(i)+unbind(a)+unbind(/)+unbind(S)+toggle-search+change-prompt($FZF_QUERY_MODE_PROMPT)"
+FZF_VI_UNBIND+="unbind(i)+unbind(a)+unbind(/)+unbind(S)+toggle-search+change-prompt($FZF_QUERY_MODE_PROMPT)+execute-silent(echo \"$cursor_beam\")"
 FZF_VI_REBIND+="rebind(i)+rebind(a)+rebind(/)+rebind(S)+$FZF_SWITCH_MODE"
 
 # TODO: fix me
