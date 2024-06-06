@@ -5,7 +5,7 @@ gli() {
   fi
 
   git log \
-    --graph --color=always --abbrev=7 --format='%C(auto)%h%d %an %C(blue)%s %C(yellow)%cr' $@ | \
+    --color=always --abbrev=7 --format='%C(auto)%h%d %an %C(blue)%s %C(yellow)%cr' $@ | \
     fzf \
         --ansi --no-sort --reverse --tiebreak=index \
         --preview "f() { set -- \$(echo -- \$@ | grep -o '[a-f0-9]\{7\}'); [ \$# -eq 0 ] || git show --color=always \$1 $filter; }; f {}" \

@@ -150,6 +150,19 @@ setopt hist_find_no_dups
 export PATH="$PATH:~/.local/bin/"
 eval $(thefuck --alias)
 
+: '
+####################
+# FZF              #
+####################
+TODO: 
+    - Add change between preview bind:
+           change-preview(...)          (change --preview option)
+           change-preview-label(...)    (change --preview-label to the given string)
+    - toggle-search  OR  enable-search/disabel-search
+    - Add min-height
+'
+# ??? --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
+
 FZF_VI_BIND_LIST=("j:down"
             "k:up"
             "g:first"
@@ -186,6 +199,7 @@ FZF_VI_REBIND+="rebind(i)+rebind(a)+rebind(/)+rebind(S)+$FZF_SWITCH_MODE"
 
 # TODO: fix me
 export FZF_DEFAULT_OPTS="
+    --min-height=20 --border
     --bind '$FZF_VI_BIND' \
     --bind 'start:$FZF_SWITCH_MODE' \
     --bind 'esc:$FZF_VI_REBIND' \
@@ -193,6 +207,7 @@ export FZF_DEFAULT_OPTS="
     --bind 'a:$FZF_VI_UNBIND' \
     --bind '/:$FZF_VI_UNBIND' \
     --bind 'S:$FZF_VI_UNBIND+clear-query' \
+    --color='header:italic:underline,label:blue' \
 	--header '?: toggle preview; i/a: Query mode; ESC: browser mode'
 "
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude '.git' --exclude 'node_modules'"
@@ -209,7 +224,7 @@ export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window up:3:hidden:wrap
   --bind 'F2:toggle-preview'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-  --color header:italic
+  --color='header:italic:underline,label:blue' \
   --header 'CTRL-Y: copy command into clipboard; F2: toggle preview'"
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'
