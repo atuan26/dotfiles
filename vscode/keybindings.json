@@ -1,6 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
-  {
+{
     "key": "shift+space",
     "command": "whichkey.show"
     // "when": "sideBarFocus && !textInputFocus && !inputFocus"
@@ -299,5 +299,40 @@
     "key": "cmd+o",
     "command": "-workbench.action.files.openFileFolder",
     "when": "isMacNative && openFolderWorkspaceSupport"
-  }
+  },
+  {
+    "key": "h",
+    "command": "editor.action.scrollLeftHover",
+    "when": "editorHoverFocused"
+  },
+  {
+    "key": "j",
+    "command": "editor.action.scrollDownHover",
+    "when": "editorHoverFocused"
+  },
+  {
+    "key": "l",
+    "command": "editor.action.scrollRightHover",
+    "when": "editorHoverFocused"
+  },
+  {
+    "key": "k",
+    "command": "editor.action.scrollUpHover",
+    "when": "editorHoverFocused"
+},
+{
+    "key": "l",
+    "command": "list.select",
+    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+},
+{
+    "key": "g h",
+    "command": "list.showHover",
+    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+},
+{
+    "key": "/",
+    "command": "list.find",
+    "when": "listFocus && listSupportsFind"
+}
 ]

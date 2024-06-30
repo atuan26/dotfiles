@@ -237,6 +237,10 @@
       "commands": ["git.revertSelectedRanges"]
     },
     {
+      "before": ["<leader>", "g", "R"],
+      "commands": ["git.clean"]
+    },
+    {
       "before": ["<leader>", "q"],
       "commands": [
         {
@@ -645,6 +649,12 @@
           "command": "git.revertSelectedRanges"
         },
         {
+          "key": "R",
+          "name": "Revert file",
+          "type": "command",
+          "command": "git.clean"
+        },
+        {
           "key": "u",
           "name": "Unstage file",
           "type": "command",
@@ -928,7 +938,7 @@
       ]
     }
   ],
-  "apc.imports": [
-    "file://${userHome}/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.2/dist/updateHandler.js"
-  ]
+  "apc.imports": [],
+  "diffEditor.ignoreTrimWhitespace": true,
+  "workbench.editor.editorActionsLocation": "hidden"
 }
