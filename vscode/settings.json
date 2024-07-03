@@ -181,8 +181,12 @@
       "before": ["<C-v>"]
     },
     {
-      "before": ["<leader>", "m", "t"],
-      "commands": ["bookmarks.toggle"]
+      "before": ["<Tab>"],
+      "commands": [":bn"]
+    },
+    {
+      "before": ["<S-Tab>"],
+      "commands": [":bp"]
     },
     {
       "before": ["<leader>", "m", "l"],
@@ -461,7 +465,6 @@
   "explorer.confirmDelete": false,
   "explorer.compactFolders": false,
   "git.decorations.enabled": false,
-  "files.insertFinalNewline": true,
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.lineHeight": 1.5,
   "terminal.integrated.fontSize": 14,

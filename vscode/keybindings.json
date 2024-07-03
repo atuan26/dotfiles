@@ -16,19 +16,43 @@
     "when": "isLinux && workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   },
   {
+    "key": "meta+h",
+    // "when": "isMac",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "meta+l",
+    // "when": "isMac",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "meta+k",
+    // "when": "isMac",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "meta+j",
+    // "when": "isMac",
+    "command": "workbench.action.navigateDown"
+  },
+  {
     "key": "ctrl+h",
+    // "when": "!isMac",
     "command": "workbench.action.navigateLeft"
   },
   {
     "key": "ctrl+l",
+    // "when": "!isMac",
     "command": "workbench.action.navigateRight"
   },
   {
     "key": "ctrl+k",
+    // "when": "!isMac",
     "command": "workbench.action.navigateUp"
   },
   {
     "key": "ctrl+j",
+    // "when": "!isMac",
     "command": "workbench.action.navigateDown"
   },
   {
@@ -323,16 +347,16 @@
 {
     "key": "l",
     "command": "list.select",
-    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    "when": "!inputFocus && !inputFocus && !treestickyScrollFocused"
 },
 {
     "key": "g h",
     "command": "list.showHover",
-    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    "when": "!inputFocus && !inputFocus && !treestickyScrollFocused"
 },
 {
     "key": "/",
     "command": "list.find",
-    "when": "listFocus && listSupportsFind"
+    "when": "!inputFocus && listSupportsFind"
 }
 ]
