@@ -7,7 +7,7 @@
 [init]
 	defaultBranch = master
 [core]
-    pager = delta
+    pager = delta --dark
     editor = nvim
     pager = delta --line-numbers --side-by-side
     excludesfile = ~/.gitignore
@@ -492,5 +492,3 @@
 	pa = push --all
 	cp = cherry-pick
 	fp = format-patch --signoff --stdout -M -C
-
-
