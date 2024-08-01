@@ -63,6 +63,9 @@ plugins=(git fzf-tab zsh-syntax-highlighting zsh-autosuggestions fzf)
 
 source $ZSH/oh-my-zsh.sh
 
+# Fix suggestion on paste
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -280,7 +283,7 @@ bindkey -s '^g' 'clear\n'
 
 PATH="$HOME/.local/bin:$PATH"
 eval "$(fzf --zsh)"
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd&>/dev/null)"
 eval "$(zoxide init zsh)"
 
 source "$XDG_CONFIG_HOME/zsh/aliases"

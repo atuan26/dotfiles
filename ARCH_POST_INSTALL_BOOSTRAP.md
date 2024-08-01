@@ -22,12 +22,12 @@ yay -S --noconfirm flatpak
 yay -S --noconfirm visual-studio-code-bin
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 sudo pacman -S neovim
-sudo pacman -S less ttf-fira-code pacman-contrib tmux
+sudo pacman -S less ttf-fira-code pacman-contrib tmux libreoffice-still
 
 ```
 Add kitty desktop icon
 ```
-mkdir ~/.local/bin/
+mkdir ~/.local/bin/ || true 
 # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
 # your system-wide PATH)
 ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
@@ -104,13 +104,15 @@ rm -rf ~/miniconda3/miniconda.sh
 ### VSCODE
 ```
 code --install-extension golf1052.code-sync
-chown -R $(whoami) $(which code) # /usr/bin/code  or /opt/visual-studio-code or /usr/share/code
+sudo chown -R $(whoami) $(which code) # /usr/bin/code  or /opt/visual-studio-code or /usr/share/code
 ```
 
 TODO:
 sudo pacman -S qt5-tools extra-cmake-modules
 
-- crow translate: `git clone https://aur.archlinux.org/crow-translate.git && cd crow-translate && makepkg -si`
+- crow translate: 
+  - `git clone https://aur.archlinux.org/crow-translate.git && cd crow-translate && makepkg -si`
+  - `ln -sf "$DOTFILES/config/Crow Translate/Crow Translate.conf" ~/.config/crow-translate/crow-translate.conf`
 
 - warpd
 - password-store

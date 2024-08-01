@@ -655,7 +655,7 @@
         "sideBar.background": "#282a36",
         "tab.activeBorder": "#0000"
     },
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Dracula Theme",
     "workbench.editor.tabCloseButton": "off",
     "workbench.hover.delay": 1,
     "workbench.iconTheme": "material-icon-theme",

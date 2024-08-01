@@ -2,6 +2,7 @@
     "extensions": [
         "albert.TabOut",
         "alefragnani.Bookmarks",
+        "charliermarsh.ruff",
         "csstools.postcss",
         "donjayamanne.githistory",
         "dracula-theme.theme-dracula",
