@@ -21,7 +21,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
+zstyle ':fzf-tab:*' fzf-pad 6
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -62,7 +62,7 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 plugins=(git fzf-tab zsh-syntax-highlighting zsh-autosuggestions fzf)
 
 source $ZSH/oh-my-zsh.sh
-
+ 
 # Fix suggestion on paste
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
@@ -203,9 +203,8 @@ FZF_VI_BIND+="enter:accept"
 FZF_VI_UNBIND+="unbind(i)+unbind(a)+unbind(/)+unbind(S)+toggle-search+change-prompt($FZF_QUERY_MODE_PROMPT)+execute-silent(echo \"$cursor_beam\")"
 FZF_VI_REBIND+="rebind(i)+rebind(a)+rebind(/)+rebind(S)+$FZF_SWITCH_MODE"
 
-# TODO: fix me
 export FZF_DEFAULT_OPTS="
-    --min-height=20 --border
+    --height ~70% --border \
     --bind '$FZF_VI_BIND' \
     --bind 'start:$FZF_SWITCH_MODE' \
     --bind 'esc:$FZF_VI_REBIND' \
