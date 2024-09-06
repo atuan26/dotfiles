@@ -144,7 +144,7 @@
         "<C-a>": false,
         "<C-b>": false,
         "<C-c>": false,
-        "<C-d>": false,
+        // "<C-d>": false,
         "<C-n>": false,
         "<C-f>": false,
         "<C-j>": false,
@@ -1207,5 +1207,6 @@
     "apc.imports": [],
     "diffEditor.ignoreTrimWhitespace": true,
     "workbench.editor.editorActionsLocation": "hidden",
-    "terminal.integrated.defaultProfile.linux": "zsh"
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "gitlens.views.searchAndCompare.avatars": false
 }

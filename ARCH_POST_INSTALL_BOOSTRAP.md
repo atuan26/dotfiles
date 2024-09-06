@@ -70,6 +70,8 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 
 sudo pacman -S unzip
 sudo pacman -S fzf zoxide thefuck
+sudo pacman -S ripgrep-all zip
+
 ```
 
 ### Git

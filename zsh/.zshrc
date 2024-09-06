@@ -156,7 +156,7 @@ eval $(thefuck --alias)
 
 : '
 ####################
-# FZF              #
+#        FZF       #
 ####################
 TODO: 
     - Add change between preview bind:
@@ -204,6 +204,8 @@ FZF_VI_UNBIND+="unbind(i)+unbind(a)+unbind(/)+unbind(S)+toggle-search+change-pro
 FZF_VI_REBIND+="rebind(i)+rebind(a)+rebind(/)+rebind(S)+$FZF_SWITCH_MODE"
 
 export FZF_DEFAULT_OPTS="
+    --pointer ▶ \
+    --marker ⇒ \
     --height ~70% --border \
     --bind '$FZF_VI_BIND' \
     --bind 'start:$FZF_SWITCH_MODE' \
@@ -290,3 +292,17 @@ for file in $DOTFILES/zsh/external/*; do
     source "$file"
 done
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+. "$HOME/.cargo/env"
+source $HOME/.cargo/env
+
+# fnm
+FNM_PATH="$HOME/.config/local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$HOME/.config/local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
