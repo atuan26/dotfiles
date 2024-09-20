@@ -297,7 +297,15 @@ ln -sf "$DOTFILES/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
 "$XDG_CONFIG_HOME/tmux/plugins/tpm"
 
 ###########
-# git     #
+#   git   #
 ###########
 ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
+###########
+#   zed   #
+###########
+mkdir -p "$XDG_CONFIG_HOME/zed"
+mkdir -p "$XDG_CONFIG_HOME/zed/themes"
+ln -sf "$DOTFILES/zed/keymap.json" "$XDG_CONFIG_HOME/zed/keymap.json"
+ln -sf "$DOTFILES/zed/settings.json" "$XDG_CONFIG_HOME/zed/settings.json"
+ln -sf "$DOTFILES/zed/themes/dracular.json" "$XDG_CONFIG_HOME/zed/themes/dracular.json"
