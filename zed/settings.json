@@ -24,5 +24,17 @@
     "mode": "system",
     "light": "Dracula",
     "dark": "Dracula"
+  },
+  "toolbar": {
+    // Whether to show breadcrumbs.
+    "breadcrumbs": true,
+    // Whether to show quick action buttons.
+    "quick_actions": true,
+    // Whether to show the Selections menu in the editor toolbar
+    "selections_menu": true
+  },
+  // Whether to show buffer search results in the scrollbar.
+  "terminal": {
+    "line_height": "standard"
   }
 }
