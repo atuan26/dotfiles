@@ -1,13 +1,12 @@
 [
   {
   "bindings": {
+    "ctrl-b": "workspace::CloseAllDocks"
   }
   },
   {
     "context": "VimControl && !menu",
     "bindings": {
-      "z a": "editor::Fold",
-      "z o": "editor::UnfoldLines",
       "ctrl-shift-g": [
         "workspace::SendKeystrokes",
         ": w n c t e enter ctrl-wait ctrl-u i l a z y g i t enter"
@@ -24,6 +23,8 @@
       "space g b": "editor::ToggleGitBlame",
       "space g c": "editor::ToggleHunkDiff",
       "space g r": "editor::RevertSelectedHunks",
+      "space w": "workspace::Save",
+      "space q": ["workspace::SendKeystrokes", ": q enter"],
     }
   },
   {

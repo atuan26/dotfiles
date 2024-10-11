@@ -204,6 +204,26 @@
         },
         {
             "after": [
+                "H",
+                "z",
+                "z"
+            ],
+            "before": [
+                "H"
+            ]
+        },
+        {
+            "after": [
+                "L",
+                "z",
+                "z"
+            ],
+            "before": [
+                "L"
+            ]
+        },
+        {
+            "after": [
                 "\"",
                 "+",
                 "p"
@@ -242,7 +262,7 @@
             "before": [
                 "<leader>",
                 "f",
-                "s"
+                "w"
             ],
             "commands": [
                 "workbench.action.quickTextSearch"
@@ -731,7 +751,6 @@
     "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.lineHeight": 1.5,
     "terminal.integrated.fontSize": 14,
-    "workbench.activityBar.location": "hidden",
     "whichkey.delay": 200,
     "whichkey.bindings": [
         {
@@ -1208,5 +1227,7 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "workbench.editor.editorActionsLocation": "hidden",
     "terminal.integrated.defaultProfile.linux": "zsh",
-    "gitlens.views.searchAndCompare.avatars": false
+    "gitlens.views.searchAndCompare.avatars": false,
+    "workbench.activityBar.location": "hidden",
+    "gitlens.views.remotes.branches.layout": "list"
 }

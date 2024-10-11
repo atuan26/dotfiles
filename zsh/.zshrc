@@ -16,11 +16,11 @@ ZSH_THEME="robbyrussell"
 
 # zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract";$PREVIEW \$in"
 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*' menu no
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' fzf-pad 6
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -62,7 +62,7 @@ zstyle ':fzf-tab:*' fzf-pad 6
 plugins=(git fzf-tab zsh-syntax-highlighting zsh-autosuggestions fzf)
 
 source $ZSH/oh-my-zsh.sh
- 
+
 # Fix suggestion on paste
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
@@ -158,7 +158,7 @@ eval $(thefuck --alias)
 ####################
 #        FZF       #
 ####################
-TODO: 
+TODO:
     - Add change between preview bind:
            change-preview(...)          (change --preview option)
            change-preview-label(...)    (change --preview-label to the given string)
@@ -306,3 +306,4 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="$HOME/.config/local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+

@@ -7,7 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "features": {
+    "inline_completion_provider": "none"
+  },
   "assistant": {
+    "button": false,
     "default_model": {
       "provider": "google",
       "model": "gemini-1.5-pro"
@@ -31,10 +35,115 @@
     // Whether to show quick action buttons.
     "quick_actions": true,
     // Whether to show the Selections menu in the editor toolbar
-    "selections_menu": true
+    "selections_menu": false
   },
   // Whether to show buffer search results in the scrollbar.
   "terminal": {
-    "line_height": "standard"
-  }
+    // "line_height": "standard",
+    "line_height": {
+      "custom": 1  
+    },
+  "toolbar": {
+      // Whether to display the terminal title in its toolbar.
+      "title": false
+    },
+    "button": false,
+  },
+  "remove_trailing_whitespace_on_save": false,  
+  "scrollbar": {
+    "show": "auto",
+    // Whether to show cursor positions in the scrollbar.
+    "cursors": true,
+    // Whether to show git diff indicators in the scrollbar.
+    "git_diff": true,
+    // Whether to show buffer search results in the scrollbar.
+    "search_results": false,
+    // Whether to show selected symbol occurrences in the scrollbar.
+    "selected_symbol": false,
+    // Whether to show diagnostic indicators in the scrollbar.
+    "diagnostics": false
+  },
+  "search_wrap": false,
+  "project_panel": {
+    // Whether to show the project panel button in the status bar
+    "button": false,
+    // Default width of the project panel.
+    "default_width": 240,
+    // Where to dock the project panel. Can be 'left' or 'right'.
+    "dock": "right",
+    // Whether to show file icons in the project panel.
+    "indent_size": 20,
+  },
+  "outline_panel": {
+    // Whether to show the outline panel button in the status bar
+    "button": false,
+    // Default width of the outline panel.
+    "default_width": 300,
+    // Where to dock the outline panel. Can be 'left' or 'right'.
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    // Whether to show the collaboration panel button in the status bar.
+    "button": false,
+    // Where to dock the collaboration panel. Can be 'left' or 'right'.
+    "dock": "right",
+    // Default width of the collaboration panel.
+    "default_width": 240
+  },
+  "chat_panel": {
+    "button": false,
+    "dock": "right",
+  },
+  "notification_panel": {
+    "button": false,
+    "dock": "right",
+    "default_width": 380
+  },
+  "tab_bar": {
+    // Whether or not to show the tab bar in the editor
+    "show": true,
+    // Whether or not to show the navigation history buttons.
+    "show_nav_history_buttons": false
+  },
+  "tabs": {
+    "git_status": true,
+    "file_icons": true
+  },
+  "ensure_final_newline_on_save": false,
+  "extend_comment_on_newline": false,
+  "telemetry": {
+    // Send debug info like crash reports.
+    "diagnostics": false,
+    // Send anonymized usage data like what languages you're using Zed with.
+    "metrics": false
+  },
+  "auto_update": true,
+  "diagnostics": {
+    // Whether to show warnings or not by default.
+    "include_warnings": false
+  }, 
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 600
+    }
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_system_clipboard": "always",
+    "use_multiline_find": false,
+    "use_smartcase_find": false,
+    "custom_digraphs": {}
+  },
+  "line_indicator_format": "short",
+  "gutter": {
+    // Whether to show line numbers in the gutter.
+    "line_numbers": true,
+    // Whether to show code action buttons in the gutter.
+    "code_actions": false,
+    // Whether to show runnables buttons in the gutter.
+    "runnables": true,
+    // Whether to show fold buttons in the gutter.
+    "folds": false
+  },
 }
