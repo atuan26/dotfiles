@@ -1,20 +1,30 @@
 [
   {
-  "bindings": {
-    "ctrl-b": "workspace::CloseAllDocks"
-  }
-  },
-  {
-    "context": "VimControl && !menu",
     "bindings": {
       "ctrl-shift-g": [
         "workspace::SendKeystrokes",
         ": w n c t e enter ctrl-wait ctrl-u i l a z y g i t enter"
-      ]
-      // "space g g": [
-      //   "workspace::SendKeystrokes",
-      //   ": c r p enter : te enter ctrl-wait ctrl-u mix space test space cmd-v i a b c enter"
-      // ],
+      ],
+      "ctrl-b": "workspace::CloseAllDocks",
+    }
+  },
+  {
+    "context": "showing_code_actions",
+    "bindings": {
+      "ctrl-l": "editor::ConfirmCodeAction"
+    }
+  },
+  {
+    "context": "showing_completions",
+    "bindings": {
+      "ctrl-l": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space f d": "editor::Format",
+      "g q": "editor::ToggleCodeActions",
     }
   },
   {
@@ -22,9 +32,10 @@
     "bindings": {
       "space g b": "editor::ToggleGitBlame",
       "space g c": "editor::ToggleHunkDiff",
+      "space g C": "editor::ExpandAllHunkDiffs",
       "space g r": "editor::RevertSelectedHunks",
       "space w": "workspace::Save",
-      "space q": ["workspace::SendKeystrokes", ": q enter"],
+      "space q": "pane::CloseActiveItem"
     }
   },
   {
@@ -37,7 +48,8 @@
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "space g r": "editor::RevertSelectedHunks"
+      "space g r": "editor::RevertSelectedHunks",
+      "space f d": "editor::FormatSelections"
     }
   },
   {
@@ -48,18 +60,15 @@
   },
   {
     "context": "vim_mode == insert && !(showing_code_actions || showing_completions)",
-    "bindings": {
-    }
+    "bindings": {}
   },
   {
     "context": "vim_mode == replace",
-    "bindings": {
-    }
+    "bindings": {}
   },
   {
     "context": "vim_mode == waiting",
-    "bindings": {
-    }
+    "bindings": {}
   },
   {
     // netrw compatibility
@@ -100,5 +109,31 @@
       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
       "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
     }
-  }
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "w": "vim::Word",
+      "shift-w": ["vim::Word", { "ignorePunctuation": true }],
+      "t": "vim::Tag",
+      "s": "vim::Sentence",
+      "p": "vim::Paragraph",
+      "'": "vim::Quotes",
+      "`": "vim::BackQuotes",
+      "\"": "vim::DoubleQuotes",
+      "|": "vim::VerticalBars",
+      "(": "vim::Parentheses",
+      ")": "vim::Parentheses",
+      "b": "vim::Parentheses",
+      "[": "vim::SquareBrackets",
+      "]": "vim::SquareBrackets",
+      "r": "vim::SquareBrackets",
+      "{": "vim::CurlyBrackets",
+      "}": "vim::CurlyBrackets",
+      "shift-b": "vim::CurlyBrackets",
+      "<": "vim::AngleBrackets",
+      ">": "vim::AngleBrackets",
+      "a": "vim::Argument",
+    }
+  },
 ]

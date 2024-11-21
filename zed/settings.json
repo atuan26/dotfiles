@@ -7,9 +7,44 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "ssh_connections": [
+    {
+      "host": "dify-dev",
+      "projects": [
+        {
+          "paths": [
+            "~/01_source"
+          ]
+        },
+        {
+          "paths": [
+            "~/01_source/dify-milize"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "dify-stg",
+      "projects": [
+        {
+          "paths": [
+            "~/01_source/dify-milize"
+          ]
+        },
+        {
+          "paths": [
+            "~/01_source"
+          ]
+        }
+      ]
+    }
+  ],
   "features": {
     "inline_completion_provider": "none"
   },
+  "buffer_font_family": "Fira Code",
+  "buffer_font_fallbacks": ["Agave Nerd Font"],
+  "ui_font_family": "Fira Code",
   "assistant": {
     "button": false,
     "default_model": {
@@ -17,6 +52,9 @@
       "model": "gemini-1.5-pro"
     },
     "version": "2"
+  },
+  "buffer_line_height": {
+    "custom": 1.5
   },
   "base_keymap": "VSCode",
   "vim_mode": true,
@@ -33,7 +71,7 @@
     // Whether to show breadcrumbs.
     "breadcrumbs": true,
     // Whether to show quick action buttons.
-    "quick_actions": true,
+    "quick_actions": false,
     // Whether to show the Selections menu in the editor toolbar
     "selections_menu": false
   },
@@ -41,19 +79,19 @@
   "terminal": {
     // "line_height": "standard",
     "line_height": {
-      "custom": 1  
+      "custom": 1
     },
-  "toolbar": {
+    "toolbar": {
       // Whether to display the terminal title in its toolbar.
       "title": false
     },
-    "button": false,
+    "button": false
   },
-  "remove_trailing_whitespace_on_save": false,  
+  "remove_trailing_whitespace_on_save": true,
   "scrollbar": {
     "show": "auto",
     // Whether to show cursor positions in the scrollbar.
-    "cursors": true,
+    "cursors": false,
     // Whether to show git diff indicators in the scrollbar.
     "git_diff": true,
     // Whether to show buffer search results in the scrollbar.
@@ -72,7 +110,7 @@
     // Where to dock the project panel. Can be 'left' or 'right'.
     "dock": "right",
     // Whether to show file icons in the project panel.
-    "indent_size": 20,
+    "indent_size": 20
   },
   "outline_panel": {
     // Whether to show the outline panel button in the status bar
@@ -80,19 +118,19 @@
     // Default width of the outline panel.
     "default_width": 300,
     // Where to dock the outline panel. Can be 'left' or 'right'.
-    "dock": "right",
+    "dock": "right"
   },
   "collaboration_panel": {
     // Whether to show the collaboration panel button in the status bar.
     "button": false,
-    // Where to dock the collaboration panel. Can be 'left' or 'right'.
+    // where to dock the collaboration panel. can be 'left' or 'right'.
     "dock": "right",
-    // Default width of the collaboration panel.
+    // default width of the collaboration panel.
     "default_width": 240
   },
   "chat_panel": {
     "button": false,
-    "dock": "right",
+    "dock": "right"
   },
   "notification_panel": {
     "button": false,
@@ -109,7 +147,7 @@
     "git_status": true,
     "file_icons": true
   },
-  "ensure_final_newline_on_save": false,
+  "ensure_final_newline_on_save": true,
   "extend_comment_on_newline": false,
   "telemetry": {
     // Send debug info like crash reports.
@@ -121,7 +159,7 @@
   "diagnostics": {
     // Whether to show warnings or not by default.
     "include_warnings": false
-  }, 
+  },
   "git": {
     "inline_blame": {
       "enabled": true,
@@ -146,4 +184,23 @@
     // Whether to show fold buttons in the gutter.
     "folds": false
   },
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff"],
+      // "format_on_save": "on",
+      "formatter": [
+        {
+          "code_actions": {
+            "source.organizeImports.ruff": true,
+            "source.fixAll.ruff": true
+          }
+        },
+        {
+          "language_server": {
+            "name": "ruff"
+          }
+        }
+      ]
+    }
+  }
 }
