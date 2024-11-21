@@ -277,6 +277,15 @@
 # success "Done."
 DOTFILES="$(pwd)"
 ##########
+# config #
+##########
+ln -sf "$DOTFILES/config/.xinitrc" "$HOME"
+ln -sf "$DOTFILES/config/warpd/config" "$HOME/.config/warpd/config"
+
+mkdir -p "$HOME/.config/sxhkd"
+ln -sf "$DOTFILES/config/sxhkd/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
+
+##########
 # zsh    #
 ##########
 mkdir -p "$HOME/.config/zsh"

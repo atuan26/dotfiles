@@ -6,3 +6,6 @@ alt + shift + c
 
 alt + shift + g
   warpd --grid
+
+meta + l
+  $DOTFILES/config/xsecurelock.sh

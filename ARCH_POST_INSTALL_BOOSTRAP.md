@@ -14,6 +14,14 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/BambooEngine/ibus-bamboo
 ```
 Partition manager: `sudo pacman -S gparted`
 
+### Display manager
+- https://github.com/fairyglade/ly:
+```
+$ sudo pacman -S ly
+$ systemctl enable ly.service
+```
+Screen Locker: https://github.com/google/xsecurelock?tab=readme-ov-file#authentication-modules
+sudo pacman -S libnotify
 ### Install google-chrome
 
 ```
@@ -27,7 +35,7 @@ sudo pacman -S less ttf-fira-code pacman-contrib tmux libreoffice-still
 ```
 Add kitty desktop icon
 ```
-mkdir ~/.local/bin/ || true 
+mkdir ~/.local/bin/ || true
 # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
 # your system-wide PATH)
 ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
@@ -52,7 +60,7 @@ sudo systemctl enable docker.service
 ```
 
 
-Fix permission: 
+Fix permission:
 ```
 sudo usermod -aG docker $USER
 newgrp docker
@@ -89,9 +97,9 @@ Host tuanna
     IdentityFile ~/.ssh/id_tuanna
 ```
 
-### Python 
+### Python
 ```
-sudo pacman -S python-pip 
+sudo pacman -S python-pip
 ```
 yay -S python-setuptools
 Miniconda3
@@ -112,11 +120,12 @@ sudo chown -R $(whoami) $(which code) # /usr/bin/code  or /opt/visual-studio-cod
 TODO:
 sudo pacman -S qt5-tools extra-cmake-modules
 
-- crow translate: 
+- crow translate:
   - `git clone https://aur.archlinux.org/crow-translate.git && cd crow-translate && makepkg -si`
   - `ln -sf "$DOTFILES/config/Crow Translate/Crow Translate.conf" ~/.config/crow-translate/crow-translate.conf`
 
-- warpd
+- warpd: yay -S warpd
+- yay -S sxhkd
 - password-store
 - insomia
 - obsidian
