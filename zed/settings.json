@@ -12,14 +12,7 @@
       "host": "dify-dev",
       "projects": [
         {
-          "paths": [
-            "~/01_source"
-          ]
-        },
-        {
-          "paths": [
-            "~/01_source/dify-milize"
-          ]
+          "paths": ["~/01_source/dify-milize"]
         }
       ]
     },
@@ -27,14 +20,7 @@
       "host": "dify-stg",
       "projects": [
         {
-          "paths": [
-            "~/01_source/dify-milize"
-          ]
-        },
-        {
-          "paths": [
-            "~/01_source"
-          ]
+          "paths": ["~/01_source/dify-milize"]
         }
       ]
     }
@@ -157,7 +143,6 @@
   },
   "auto_update": true,
   "diagnostics": {
-    // Whether to show warnings or not by default.
     "include_warnings": false
   },
   "git": {

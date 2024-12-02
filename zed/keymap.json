@@ -5,7 +5,7 @@
         "workspace::SendKeystrokes",
         ": w n c t e enter ctrl-wait ctrl-u i l a z y g i t enter"
       ],
-      "ctrl-b": "workspace::CloseAllDocks",
+      "ctrl-b": "workspace::CloseAllDocks"
     }
   },
   {
@@ -24,7 +24,7 @@
     "context": "VimControl && !menu",
     "bindings": {
       "space f d": "editor::Format",
-      "g q": "editor::ToggleCodeActions",
+      "g q": "editor::ToggleCodeActions"
     }
   },
   {
@@ -49,7 +49,8 @@
     "context": "vim_mode == visual",
     "bindings": {
       "space g r": "editor::RevertSelectedHunks",
-      "space f d": "editor::FormatSelections"
+      "space f d": "editor::FormatSelections",
+      "shift-tab": "editor::TabPrev"
     }
   },
   {
@@ -133,7 +134,7 @@
       "shift-b": "vim::CurlyBrackets",
       "<": "vim::AngleBrackets",
       ">": "vim::AngleBrackets",
-      "a": "vim::Argument",
+      "a": "vim::Argument"
     }
-  },
+  }
 ]
