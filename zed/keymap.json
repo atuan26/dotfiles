@@ -5,6 +5,7 @@
         "workspace::SendKeystrokes",
         ": w n c t e enter ctrl-wait ctrl-u i l a z y g i t enter"
       ],
+      "ctrl-shift-e": "project_panel::ToggleFocus",
       "ctrl-b": "workspace::CloseAllDocks"
     }
   },
@@ -34,6 +35,7 @@
       "space g c": "editor::ToggleHunkDiff",
       "space g C": "editor::ExpandAllHunkDiffs",
       "space g r": "editor::RevertSelectedHunks",
+      "space g R": "editor::RevertFile",
       "space w": "workspace::Save",
       "space q": "pane::CloseActiveItem"
     }

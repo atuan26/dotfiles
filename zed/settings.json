@@ -34,8 +34,8 @@
   "assistant": {
     "button": false,
     "default_model": {
-      "provider": "google",
-      "model": "gemini-1.5-pro"
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
     },
     "version": "2"
   },
@@ -71,7 +71,8 @@
       // Whether to display the terminal title in its toolbar.
       "title": false
     },
-    "button": false
+    "button": false,
+    "detect_venv": "off"
   },
   "remove_trailing_whitespace_on_save": true,
   "scrollbar": {
