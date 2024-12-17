@@ -46,6 +46,9 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 
+bindkey -M viins "^[[A" up-line-or-beginning-search
+bindkey -M viins "^[[B" down-line-or-beginning-search
+
 # "/" vi-history-search-backward
 # "?" vi-history-search-forward
 
@@ -57,9 +60,9 @@ bindkey -M vicmd "/" vi-history-search-forward
 # bindkey -M isearch '^N' history-incremental-search-backward
 # bindkey -M isearch '^R' history-incremental-search-forward
 
-# make search up and down work, so partially type and hit up/down to find relevant stuff
-bindkey '^[[A' up-line-or-search                                                
-bindkey '^[[B' down-line-or-search
+# # make search up and down work, so partially type and hit up/down to find relevant stuff
+# bindkey '^[[A' up-line-or-search
+# bindkey '^[[B' down-line-or-search
 
 function vi-yank-xclip {
     zle vi-yank

@@ -169,6 +169,10 @@ TODO:
 
 FZF_VI_BIND_LIST=("j:down"
             "k:up"
+            "n:down"
+            "p:up"
+            "tab:down"
+            "shift-tab:up"
             "g:first"
             "G:last"
             "d:preview-half-page-down"
@@ -181,11 +185,9 @@ FZF_VI_BIND_LIST=("j:down"
             "m:change-multi"
             "space:select"
             "ctrl-space:deselect"
-            "tab:down"
-            "shift-tab:up"
 )
 declare FZF_VI_BIND="" FZF_VI_REBIND="" FZF_VI_UNBIND=""
-FZF_BROWSER_MODE_PROMPT="Tips: j/k: navigate, d/u: navigate preview 🪄️ "
+FZF_BROWSER_MODE_PROMPT="COMMAND MODE 🪄️ "
 FZF_QUERY_MODE_PROMPT="QUERY MODE 🔎 "
 
 cursor_block='\e[0 q'
@@ -282,6 +284,14 @@ bindkey -r '^l'
 bindkey -r '^g'
 bindkey -s '^g' 'clear\n'
 
+function texplorer() {
+  zle -M "$(yazi)"
+}
+zle -N texplorer
+
+bindkey -M viins '^E' texplorer
+bindkey -M vicmd '^E' texplorer
+
 PATH="$HOME/.local/bin:$PATH"
 eval "$(fzf --zsh)"
 eval "$(fnm env --use-on-cd&>/dev/null)"
@@ -292,9 +302,9 @@ for file in $DOTFILES/zsh/external/*; do
     source "$file"
 done
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 
 . "$HOME/.cargo/env"
@@ -306,4 +316,3 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="$HOME/.config/local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
-
