@@ -17,3 +17,24 @@ gli() {
         --header="^f/b : navigate preview; ENTER: view" \
         --preview-window=right:60% \
 }
+
+git_file_history_diff() {
+  # Ensure a file is provided as an argument
+  if [ -z "$1" ]; then
+    echo "Usage: git_file_history_diff <file_path>"
+    return 1
+  fi
+
+  local file_path="$1"
+
+  # Ensure the file is inside a git repository
+  if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
+    echo "Not a git repository"
+    return 1
+  fi
+
+  # Use fzf to show commits affecting the file
+  git log --pretty=format:"%h %C(bold)%s%C(reset)" --date=short -- "$file_path" | \
+  fzf --height=100% --border=none --layout=reverse --preview-window=right:80%:wrap \
+  --preview "echo {} | awk '{print \$1}' | xargs -I {} git show --color {} -- '$file_path'"
+}

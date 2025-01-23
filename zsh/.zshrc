@@ -152,7 +152,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 export PATH="$PATH:~/.local/bin/"
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 : '
 ####################
@@ -291,6 +291,16 @@ zle -N texplorer
 
 bindkey -M viins '^E' texplorer
 bindkey -M vicmd '^E' texplorer
+
+
+function lazygiit() {
+  zle -M "$(lazygit)"
+}
+zle -N lazygiit
+
+bindkey -M viins '^G' lazygiit
+bindkey -M vicmd '^G' lazygiit
+
 
 PATH="$HOME/.local/bin:$PATH"
 eval "$(fzf --zsh)"

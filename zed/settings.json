@@ -65,7 +65,7 @@
   "terminal": {
     // "line_height": "standard",
     "line_height": {
-      "custom": 1
+      "custom": 1.2
     },
     "toolbar": {
       // Whether to display the terminal title in its toolbar.

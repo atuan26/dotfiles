@@ -1,12 +1,29 @@
 [
   {
     "bindings": {
-      "ctrl-shift-g": [
-        "workspace::SendKeystrokes",
-        ": w n c t e enter ctrl-wait ctrl-u i l a z y g i t enter"
-      ],
       "ctrl-shift-e": "project_panel::ToggleFocus",
       "ctrl-b": "workspace::CloseAllDocks"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-d": [
+        "task::Spawn",
+        { "task_name": "lazydocker", "reveal_target": "center" }
+      ],
+      "alt-e": [
+        "task::Spawn",
+        { "task_name": "yazi"}
+      ],
+      "alt-g": [
+        "task::Spawn",
+        { "task_name": "lazygit", "reveal_target": "center" }
+      ],
+      "ctrl-shift-g": [
+        "task::Spawn",
+        { "task_name": "lazygit", "reveal_target": "center" }
+      ]
     }
   },
   {
@@ -29,7 +46,7 @@
     }
   },
   {
-    "context": "vim_mode == normal",
+    "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "space g b": "editor::ToggleGitBlame",
       "space g c": "editor::ToggleHunkDiff",
@@ -37,7 +54,13 @@
       "space g r": "editor::RevertSelectedHunks",
       "space g R": "editor::RevertFile",
       "space w": "workspace::Save",
-      "space q": "pane::CloseActiveItem"
+      "space q": "pane::CloseActiveItem",
+      "space g f h": [
+        "task::Spawn", {"task_name": "git_file_hist", "reveal_target": "center" }
+      ],
+      "space g l i": [
+        "task::Spawn", {"task_name": "gli", "reveal_target": "center" }
+      ]
     }
   },
   {
