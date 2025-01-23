@@ -1,0 +1,9 @@
+[Unit]
+Description=Start xautolock with xsecurelock on session startup
+
+[Service]
+ExecStart=/usr/bin/xautolock -time 10 -locker xsecurelock -notify 30 -notifier "if ! pgrep -x xsecurelock ; then notify-send 'Locking in 30 seconds'; fi"
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -1,4 +1,4 @@
-xautolock -time 10 -locker xsecurelock &
+
 exec startkde
 
 #!/bin/bash
@@ -17,9 +17,5 @@ export XSECURELOCK_DIM_OVERRIDE_COMPOSITOR_DETECTION=1
 
 # Start xautolock with xsecurelock
 xautolock -time 5 -locker xsecurelock -notify 30 -notifier "notify-send 'Locking in 30 seconds'" &
-
-# warpd
-warpd &
-sxhkd &
 
 exec startkde
