@@ -20,10 +20,7 @@
         "task::Spawn",
         { "task_name": "lazygit", "reveal_target": "center" }
       ],
-      "ctrl-shift-g": [
-        "task::Spawn",
-        { "task_name": "lazygit", "reveal_target": "center" }
-      ]
+      "ctrl-shift-g": "git_panel::ToggleFocus"
     }
   },
   {
@@ -48,13 +45,16 @@
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      "space g b": "editor::ToggleGitBlame",
-      "space g c": "editor::ToggleHunkDiff",
-      "space g C": "editor::ExpandAllHunkDiffs",
-      "space g r": "editor::RevertSelectedHunks",
-      "space g R": "editor::RevertFile",
       "space w": "workspace::Save",
       "space q": "pane::CloseActiveItem",
+      ///////////////// git ////////////////
+      "space g b": "editor::ToggleGitBlame",
+      "space g c": "editor::ToggleSelectedDiffHunks",
+      "space g C": "editor::ExpandAllDiffHunks",
+      "space g r": "git::Restore",
+      "space g R": "git::RestoreFile",
+      "space g s": "git::ToggleStaged",
+      "space g S": "git::StageFile",
       "space g f h": [
         "task::Spawn", {"task_name": "git_file_hist", "reveal_target": "center" }
       ],
@@ -73,9 +73,8 @@
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "space g r": "editor::RevertSelectedHunks",
-      "space f d": "editor::FormatSelections",
-      "shift-tab": "editor::TabPrev"
+      "space g r": "git::Restore",
+      "space f d": "editor::FormatSelections"
     }
   },
   {
@@ -103,21 +102,21 @@
       "a": "project_panel::NewFile",
       "f": "project_panel::NewFile",
       "ctrl-w": null,
-      "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w right": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w up": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w down": ["workspace::ActivatePaneInDirection", "Down"],
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-w left": "workspace::ActivatePaneLeft",
+      "ctrl-w right": "workspace::ActivatePaneRight",
+      "ctrl-w up": "workspace::ActivatePaneUp",
+      "ctrl-w down": "workspace::ActivatePaneDown",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
     }
   },
   {
     "context": "OutlinePanel && not_editing",
     "bindings": {
       "j": "menu::SelectNext",
-      "k": "menu::SelectPrev",
+      "k": "menu::SelectPrevious",
       "shift-g": "menu::SelectLast",
       "g g": "menu::SelectFirst"
     }
@@ -126,21 +125,21 @@
     "context": "Terminal",
     "bindings": {
       // "ctrl-w": ["terminal::SendKeystroke", "ctrl-w"],
-      "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w right": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w up": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w down": ["workspace::ActivatePaneInDirection", "Down"],
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-w left": "workspace::ActivatePaneLeft",
+      "ctrl-w right": "workspace::ActivatePaneRight",
+      "ctrl-w up": "workspace::ActivatePaneUp",
+      "ctrl-w down": "workspace::ActivatePaneDown",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
     }
   },
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
     "bindings": {
       "w": "vim::Word",
-      "shift-w": ["vim::Word", { "ignorePunctuation": true }],
+      "shift-w": ["vim::Word", { "ignore_punctuation": true }],
       "t": "vim::Tag",
       "s": "vim::Sentence",
       "p": "vim::Paragraph",

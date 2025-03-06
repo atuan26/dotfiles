@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "icon_theme": "Material Icon Theme",
   "ssh_connections": [
     {
       "host": "dify-dev",
@@ -26,7 +27,7 @@
     }
   ],
   "features": {
-    "inline_completion_provider": "none"
+    "edit_prediction_provider": "zed"
   },
   "buffer_font_family": "Fira Code",
   "buffer_font_fallbacks": ["Agave Nerd Font"],
@@ -86,7 +87,7 @@
     // Whether to show selected symbol occurrences in the scrollbar.
     "selected_symbol": false,
     // Whether to show diagnostic indicators in the scrollbar.
-    "diagnostics": false
+    "diagnostics": "error"
   },
   "search_wrap": false,
   "project_panel": {
@@ -116,9 +117,28 @@
     "default_width": 240
   },
   "chat_panel": {
-    "button": false,
+    "button": "when_in_call",
     "dock": "right"
   },
+  "git_panel": {
+    // Whether to show the git panel button in the status bar.
+    "button": false,
+    // Where to the git panel. Can be 'left' or 'right'.
+    "dock": "right",
+    // Default width of the git panel.
+    "default_width": 360,
+    // Style of the git status indicator in the panel.
+    //
+    // Default: icon
+    "status_style": "icon",
+    "scrollbar": {
+      // When to show the scrollbar in the git panel.
+      //
+      // Default: inherits editor scrollbar settings
+      "show": null
+    }
+  },
+  "edit_prediction_provider": "zed",
   "notification_panel": {
     "button": false,
     "dock": "right",
@@ -128,7 +148,8 @@
     // Whether or not to show the tab bar in the editor
     "show": true,
     // Whether or not to show the navigation history buttons.
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
   },
   "tabs": {
     "git_status": true,
@@ -138,7 +159,7 @@
   "extend_comment_on_newline": false,
   "telemetry": {
     // Send debug info like crash reports.
-    "diagnostics": false,
+    "diagnostics": true,
     // Send anonymized usage data like what languages you're using Zed with.
     "metrics": false
   },
