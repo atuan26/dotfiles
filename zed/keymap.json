@@ -8,19 +8,28 @@
   {
     "context": "Workspace",
     "bindings": {
+      "ctrl-w right": "vim::ResizePaneRight",
+      "ctrl-w left": "vim::ResizePaneLeft",
+      "ctrl-w down": "vim::ResizePaneDown",
+      "ctrl-w up": "vim::ResizePaneUp",
       "alt-d": [
         "task::Spawn",
         { "task_name": "lazydocker", "reveal_target": "center" }
       ],
-      "alt-e": [
-        "task::Spawn",
-        { "task_name": "yazi"}
-      ],
+      "alt-e": ["task::Spawn", { "task_name": "yazi" }],
       "alt-g": [
         "task::Spawn",
         { "task_name": "lazygit", "reveal_target": "center" }
       ],
       "ctrl-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown",
+      "space e": "project_panel::ToggleFocus"
     }
   },
   {
@@ -47,78 +56,55 @@
     "bindings": {
       "space w": "workspace::Save",
       "space q": "pane::CloseActiveItem",
+      "space g l": "editor::OpenUrl",
+      // "ctrl-/": "terminal_panel::ToggleFocus",
+      "[ b": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
       ///////////////// git ////////////////
-      "space g b": "editor::ToggleGitBlame",
+      "space g b": "git::Blame",
       "space g c": "editor::ToggleSelectedDiffHunks",
       "space g C": "editor::ExpandAllDiffHunks",
       "space g r": "git::Restore",
       "space g R": "git::RestoreFile",
       "space g s": "git::ToggleStaged",
       "space g S": "git::StageFile",
+      ///////////////// task ////////////////
       "space g f h": [
-        "task::Spawn", {"task_name": "git_file_hist", "reveal_target": "center" }
+        "task::Spawn",
+        { "task_name": "git_file_hist", "reveal_target": "center" }
       ],
       "space g l i": [
-        "task::Spawn", {"task_name": "gli", "reveal_target": "center" }
+        "task::Spawn",
+        { "task_name": "gli", "reveal_target": "center" }
       ]
-    }
-  },
-  {
-    "context": "VimControl && VimCount",
-    "bindings": {
-      "0": ["vim::Number", 0],
-      ":": "vim::CountCommand"
     }
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown",
       "space g r": "git::Restore",
       "space f d": "editor::FormatSelections"
     }
-  },
-  {
-    "context": "vim_mode == insert",
-    "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
-    }
-  },
-  {
-    "context": "vim_mode == insert && !(showing_code_actions || showing_completions)",
-    "bindings": {}
-  },
-  {
-    "context": "vim_mode == replace",
-    "bindings": {}
-  },
-  {
-    "context": "vim_mode == waiting",
-    "bindings": {}
   },
   {
     // netrw compatibility
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "a": "project_panel::NewFile",
-      "f": "project_panel::NewFile",
-      "ctrl-w": null,
-      "ctrl-w left": "workspace::ActivatePaneLeft",
-      "ctrl-w right": "workspace::ActivatePaneRight",
-      "ctrl-w up": "workspace::ActivatePaneUp",
-      "ctrl-w down": "workspace::ActivatePaneDown",
-      "ctrl-w h": "workspace::ActivatePaneLeft",
-      "ctrl-w l": "workspace::ActivatePaneRight",
-      "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w j": "workspace::ActivatePaneDown"
-    }
-  },
-  {
-    "context": "OutlinePanel && not_editing",
-    "bindings": {
-      "j": "menu::SelectNext",
-      "k": "menu::SelectPrevious",
-      "shift-g": "menu::SelectLast",
-      "g g": "menu::SelectFirst"
+      "A": "project_panel::NewDirectory",
+      "enter": "project_panel::OpenPermanent",
+      "o": "project_panel::Open",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "d": "project_panel::Delete",
+      "shift-y": "workspace::CopyRelativePath",
+      "g y": "workspace::CopyPath",
+      "r": "project_panel::Rename",
+      "f": "project_panel::NewSearchInDirectory",
+      "F": "project_panel::NewSearchInDirectory"
     }
   },
   {
@@ -136,29 +122,21 @@
     }
   },
   {
-    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "context": "GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView",
     "bindings": {
-      "w": "vim::Word",
-      "shift-w": ["vim::Word", { "ignore_punctuation": true }],
-      "t": "vim::Tag",
-      "s": "vim::Sentence",
-      "p": "vim::Paragraph",
-      "'": "vim::Quotes",
-      "`": "vim::BackQuotes",
-      "\"": "vim::DoubleQuotes",
-      "|": "vim::VerticalBars",
-      "(": "vim::Parentheses",
-      ")": "vim::Parentheses",
-      "b": "vim::Parentheses",
-      "[": "vim::SquareBrackets",
-      "]": "vim::SquareBrackets",
-      "r": "vim::SquareBrackets",
-      "{": "vim::CurlyBrackets",
-      "}": "vim::CurlyBrackets",
-      "shift-b": "vim::CurlyBrackets",
-      "<": "vim::AngleBrackets",
-      ">": "vim::AngleBrackets",
-      "a": "vim::Argument"
+      "ctrl-w right": "vim::ResizePaneRight",
+      "ctrl-w left": "vim::ResizePaneLeft",
+      "ctrl-w down": "vim::ResizePaneDown",
+      "ctrl-w up": "vim::ResizePaneUp",
+      "ctrl-w _": "vim::MaximizePane",
+      "ctrl-w =": "vim::ResetPaneSizes"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "use_key_equivalents": true,
+    "bindings": {
+      "space": "git::ToggleStaged"
     }
   }
 ]

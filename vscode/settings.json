@@ -592,6 +592,16 @@
     "vim.visualModeKeyBindings": [
         {
             "after": [
+                "g",
+                "b"
+            ],
+            "before": [
+                "g",
+                "l"
+            ]
+        },
+        {
+            "after": [
                 "\"",
                 "+",
                 "y"
@@ -1229,5 +1239,13 @@
     "terminal.integrated.defaultProfile.linux": "zsh",
     "gitlens.views.searchAndCompare.avatars": false,
     "workbench.activityBar.location": "hidden",
-    "gitlens.views.remotes.branches.layout": "list"
+    "gitlens.views.remotes.branches.layout": "list",
+    "merge-conflict.diffViewPosition": "Beside",
+    "vscode-color-picker.languages": [
+        "json",
+        "python",
+        "javascript",
+        "typescript"
+    ],
+    "git.openRepositoryInParentFolders": "never"
 }
