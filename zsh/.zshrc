@@ -285,7 +285,8 @@ bindkey -r '^g'
 bindkey -s '^g' 'clear\n'
 
 function texplorer() {
-  zle -M "$(yazi)"
+  zle -I
+  zsh -ic yazi
 }
 zle -N texplorer
 
@@ -294,7 +295,8 @@ bindkey -M vicmd '^E' texplorer
 
 
 function lazygiit() {
-  zle -M "$(lazygit)"
+  zle -I
+  zsh -ic lazygit
 }
 zle -N lazygiit
 
