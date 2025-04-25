@@ -25,14 +25,6 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
-    "bindings": {
-      "alt-k": "editor::MoveLineUp",
-      "alt-j": "editor::MoveLineDown",
-      "space e": "project_panel::ToggleFocus"
-    }
-  },
-  {
     "context": "showing_code_actions",
     "bindings": {
       "ctrl-l": "editor::ConfirmCodeAction"
@@ -52,11 +44,17 @@
     }
   },
   {
-    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "context": "Editor && VimControl && !VimWaiting && !menu || MarkdownPreview",
     "bindings": {
+      "?": "buffer_search::DeployReplace",
+      "g i": "editor::FindAllReferences",
+      "shift shift": "command_palette::Toggle",
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown",
+      "space e": "project_panel::ToggleFocus",
       "space w": "workspace::Save",
-      "space q": "pane::CloseActiveItem",
       "space g l": "editor::OpenUrl",
+      "space q": "pane::CloseActiveItem",
       // "ctrl-/": "terminal_panel::ToggleFocus",
       "[ b": "pane::ActivatePreviousItem",
       "] b": "pane::ActivateNextItem",
@@ -82,10 +80,9 @@
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "alt-k": "editor::MoveLineUp",
-      "alt-j": "editor::MoveLineDown",
       "space g r": "git::Restore",
-      "space f d": "editor::FormatSelections"
+      "space f d": "editor::FormatSelections",
+      "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
   {
@@ -94,8 +91,8 @@
     "bindings": {
       "a": "project_panel::NewFile",
       "A": "project_panel::NewDirectory",
-      "enter": "project_panel::OpenPermanent",
-      "o": "project_panel::Open",
+      "o": "project_panel::OpenPermanent",
+      "tab": "project_panel::Open",
       "x": "project_panel::Cut",
       "y": "project_panel::Copy",
       "p": "project_panel::Paste",

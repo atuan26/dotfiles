@@ -40,9 +40,7 @@
     },
     "version": "2"
   },
-  "buffer_line_height": {
-    "custom": 1.5
-  },
+  "buffer_line_height": "comfortable",
   "base_keymap": "VSCode",
   "vim_mode": true,
   "ui_font_size": 16,
@@ -64,10 +62,7 @@
   },
   // Whether to show buffer search results in the scrollbar.
   "terminal": {
-    // "line_height": "standard",
-    "line_height": {
-      "custom": 1.2
-    },
+    "line_height": "comfortable",
     "toolbar": {
       // Whether to display the terminal title in its toolbar.
       "title": false
@@ -174,6 +169,12 @@
     }
   },
   "vim": {
+    "cursor_shape": {
+      "normal": "hollow",
+      "insert": "bar",
+      "replace": "block",
+      "visual": "underline"
+    },
     "toggle_relative_line_numbers": true,
     "use_system_clipboard": "always",
     "use_multiline_find": false,
