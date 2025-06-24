@@ -7,6 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
   "icon_theme": "Material Icon Theme",
   "ssh_connections": [
     {
@@ -32,11 +40,21 @@
   "buffer_font_family": "Fira Code",
   "buffer_font_fallbacks": ["Agave Nerd Font"],
   "ui_font_family": "Fira Code",
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
+    "profiles": {
+      "test": {
+        "name": "TEST",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
     "button": false,
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-thinking"
     },
     "version": "2"
   },
@@ -193,6 +211,10 @@
     "folds": false
   },
   "languages": {
+    "Ruby": {
+      // "language_servers": ["ruby-lsp", "!solargraph", "!rubocop", "..."]
+      "language_servers": ["solargraph", "rubocop", "!ruby-lsp"]
+    },
     "Python": {
       "language_servers": ["pyright", "ruff"],
       // "format_on_save": "on",
@@ -209,6 +231,19 @@
           }
         }
       ]
+    }
+  },
+  "lsp": {
+    "rubocop": {
+      "initialization_options": {
+        "safeAutocorrect": false
+      }
+    },
+    "solargraph": {
+      "initialization_options": {
+        "diagnostics": true,
+        "formatting": true
+      }
     }
   }
 }
