@@ -492,3 +492,9 @@
 	pa = push --all
 	cp = cherry-pick
 	fp = format-patch --signoff --stdout -M -C
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
