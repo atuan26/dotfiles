@@ -62,7 +62,7 @@ zstyle ':completion:*:*:aws' fzf-search-display true
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf-tab zsh-syntax-highlighting zsh-autosuggestions aws fzf zsh-completions)
+plugins=(git fzf-tab zsh-syntax-highlighting zsh-autosuggestions aws fzf zsh-completions github pass)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -187,7 +187,7 @@ FZF_VI_BIND_LIST=("j:down"
             "r:toggle-sort"
             "m:change-multi"
             "space:select"
-            "shift-space:deselect"
+            "ctrl-space:deselect"
 )
 declare FZF_VI_BIND="" FZF_VI_REBIND="" FZF_VI_UNBIND=""
 FZF_BROWSER_MODE_PROMPT="COMMAND MODE 🪄️ "
