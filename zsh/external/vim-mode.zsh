@@ -52,8 +52,12 @@ bindkey -M viins "^[[B" down-line-or-beginning-search
 # "/" vi-history-search-backward
 # "?" vi-history-search-forward
 
-bindkey -M vicmd "?" vi-history-search-backward
-bindkey -M vicmd "/" vi-history-search-forward
+# bindkey -M vicmd "?" vi-history-search-backward
+# bindkey -M vicmd "/" vi-history-search-forward
+
+# Use / and ? for incremental search in vim normal mode
+bindkey -M vicmd '/' history-incremental-search-forward
+bindkey -M vicmd '?' history-incremental-search-backward
 
 # bindkey -M vicmd "?" history-incremental-search-backward
 # bindkey -M vicmd "/" history-incremental-search-forward
