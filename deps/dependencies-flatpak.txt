@@ -1,0 +1,9 @@
+app.zen_browser.zen
+com.anydesk.Anydesk
+com.google.ChromeDev
+# com.usebruno.Bruno
+com.visualstudio.code
+# io.appflowy.AppFlowy
+io.dbeaver.DBeaverCommunity
+org.flameshot.Flameshot
+org.libreoffice.LibreOffice

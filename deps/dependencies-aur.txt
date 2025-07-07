@@ -1,0 +1,14 @@
+# --- Input Methods ---
+ibus-bamboo-git
+
+# --- Utilities/Tools not in official repos ---
+crow-translate
+#crow-translate-debug
+lazydocker
+lazygit
+yt-x
+#lazysql
+#spotifyd
+
+# --- Other ---
+# (Add any AUR-only packages you use that are not in the official repos)
