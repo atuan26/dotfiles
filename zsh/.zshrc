@@ -331,3 +331,5 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="$HOME/.config/local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+PATH="$PATH:${HOME}/.config/local/share/gem/ruby/3.4.0/bin"

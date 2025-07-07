@@ -1,67 +1,91 @@
-#!/usr/bin/env bash
+# Makefile at repo root
 
-DOTFILES="$(pwd)"
-COLOR_GRAY="\033[1;38;5;243m"
-COLOR_BLUE="\033[1;34m"
-COLOR_GREEN="\033[1;32m"
-COLOR_RED="\033[1;31m"
-COLOR_PURPLE="\033[1;35m"
-COLOR_YELLOW="\033[1;33m"
-COLOR_NONE="\033[0m"
+GREEN=\033[0;32m
+YELLOW=\033[1;33m
+RED=\033[0;31m
+NC=\033[0m
 
-# title() {
-#     echo -e "\n${COLOR_PURPLE}$1${COLOR_NONE}"
-#     echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
-# }
+DEPS_FILE=deps/dependencies-arch.txt
+AUR_DEPS_FILE=deps/dependencies-aur.txt
+FLATPAK_DEPS_FILE=deps/dependencies-flatpak.txt
 
-# error() {
-#     echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
-#     exit 1
-# }
+.PHONY: all zsh tmux vscode kde service zed copy-all deps aur-deps flatpak-deps pass-init
 
-# warning() {
-#     echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
-# }
+all: zsh tmux vscode kde service zed
 
-# info() {
-#     echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
-# }
+zsh:
+	@echo -e "$(GREEN)Installing ZSH configs...$(NC)"
+	@$(MAKE) zsh install || echo -e "$(RED)[ROOT] ZSH install failed.$(NC)"
 
-# success() {
-#     echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
-# }
+tmux:
+	@echo -e "$(GREEN)Installing tmux configs...$(NC)"
+	@$(MAKE) -C tmux install || echo -e "$(RED)[ROOT] tmux install failed.$(NC)"
 
-# get_linkables() {
-#     find -H "$DOTFILES" -maxdepth 3 -name '*.symlink'
-# }
+vscode:
+	@echo -e "$(GREEN)Installing VSCode configs...$(NC)"
+	@$(MAKE) -C vscode install || echo -e "$(RED)[ROOT] VSCode install failed.$(NC)"
 
-link: 
-    echo "=============================="
-    # echo -e "\n${COLOR_PURPLE}Creating symlinks${COLOR_NONE}"
-    # for file in $(get_linkables) ; do
-    #     target="$HOME/.$(basename "$file" '.symlink')"
-    #     if [ -e "$target" ]; then
-    #         info "~${target#$HOME} already exists... Skipping."
-    #     else
-    #         info "Creating symlink for $file"
-    #         ln -s "$file" "$target"
-    #     fi
-    # done
+kde:
+	@echo -e "$(GREEN)Installing KDE configs...$(NC)"
+	@$(MAKE) -C kde-profiles/kde install || echo -e "$(RED)[ROOT] KDE install failed.$(NC)"
 
-    # echo -e
-    # info "installing to ~/.config"
-    # if [ ! -d "$HOME/.config" ]; then
-    #     info "Creating ~/.config"
-    #     mkdir -p "$HOME/.config"
-    # fi
+service:
+	@echo -e "$(GREEN)Installing services...$(NC)"
+	@$(MAKE) -C service install || echo -e "$(RED)[ROOT] Service install failed.$(NC)"
 
-    # config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
-    # for config in $config_files; do
-    #     target="$HOME/.config/$(basename "$config")"
-    #     if [ -e "$target" ]; then
-    #         info "~${target#$HOME} already exists... Skipping."
-    #     else
-    #         info "Creating symlink for $config"
-    #         ln -s "$config" "$target"
-    #     fi
-    # done
+zed:
+	@echo -e "$(GREEN)Installing Zed configs...$(NC)"
+	@$(MAKE) -C zed install || echo -e "$(RED)[ROOT] Zed install failed.$(NC)"
+
+copy-all:
+	@$(MAKE) -C zsh install-copy || echo -e "$(RED)[ROOT] ZSH copy failed.$(NC)"
+	@$(MAKE) -C tmux install-copy || echo -e "$(RED)[ROOT] tmux copy failed.$(NC)"
+	@$(MAKE) -C vscode install-copy || echo -e "$(RED)[ROOT] VSCode copy failed.$(NC)"
+	@$(MAKE) -C kde-profiles/kde install-copy || echo -e "$(RED)[ROOT] KDE copy failed.$(NC)"
+	@$(MAKE) -C service install-copy || echo -e "$(RED)[ROOT] Service copy failed.$(NC)"
+	@$(MAKE) -C zed install-copy || echo -e "$(RED)[ROOT] Zed copy failed.$(NC)"
+
+deps:
+	@echo -e "$(GREEN)Installing pacman dependencies from $(DEPS_FILE)...$(NC)"
+	@if [ -s $(DEPS_FILE) ]; then \
+		sudo pacman -Sy --needed --noconfirm $$(grep -vE '^(#|$)' $(DEPS_FILE)) || echo -e "$(RED)Pacman dependency install failed.$(NC)"; \
+	else \
+		echo -e "$(YELLOW)No pacman dependencies listed.$(NC)"; \
+	fi
+	@echo -e "$(YELLOW)Pacman dependency installation complete.$(NC)"
+
+aur-deps:
+	@echo -e "$(GREEN)Installing AUR dependencies from $(AUR_DEPS_FILE)...$(NC)"
+	@if [ -s $(AUR_DEPS_FILE) ]; then \
+		yay -Sy --needed --noconfirm $$(grep -vE '^(#|$)' $(AUR_DEPS_FILE)) || echo -e "$(RED)Yay dependency install failed.$(NC)"; \
+	else \
+		echo -e "$(YELLOW)No AUR dependencies listed.$(NC)"; \
+	fi
+	@echo -e "$(YELLOW)Yay dependency installation complete.$(NC)"
+
+flatpak-deps:
+	@echo -e "$(GREEN)Installing Flatpak dependencies from $(FLATPAK_DEPS_FILE)...$(NC)"
+	@if [ -s $(FLATPAK_DEPS_FILE) ]; then \
+		flatpak install -y --noninteractive $$(grep -vE '^(#|$)' $(FLATPAK_DEPS_FILE)) || echo -e "$(RED)Flatpak dependency install failed.$(NC)"; \
+	else \
+		echo -e "$(YELLOW)No Flatpak dependencies listed.$(NC)"; \
+	fi
+	@echo -e "$(YELLOW)Flatpak dependency installation complete.$(NC)"
+
+pass-init:
+	@echo -e "$(GREEN)Initializing password store as a git submodule...$(NC)"
+	@git submodule update --init --recursive
+	# @echo -e "$(GREEN)Linking pass-store to ~/.password-store...$(NC)"
+	# @if [ -d pass-store ]; then \
+	# 	if [ -e $$HOME/.password-store ] && [ ! -L $$HOME/.password-store ]; then \
+	# 		mv $$HOME/.password-store $$HOME/.password-store.bak && echo -e "$(YELLOW)Backed up existing .password-store.$(NC)"; \
+	# 	fi; \
+	# 	ln -sf $(PWD)/pass-store $$HOME/.password-store || echo -e "$(RED)Failed to symlink .password-store.$(NC)"; \
+	# fi
+	@echo -e "$(YELLOW)pass password store setup complete.$(NC)"
+
+# Usage:
+# make deps         # Install pacman packages
+# make aur-deps     # Install AUR packages (requires yay)
+# make flatpak-deps # Install Flatpak apps
+# make all          # Set up dotfiles

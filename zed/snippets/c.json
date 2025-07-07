@@ -1,0 +1,7 @@
+{
+  "Print Variable": {
+    "prefix": "pprintvar",
+    "body": ["printf(\"\\x1b[36m🔍 ${1:var} = \\x1b[32m%s\\x1b[0m\\n\", ${1:var});"],
+    "description": "Print variable name and value"
+  },
+}
