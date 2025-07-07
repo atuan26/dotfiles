@@ -1,3 +1,7 @@
+base-devel
+less
+pacman-contrib
+
 # --- Shell & Terminal ---
 zsh
 tmux
@@ -8,7 +12,7 @@ zoxide
 # --- Editors & IDEs ---
 neovim
 kate
-konsole
+# konsole
 
 # --- Window Manager & Desktop ---
 # i3-wm
@@ -24,7 +28,9 @@ kdeconnect
 xclip
 xautolock
 xss-lock
+ly
 xterm
+xsecurelock
 
 # --- Networking & Remote ---
 autossh
