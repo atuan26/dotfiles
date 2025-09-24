@@ -230,7 +230,7 @@ if [[ -f "$XDG_CONFIG_HOME/zsh/aliases" ]]; then
 fi
 
 # Load external zsh scripts
-for file in "$DOTFILES/zsh/external"/*.zsh; do
+for file in "$DOTFILES/zsh/external"/*.{zsh,sh}; do
     [[ -f "$file" ]] && source "$file"
 done
 

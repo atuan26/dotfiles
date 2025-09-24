@@ -104,6 +104,19 @@ bindkey -M vicmd '^X' fzf_conventional_commit-widget
 # UTILITY BINDINGS
 # =============================================================================
 
+# Simple search widget
+fif-widget() {
+    fif
+    zle reset-prompt
+}
+
+# Register widget
+zle -N fif-widget
+
+# Key binding
+bindkey -M viins '^f' fif-widget  # Alt+F: Search in files
+bindkey -M vicmd '^f' fif-widget  # Alt+F: Search in files
+
 # =============================================================================
 # DEBUGGING BINDINGS (Optional)
 # =============================================================================
