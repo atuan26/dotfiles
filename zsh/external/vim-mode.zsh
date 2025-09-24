@@ -30,11 +30,23 @@ function zle-keymap-select {
     zle -R
 }
 
-# Start up in command mode
 zle-line-init() {
-    zle -K vicmd;
-    echo -ne $cursor_block
+    # Start up in command mode (old)
+    # zle -K vicmd;
+    # echo -ne $cursor_block
+
+    # Start up in insert mode to avoid pasting issues
+    zle -K viins;
+    echo -ne $cursor_beam
 }
+
+# Enable bracketed paste mode
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+# Key bindings for mode switching
+bindkey -M viins '^[' vi-cmd-mode  # ESC to go to command mode
+bindkey -M vicmd '^V' vi-insert    # Ctrl+V to go to insert mode
 
 zle -N zle-keymap-select
 zle -N zle-line-init
