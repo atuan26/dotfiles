@@ -19,10 +19,9 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # Modern replacements
-alias catt="bat"
-alias cat="bat"
-alias ls="exa"
-alias tree="exa --tree"
+alias cat="$(command -v bat || echo cat)"
+alias ls="$(command -v exa || echo ls)"
+alias tree="$(command -v exa && echo 'exa --tree' || echo tree)"
 
 # =============================================================================
 # SYSTEM ALIASES
