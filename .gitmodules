@@ -14,4 +14,4 @@
 	url = https://github.com/Aloxaf/fzf-tab
 [submodule "tmux/plugins/tmux-prefix-highlight"]
 	path = tmux/plugins/tmux-prefix-highlight
-	url = https://github.com/tmux-prefix-highlight.git
+    url = https://github.com/tmux-plugins/tmux-prefix-highlight
