@@ -28,12 +28,8 @@ ZSH_THEME="robbyrussell"
 # Plugin configuration
 plugins=(
     git
-    fzf-tab
-    zsh-syntax-highlighting
-    zsh-autosuggestions
     aws
     fzf
-    zsh-completions
     github
     pass
     azure
@@ -229,10 +225,14 @@ if [[ -f "$XDG_CONFIG_HOME/zsh/aliases" ]]; then
     source "$XDG_CONFIG_HOME/zsh/aliases"
 fi
 
-# Load external zsh scripts
+# Load external zsh scripts, plugins
 for file in "$DOTFILES/zsh/external"/*.{zsh,sh}; do
     [[ -f "$file" ]] && source "$file"
 done
+source $DOTFILES/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 # =============================================================================
 # 14. POST-INITIALIZATION
@@ -243,6 +243,10 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 # Add fpath for custom completions
 fpath=("$ZDOTDIR/external" $fpath)
+fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+
+# zsh-completions: You may have to force rebuild zcompdump:
+# rm -f ~/.zcompdump; compinit
 
 # =============================================================================
 # 15. DEBUGGING (Optional)

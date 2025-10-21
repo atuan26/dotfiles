@@ -25,7 +25,7 @@ This repository contains configuration files for:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/dotfiles.git
+git clone --recursive https://github.com/atuan26/dotfiles.git
 cd dotfiles
 
 # Install dependencies for your platform
