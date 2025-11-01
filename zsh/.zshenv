@@ -14,4 +14,4 @@ export SAVEHIST=10000
 export DOTFILES="$HOME/dotfiles"
 
 export CONDA_AUTO_ACTIVATE_BASE=false
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

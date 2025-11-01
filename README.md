@@ -217,6 +217,8 @@ make vscode       # VSCode settings
 make zed          # Zed editor settings
 ```
 
+**Notes**:  https://superuser.com/questions/940342/how-to-change-shortcut-key-for-switching-between-virtual-desktops-in-windows-10
+
 ### Installation Options
 
 #### Symlink vs Copy

@@ -8,6 +8,9 @@ NC=\033[0m
 DEPS_FILE=deps/dependencies-arch.txt
 AUR_DEPS_FILE=deps/dependencies-aur.txt
 FLATPAK_DEPS_FILE=deps/dependencies-flatpak.txt
+# Normalize locale to avoid warnings on systems without en_US.UTF-8
+export LC_ALL=C
+export LANG=C
 
 .PHONY: all zsh tmux vscode kde service zed copy-all deps aur-deps flatpak-deps pass-init
 
@@ -48,7 +51,7 @@ copy-all:
 deps:
 	@echo -e "$(GREEN)Installing pacman dependencies from $(DEPS_FILE)...$(NC)"
 	@if [ -s $(DEPS_FILE) ]; then \
-		sudo pacman -Sy --needed --noconfirm $$(grep -vE '^(#|$)' $(DEPS_FILE)) || echo -e "$(RED)Pacman dependency install failed.$(NC)"; \
+		LC_ALL=C sudo pacman -Sy --needed --noconfirm $$(awk '{ sub(/#.*/,""); if (NF) print $$1 }' $(DEPS_FILE)) || echo -e "$(RED)Pacman dependency install failed.$(NC)"; \
 	else \
 		echo -e "$(YELLOW)No pacman dependencies listed.$(NC)"; \
 	fi
@@ -57,7 +60,15 @@ deps:
 aur-deps:
 	@echo -e "$(GREEN)Installing AUR dependencies from $(AUR_DEPS_FILE)...$(NC)"
 	@if [ -s $(AUR_DEPS_FILE) ]; then \
-		yay -Sy --needed --noconfirm $$(grep -vE '^(#|$)' $(AUR_DEPS_FILE)) || echo -e "$(RED)Yay dependency install failed.$(NC)"; \
+		if ! command -v yay >/dev/null 2>&1; then \
+			echo -e "$(YELLOW)yay not found; installing yay-bin from AUR...$(NC)"; \
+			LC_ALL=C sudo pacman -Sy --needed --noconfirm base-devel git || { echo -e "$(RED)Failed to install base-devel/git prerequisites.$(NC)"; exit 1; }; \
+			tmpdir=$$(mktemp -d); \
+			git clone https://aur.archlinux.org/yay-bin.git $$tmpdir/yay-bin || { echo -e "$(RED)Failed to clone yay-bin AUR repo.$(NC)"; exit 1; }; \
+			cd $$tmpdir/yay-bin && makepkg -si --noconfirm || { echo -e "$(RED)Failed to build/install yay.$(NC)"; exit 1; }; \
+			rm -rf $$tmpdir; \
+		fi; \
+		LC_ALL=C yay -Sy --needed --noconfirm $$(awk '{ sub(/#.*/,""); if (NF) print $$1 }' $(AUR_DEPS_FILE)) || echo -e "$(RED)Yay dependency install failed.$(NC)"; \
 	else \
 		echo -e "$(YELLOW)No AUR dependencies listed.$(NC)"; \
 	fi
@@ -66,7 +77,7 @@ aur-deps:
 flatpak-deps:
 	@echo -e "$(GREEN)Installing Flatpak dependencies from $(FLATPAK_DEPS_FILE)...$(NC)"
 	@if [ -s $(FLATPAK_DEPS_FILE) ]; then \
-		flatpak install -y --noninteractive $$(grep -vE '^(#|$)' $(FLATPAK_DEPS_FILE)) || echo -e "$(RED)Flatpak dependency install failed.$(NC)"; \
+		flatpak install -y --noninteractive $$(awk '{ sub(/#.*/,""); if (NF) print $$1 }' $(FLATPAK_DEPS_FILE)) || echo -e "$(RED)Flatpak dependency install failed.$(NC)"; \
 	else \
 		echo -e "$(YELLOW)No Flatpak dependencies listed.$(NC)"; \
 	fi
