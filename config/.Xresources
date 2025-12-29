@@ -1,0 +1,14 @@
+! Xresources - X11 resource configuration
+
+! Cursor theme
+Xcursor.theme: Bibata-Modern-Amber
+Xcursor.size: 24
+
+! DPI settings (adjust if needed)
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault

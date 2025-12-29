@@ -7,4 +7,5 @@ lazydocker
 lazygit
 
 # --- Other ---
-# (Add any AUR-only packages you use that are not in the official repos)
+bibata-cursor-theme
+

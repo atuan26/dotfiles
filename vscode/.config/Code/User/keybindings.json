@@ -1,8 +1,8 @@
 // Place your key bindings in this file to override the defaults
 [
   {
-    "key": "shift+space",
-    "command": "whichkey.show"
+    // "key": "shift+space",
+    // "command": "whichkey.show"
     // "when": "sideBarFocus && !textInputFocus && !inputFocus"
   },
   {

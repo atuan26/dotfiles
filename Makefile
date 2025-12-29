@@ -12,7 +12,7 @@ STOW_TARGET := $(HOME)
 STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET)
 
 # Package lists
-CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell
+CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons
 ALL_PACKAGES := $(CONFIG_PACKAGES)
 
 # Dependency files
@@ -133,6 +133,10 @@ install-config:
 install-shell:
 	@echo -e "$(GREEN)Installing shell...$(NC)"
 	@$(STOW) shell
+
+install-icons:
+	@echo -e "$(GREEN)Installing icons...$(NC)"
+	@$(STOW) icons
 
 # Dependency installation targets (unchanged from original)
 deps:
