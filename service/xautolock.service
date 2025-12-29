@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock the screen automatically after a timeout
+After=graphical-session.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/xautolock -time 5 -locker "/usr/bin/i3lock-fancy -g" -detectsleep
+ExecStop=/usr/bin/xautolock -exit
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target
