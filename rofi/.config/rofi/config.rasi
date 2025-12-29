@@ -169,7 +169,7 @@ configuration {
 }
 
 configuration{
-    modi: "run,window,combi";
+    modi: "run,window,combi,clipboard:greenclip print";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "alacritty";
@@ -177,9 +177,10 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-combi: " 🖥️  All ";
-    display-run: " 🏃  Run ";
-    display-window: " 🪟  Window";
+    display-combi: "🖥️ All";
+    display-run: "🏃 Run";
+    display-window: "🪟 Window";
+    display-clipboard: "📋 Clip";
     sidebar-mode: true;
 }
 

@@ -60,6 +60,7 @@ stow
 
 # --- Media & Graphics ---
 imagemagick
+flameshot
 mpv
 tesseract
 obsidian

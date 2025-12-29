@@ -8,4 +8,6 @@ lazygit
 
 # --- Other ---
 bibata-cursor-theme
+rofi-greenclip
+
 

@@ -94,6 +94,16 @@ exec_always --no-startup-id setxkbmap -option caps:swapescape
 # Set cursor theme
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
 
+# Start greenclip clipboard manager
+exec --no-startup-id greenclip daemon
+
+# Start flameshot service
+exec --no-startup-id flameshot
+
+# Start Crow Translate
+exec --no-startup-id crow
+
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -125,6 +135,12 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+space exec --no-startup-id rofi -show combi
 bindsym $mod+Tab exec --no-startup-id rofi -show window
+
+# clipboard manager
+bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+# screenshot
+bindsym Print exec --no-startup-id flameshot gui
 
 # change focus
 bindsym $mod+$left focus left
