@@ -1,53 +1,140 @@
-# Makefile at repo root
+# Makefile for dotfiles management with GNU Stow
 
 GREEN=\033[0;32m
 YELLOW=\033[1;33m
 RED=\033[0;31m
+BLUE=\033[1;34m
 NC=\033[0m
 
-DEPS_FILE=deps/dependencies-arch.txt
-AUR_DEPS_FILE=deps/dependencies-aur.txt
-FLATPAK_DEPS_FILE=deps/dependencies-flatpak.txt
+# Stow configuration
+STOW_DIR := $(PWD)
+STOW_TARGET := $(HOME)
+STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET)
+
+# Package lists
+CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell
+ALL_PACKAGES := $(CONFIG_PACKAGES)
+
+# Dependency files
+DEPS_FILE := deps/dependencies-arch.txt
+AUR_DEPS_FILE := deps/dependencies-aur.txt
+FLATPAK_DEPS_FILE := deps/dependencies-flatpak.txt
+
 # Normalize locale to avoid warnings on systems without en_US.UTF-8
 export LC_ALL=C
 export LANG=C
 
-.PHONY: all zsh tmux vscode kde service zed copy-all deps aur-deps flatpak-deps pass-init
+.PHONY: help install uninstall restow check deps aur-deps flatpak-deps pass-init
+.PHONY: install-zsh install-tmux install-git install-vscode install-zed install-service install-i3 install-polybar install-config install-shell
 
-all: zsh tmux vscode kde service zed
+# Default target
+help:
+	@echo -e "$(GREEN)Dotfiles Management with GNU Stow$(NC)"
+	@echo ""
+	@echo -e "$(YELLOW)Available targets:$(NC)"
+	@echo -e "  $(BLUE)install$(NC)        - Install all dotfile packages using stow"
+	@echo -e "  $(BLUE)uninstall$(NC)      - Remove all stowed symlinks"
+	@echo -e "  $(BLUE)restow$(NC)         - Restow all packages (useful after updates)"
+	@echo -e "  $(BLUE)check$(NC)          - Dry-run to see what would be stowed"
+	@echo -e "  $(BLUE)install-<pkg>$(NC)  - Install a specific package (e.g., make install-zsh)"
+	@echo ""
+	@echo -e "$(YELLOW)Dependency targets:$(NC)"
+	@echo -e "  $(BLUE)deps$(NC)           - Install pacman dependencies"
+	@echo -e "  $(BLUE)aur-deps$(NC)       - Install AUR dependencies (requires yay)"
+	@echo -e "  $(BLUE)flatpak-deps$(NC)   - Install Flatpak dependencies"
+	@echo -e "  $(BLUE)pass-init$(NC)      - Initialize password store"
+	@echo ""
+	@echo -e "$(YELLOW)Available packages:$(NC)"
+	@for pkg in $(ALL_PACKAGES); do echo -e "  - $$pkg"; done
 
-zsh:
-	@echo -e "$(GREEN)Installing ZSH configs...$(NC)"
-	@$(MAKE) zsh install || echo -e "$(RED)[ROOT] ZSH install failed.$(NC)"
+# Install all packages
+install:
+	@echo -e "$(GREEN)Installing all dotfiles with stow...$(NC)"
+	@for pkg in $(ALL_PACKAGES); do \
+		if [ -d "$$pkg" ]; then \
+			echo -e "$(BLUE)Stowing $$pkg...$(NC)"; \
+			$(STOW) $$pkg || echo -e "$(RED)Failed to stow $$pkg$(NC)"; \
+		else \
+			echo -e "$(YELLOW)Package $$pkg not found, skipping...$(NC)"; \
+		fi; \
+	done
+	@echo -e "$(GREEN)All packages installed!$(NC)"
 
-tmux:
-	@echo -e "$(GREEN)Installing tmux configs...$(NC)"
-	@$(MAKE) -C tmux install || echo -e "$(RED)[ROOT] tmux install failed.$(NC)"
+# Uninstall all packages
+uninstall:
+	@echo -e "$(YELLOW)Removing all stowed dotfiles...$(NC)"
+	@for pkg in $(ALL_PACKAGES); do \
+		if [ -d "$$pkg" ]; then \
+			echo -e "$(BLUE)Unstowing $$pkg...$(NC)"; \
+			$(STOW) -D $$pkg || echo -e "$(RED)Failed to unstow $$pkg$(NC)"; \
+		fi; \
+	done
+	@echo -e "$(GREEN)All packages removed!$(NC)"
 
-vscode:
-	@echo -e "$(GREEN)Installing VSCode configs...$(NC)"
-	@$(MAKE) -C vscode install || echo -e "$(RED)[ROOT] VSCode install failed.$(NC)"
+# Restow all packages (useful after updates)
+restow:
+	@echo -e "$(BLUE)Restowing all dotfiles...$(NC)"
+	@for pkg in $(ALL_PACKAGES); do \
+		if [ -d "$$pkg" ]; then \
+			echo -e "$(BLUE)Restowing $$pkg...$(NC)"; \
+			$(STOW) -R $$pkg || echo -e "$(RED)Failed to restow $$pkg$(NC)"; \
+		fi; \
+	done
+	@echo -e "$(GREEN)All packages restowed!$(NC)"
 
-kde:
-	@echo -e "$(GREEN)Installing KDE configs...$(NC)"
-	@$(MAKE) -C kde-profiles/kde install || echo -e "$(RED)[ROOT] KDE install failed.$(NC)"
+# Dry-run to check what would be stowed
+check:
+	@echo -e "$(BLUE)Checking what would be stowed (dry-run)...$(NC)"
+	@for pkg in $(ALL_PACKAGES); do \
+		if [ -d "$$pkg" ]; then \
+			echo -e "$(YELLOW)=== $$pkg ===$(NC)"; \
+			stow -n -v -d $(STOW_DIR) -t $(STOW_TARGET) $$pkg 2>&1 || true; \
+			echo ""; \
+		fi; \
+	done
 
-service:
-	@echo -e "$(GREEN)Installing services...$(NC)"
-	@$(MAKE) -C service install || echo -e "$(RED)[ROOT] Service install failed.$(NC)"
+# Individual package install targets
+install-zsh:
+	@echo -e "$(GREEN)Installing zsh...$(NC)"
+	@$(STOW) zsh
 
-zed:
-	@echo -e "$(GREEN)Installing Zed configs...$(NC)"
-	@$(MAKE) -C zed install || echo -e "$(RED)[ROOT] Zed install failed.$(NC)"
+install-tmux:
+	@echo -e "$(GREEN)Installing tmux...$(NC)"
+	@$(STOW) tmux
 
-copy-all:
-	@$(MAKE) -C zsh install-copy || echo -e "$(RED)[ROOT] ZSH copy failed.$(NC)"
-	@$(MAKE) -C tmux install-copy || echo -e "$(RED)[ROOT] tmux copy failed.$(NC)"
-	@$(MAKE) -C vscode install-copy || echo -e "$(RED)[ROOT] VSCode copy failed.$(NC)"
-	@$(MAKE) -C kde-profiles/kde install-copy || echo -e "$(RED)[ROOT] KDE copy failed.$(NC)"
-	@$(MAKE) -C service install-copy || echo -e "$(RED)[ROOT] Service copy failed.$(NC)"
-	@$(MAKE) -C zed install-copy || echo -e "$(RED)[ROOT] Zed copy failed.$(NC)"
+install-git:
+	@echo -e "$(GREEN)Installing git...$(NC)"
+	@$(STOW) git
 
+install-vscode:
+	@echo -e "$(GREEN)Installing vscode...$(NC)"
+	@$(STOW) vscode
+
+install-zed:
+	@echo -e "$(GREEN)Installing zed...$(NC)"
+	@$(STOW) zed
+
+install-service:
+	@echo -e "$(GREEN)Installing service...$(NC)"
+	@$(STOW) service
+
+install-i3:
+	@echo -e "$(GREEN)Installing i3...$(NC)"
+	@$(STOW) i3
+
+install-polybar:
+	@echo -e "$(GREEN)Installing polybar...$(NC)"
+	@$(STOW) polybar
+
+install-config:
+	@echo -e "$(GREEN)Installing config...$(NC)"
+	@$(STOW) config
+
+install-shell:
+	@echo -e "$(GREEN)Installing shell...$(NC)"
+	@$(STOW) shell
+
+# Dependency installation targets (unchanged from original)
 deps:
 	@echo -e "$(GREEN)Installing pacman dependencies from $(DEPS_FILE)...$(NC)"
 	@if [ -s $(DEPS_FILE) ]; then \
@@ -86,17 +173,4 @@ flatpak-deps:
 pass-init:
 	@echo -e "$(GREEN)Initializing password store as a git submodule...$(NC)"
 	@git submodule update --init --recursive
-	# @echo -e "$(GREEN)Linking pass-store to ~/.password-store...$(NC)"
-	# @if [ -d pass-store ]; then \
-	# 	if [ -e $$HOME/.password-store ] && [ ! -L $$HOME/.password-store ]; then \
-	# 		mv $$HOME/.password-store $$HOME/.password-store.bak && echo -e "$(YELLOW)Backed up existing .password-store.$(NC)"; \
-	# 	fi; \
-	# 	ln -sf $(PWD)/pass-store $$HOME/.password-store || echo -e "$(RED)Failed to symlink .password-store.$(NC)"; \
-	# fi
 	@echo -e "$(YELLOW)pass password store setup complete.$(NC)"
-
-# Usage:
-# make deps         # Install pacman packages
-# make aur-deps     # Install AUR packages (requires yay)
-# make flatpak-deps # Install Flatpak apps
-# make all          # Set up dotfiles
