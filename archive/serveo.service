@@ -1,0 +1,13 @@
+[Unit]
+Description=Serveo SSH Tunnel
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/ssh -o "ServerAliveInterval=30" -o "ServerAliveCountMax=3" -R 26261:localhost:22 serveo.net
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
