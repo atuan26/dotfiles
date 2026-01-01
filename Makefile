@@ -9,7 +9,13 @@ NC=\033[0m
 # Stow configuration
 STOW_DIR := $(PWD)
 STOW_TARGET := $(HOME)
+
+# Stow command with optional --adopt flag
+ifdef ADOPT
+STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET) --adopt
+else
 STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET)
+endif
 
 # Package lists
 CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons
@@ -25,7 +31,7 @@ export LC_ALL=C
 export LANG=C
 
 .PHONY: help install uninstall restow check deps aur-deps flatpak-deps pass-init
-.PHONY: install-zsh install-tmux install-git install-vscode install-zed install-service install-i3 install-polybar install-config install-shell
+.PHONY: zsh-install tmux-install git-install vscode-install zed-install service-install i3-install polybar-install config-install shell-install icons-install
 
 # Default target
 help:
@@ -36,7 +42,11 @@ help:
 	@echo -e "  $(BLUE)uninstall$(NC)      - Remove all stowed symlinks"
 	@echo -e "  $(BLUE)restow$(NC)         - Restow all packages (useful after updates)"
 	@echo -e "  $(BLUE)check$(NC)          - Dry-run to see what would be stowed"
-	@echo -e "  $(BLUE)install-<pkg>$(NC)  - Install a specific package (e.g., make install-zsh)"
+	@echo -e "  $(BLUE)<pkg>-install$(NC)  - Install a specific package (e.g., make zsh-install)"
+	@echo ""
+	@echo -e "$(YELLOW)Options:$(NC)"
+	@echo -e "  $(BLUE)BACKUP=1$(NC)       - Backup existing files before stowing (e.g., make zsh-install BACKUP=1)"
+	@echo -e "  $(BLUE)ADOPT=1$(NC)        - Adopt existing files into dotfiles repo (e.g., make zsh-install ADOPT=1)"
 	@echo ""
 	@echo -e "$(YELLOW)Dependency targets:$(NC)"
 	@echo -e "  $(BLUE)deps$(NC)           - Install pacman dependencies"
@@ -94,47 +104,47 @@ check:
 	done
 
 # Individual package install targets
-install-zsh:
+zsh-install:
 	@echo -e "$(GREEN)Installing zsh...$(NC)"
 	@$(STOW) zsh
 
-install-tmux:
+tmux-install:
 	@echo -e "$(GREEN)Installing tmux...$(NC)"
 	@$(STOW) tmux
 
-install-git:
+git-install:
 	@echo -e "$(GREEN)Installing git...$(NC)"
 	@$(STOW) git
 
-install-vscode:
+vscode-install:
 	@echo -e "$(GREEN)Installing vscode...$(NC)"
 	@$(STOW) vscode
 
-install-zed:
+zed-install:
 	@echo -e "$(GREEN)Installing zed...$(NC)"
 	@$(STOW) zed
 
-install-service:
+service-install:
 	@echo -e "$(GREEN)Installing service...$(NC)"
 	@$(STOW) service
 
-install-i3:
+i3-install:
 	@echo -e "$(GREEN)Installing i3...$(NC)"
 	@$(STOW) i3
 
-install-polybar:
+polybar-install:
 	@echo -e "$(GREEN)Installing polybar...$(NC)"
 	@$(STOW) polybar
 
-install-config:
+config-install:
 	@echo -e "$(GREEN)Installing config...$(NC)"
 	@$(STOW) config
 
-install-shell:
+shell-install:
 	@echo -e "$(GREEN)Installing shell...$(NC)"
 	@$(STOW) shell
 
-install-icons:
+icons-install:
 	@echo -e "$(GREEN)Installing icons...$(NC)"
 	@$(STOW) icons
 

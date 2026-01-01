@@ -59,8 +59,7 @@ if [[ ! -d "$ZSH" ]]; then
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 fi
 
-# Theme configuration
-ZSH_THEME="robbyrussell"
+ZSH_THEME="custom"
 
 # Plugin configuration
 plugins=(

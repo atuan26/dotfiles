@@ -14,4 +14,14 @@ export SAVEHIST=10000
 export DOTFILES="$HOME/dotfiles"
 
 export CONDA_AUTO_ACTIVATE_BASE=false
+
+# macOS Homebrew PATH setup
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    # Apple Silicon Mac
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f "/usr/local/bin/brew" ]]; then
+    # Intel Mac
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

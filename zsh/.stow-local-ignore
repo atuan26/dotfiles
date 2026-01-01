@@ -2,3 +2,7 @@ Makefile
 README\.md
 \.git
 \.gitignore
+# Ignore history files - should not be stowed
+\.zsh_history
+\.zhistory
+\.bash_history
