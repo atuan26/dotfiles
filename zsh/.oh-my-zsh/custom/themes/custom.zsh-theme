@@ -44,7 +44,7 @@ fi
 # Characters
 SEGMENT_SEPARATOR="\ue0b0"
 PLUSMINUS="\u00b1"
-BRANCH="\ue0a0"
+BRANCH=""
 DETACHED="\u27a6"
 CROSS="\u2718"
 LIGHTNING="\u26a1"
@@ -84,7 +84,7 @@ prompt_end() {
 prompt_context() {
   # Only show user@hostname when connected via SSH
   if [[ -n "$SSH_CONNECTION" ]]; then
-    prompt_segment $PRIMARY_FG default " %n@%m "
+    prompt_segment $PRIMARY_FG default " 󰣀 %n@%m "
   fi
 }
 
@@ -113,9 +113,9 @@ prompt_git() {
   fi
 }
 
-# Dir: current working directory
+# Dir: current folder name only with icon
 prompt_dir() {
-  prompt_segment blue $PRIMARY_FG ' %~ '
+  prompt_segment blue $PRIMARY_FG '  %1~ '
 }
 
 # Status:
@@ -139,9 +139,9 @@ prompt_virtualenv() {
   # Check for Python virtualenv
   if [[ -n "$VIRTUAL_ENV" ]]; then
     env_name=$(basename $VIRTUAL_ENV)
-  # Check for Conda environment (skip 'base' if you want)
+  # Check for Conda environment (skip 'base')
   elif [[ -n "$CONDA_DEFAULT_ENV" && "$CONDA_DEFAULT_ENV" != "base" ]]; then
-    env_name="⬡ $CONDA_DEFAULT_ENV"
+    env_name=" $CONDA_DEFAULT_ENV"
   fi
   
   if [[ -n "$env_name" ]]; then

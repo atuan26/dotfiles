@@ -9,7 +9,6 @@ NC=\033[0m
 # Stow configuration
 STOW_DIR := $(PWD)
 STOW_TARGET := $(HOME)
-
 # Stow command with optional --adopt flag
 ifdef ADOPT
 STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET) --adopt
@@ -18,7 +17,7 @@ STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET)
 endif
 
 # Package lists
-CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons
+CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons kitty
 ALL_PACKAGES := $(CONFIG_PACKAGES)
 
 # Dependency files
@@ -31,7 +30,7 @@ export LC_ALL=C
 export LANG=C
 
 .PHONY: help install uninstall restow check deps aur-deps flatpak-deps pass-init
-.PHONY: zsh-install tmux-install git-install vscode-install zed-install service-install i3-install polybar-install config-install shell-install icons-install
+.PHONY: zsh-install tmux-install git-install vscode-install zed-install service-install i3-install polybar-install config-install shell-install icons-install kitty-install
 
 # Default target
 help:
@@ -45,7 +44,6 @@ help:
 	@echo -e "  $(BLUE)<pkg>-install$(NC)  - Install a specific package (e.g., make zsh-install)"
 	@echo ""
 	@echo -e "$(YELLOW)Options:$(NC)"
-	@echo -e "  $(BLUE)BACKUP=1$(NC)       - Backup existing files before stowing (e.g., make zsh-install BACKUP=1)"
 	@echo -e "  $(BLUE)ADOPT=1$(NC)        - Adopt existing files into dotfiles repo (e.g., make zsh-install ADOPT=1)"
 	@echo ""
 	@echo -e "$(YELLOW)Dependency targets:$(NC)"
@@ -147,6 +145,10 @@ shell-install:
 icons-install:
 	@echo -e "$(GREEN)Installing icons...$(NC)"
 	@$(STOW) icons
+
+kitty-install:
+	@echo -e "$(GREEN)Installing kitty...$(NC)"
+	@$(STOW) kitty
 
 # Dependency installation targets (unchanged from original)
 deps:
