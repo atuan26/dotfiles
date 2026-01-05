@@ -15,3 +15,6 @@
 [submodule "tmux/plugins/tmux-prefix-highlight"]
 	path = tmux/.config/tmux/plugins/tmux-prefix-highlight
     url = https://github.com/tmux-plugins/tmux-prefix-highlight
+[submodule "zsh/.config/zsh/ohmyzsh"]
+	path = zsh/.config/zsh/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

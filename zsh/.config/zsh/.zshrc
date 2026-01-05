@@ -19,45 +19,11 @@ export DOTFILES="${DOTFILES:-$HOME/Documents/dotfiles}"
 # 2. OH-MY-ZSH CONFIGURATION
 # =============================================================================
 
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+# Path to oh-my-zsh installation (managed as git submodule)
+export ZSH="$ZDOTDIR/ohmyzsh"
 
-# Auto-install Oh My Zsh if not present
-if [[ ! -d "$ZSH" ]]; then
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "Oh My Zsh not found. Installing automatically..."
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    
-    # Backup current .zshrc if it exists
-    if [[ -f "$ZDOTDIR/.zshrc" ]]; then
-        cp "$ZDOTDIR/.zshrc" "$ZDOTDIR/.zshrc.backup-$(date +%Y%m%d-%H%M%S)"
-        echo "✓ Backed up current .zshrc"
-    fi
-    
-    # Install Oh My Zsh in unattended mode with KEEP_ZSHRC to prevent overwriting
-    if command -v curl &> /dev/null; then
-        RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    elif command -v wget &> /dev/null; then
-        RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    else
-        echo "Error: Neither curl nor wget found. Please install one of them."
-        echo "  sudo pacman -S curl"
-        return 1
-    fi
-    
-    # Restore our custom .zshrc if Oh My Zsh created a default one
-    if [[ -f "$ZDOTDIR/.zshrc.pre-oh-my-zsh" ]]; then
-        mv "$ZDOTDIR/.zshrc.pre-oh-my-zsh" "$ZDOTDIR/.zshrc"
-        echo "✓ Restored custom .zshrc"
-    fi
-    
-    if [[ -d "$ZSH" ]]; then
-        echo "✓ Oh My Zsh installed successfully!"
-    else
-        echo "✗ Oh My Zsh installation failed. Continuing without it..."
-    fi
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-fi
+# Custom themes/plugins folder (tracked in dotfiles, separate from submodule)
+export ZSH_CUSTOM="$ZDOTDIR/omz-custom"
 
 ZSH_THEME="custom"
 
@@ -65,7 +31,6 @@ ZSH_THEME="custom"
 plugins=(
     git
     aws
-    fzf
     github
     pass
     azure
@@ -238,6 +203,7 @@ _conda_activate() {
     fi
 }
 
+autoload -U +X bashcompinit && bashcompinit
 complete -o default -o bashdefault -F _conda_activate conda
 
 # FZF completion runner
