@@ -3,9 +3,15 @@ lock() {
     i3lock-fancy -g
 }
 
+# xsecurelock
+xlock() {
+    $DOTFILES/config/xsecurelock.sh
+}
+
+
 case "$1" in
     lock)
-        lock
+        xlock
         ;;
     logout)
         i3-msg exit
