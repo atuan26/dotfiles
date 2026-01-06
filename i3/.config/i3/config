@@ -16,6 +16,7 @@
 
     # Hide borders at the edge of the screen
     hide_edge_borders smart
+    smart_borders on
 
     # Set colours various window states
     # Syntax: client.<class> <border> <background> <text> [<indicator> [<child_border>]]
@@ -118,6 +119,19 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# Audio control mode
+set $mode_audio (F1) mute, (F2) vol-, (F3) vol+
+mode "$mode_audio" {
+    bindsym F3 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+    bindsym F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+    bindsym F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+
+    # Back to defaults
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+F2 mode "$mode_audio" 
+
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -135,19 +149,18 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec kitty
-
-# kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+Return exec --no-startup-id kitty --class kitty-float
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+space exec --no-startup-id rofi -show combi
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym Mod1+Tab exec --no-startup-id rofi -show window
 
-bindsym $mod+Shift+e exec --no-startup-id kitty --class yazi-float -e yazi
-# clipboard manager
-bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+# Open yazi (file manager)
+bindsym $mod+e exec --no-startup-id kitty --class yazi-float -e yazi
+
+# Open clipboard manager
+bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # screenshot
 bindsym Print exec --no-startup-id flameshot gui
@@ -158,11 +171,6 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+$left move left
@@ -170,31 +178,34 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# The Workspace & Pocket Hub
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
 
-# split in horizontal orientation
-bindsym $mod+Shift+v split h
+bindsym $mod+Shift+Down move scratchpad
+bindsym $mod+Down scratchpad show
 
-# split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
+
+# # split directions
+# bindsym $mod+s split h
+# bindsym $mod+Shift+s split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+q kill
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
 
-# # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
+# toggle sticky (follows you to every workspace)
+bindsym $mod+Shift+t sticky toggle
 
-# # change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -276,6 +287,35 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
+# --- Useful Custom Modes ---
+
+# 2. Screenshot Mode (Mod+p) - Different capture options
+set $mode_screenshot 📸 (s)select, (f)full, (c)copy, (5)delay 5s
+mode "$mode_screenshot" {
+    bindsym s exec --no-startup-id flameshot gui, mode "default"
+    bindsym f exec --no-startup-id flameshot full -p ~/Pictures/Screenshots, mode "default"
+    bindsym c exec --no-startup-id flameshot full -c, mode "default"
+    bindsym 5 exec --no-startup-id flameshot full -d 5000 -p ~/Pictures/Screenshots, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_screenshot"
+
+# 4. Layout Mode (Mod+z) - Change window layouts
+set $mode_layout 🪟 (s)stack, (t)tab, (e)toggle, (h)split h, (v)split v
+mode "$mode_layout" {
+    bindsym s layout stacking, mode "default"
+    bindsym t layout tabbed, mode "default"
+    bindsym e layout toggle split, mode "default"
+    bindsym h split h, mode "default"
+    bindsym v split v, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+z mode "$mode_layout"
+
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id sh ~/.config/i3/lock.sh lock, mode "default"
@@ -353,13 +393,14 @@ client.background        $base
     # Brave, chrome, chromium
         for_window [title="Picture-in-picture"] floating enable
         for_window [class="yazi-float"] floating enable, resize set 1000 700
+        for_window [class="kitty-float"] floating enable, resize set 1000 700
 
     # Assign programs to workspace
         assign [class="firefox"] → number 1
         assign [class="code"] → number 2
         assign [class="discord"] → number 3
         assign [class="dbeaver"] → number 4
-        assign [class="kitty"] → number 3
+        # assign [class="kitty"] → number 3
         # Some programs can be stubborn since they open a splash window before opening
         for_window [class="discord"] move to workspace number 5
         for_window [class="Spotify"] move to workspace number 6
