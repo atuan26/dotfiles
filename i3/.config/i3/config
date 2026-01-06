@@ -141,7 +141,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+space exec --no-startup-id rofi -show combi
 bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym Mod1+Tab exec --no-startup-id rofi -show window
 
+bindsym $mod+Shift+e exec --no-startup-id kitty --class yazi-float -e yazi
 # clipboard manager
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
@@ -247,7 +249,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -348,12 +350,13 @@ client.background        $base
 
     # Brave, chrome, chromium
         for_window [title="Picture-in-picture"] floating enable
+        for_window [class="yazi-float"] floating enable, resize set 1000 700
 
     # Assign programs to workspace
         assign [class="firefox"] → number 1
         assign [class="code"] → number 2
         assign [class="discord"] → number 3
-        assign [class="Spotify"] → number 4
+        assign [class="dbeaver"] → number 4
         assign [class="kitty"] → number 3
         # Some programs can be stubborn since they open a splash window before opening
         for_window [class="discord"] move to workspace number 5
