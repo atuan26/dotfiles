@@ -1,0 +1,31 @@
+[manager]
+cwd = { fg = "#7aa2f7" }
+
+[status]
+separator_open = ""
+separator_close = ""
+
+[filetype]
+rules = [
+  { url = "*/" , fg = "#7aa2f7", bold = true },
+  { url = "*.rs", fg = "#dea584" },
+  { url = "*.go", fg = "#00add8" },
+  { url = "*.py", fg = "#ffbc03" },
+  { url = "*.js", fg = "#f1e05a" },
+  { url = "*.ts", fg = "#3178c6" },
+  { url = "*.lua", fg = "#51a0cf" },
+  { url = "*.sh", fg = "#89e051" },
+  { url = "*.toml", fg = "#9c4221" },
+  { url = "*.yaml", fg = "#cb171e" },
+  { url = "*.json", fg = "#cbcb41" },
+  { url = "*.md", fg = "#519aba" },
+  { url = "*.jpg", fg = "#a074c4" },
+  { url = "*.png", fg = "#a074c4" },
+  { url = "*.gif", fg = "#a074c4" },
+  { url = "*.mp4", fg = "#fd971f" },
+  { url = "*.mkv", fg = "#fd971f" },
+  { url = "*.mp3", fg = "#66d9ef" },
+  { url = "*.zip", fg = "#f4bf75" },
+  { url = "*.tar", fg = "#f4bf75" },
+  { url = "*.gz", fg = "#f4bf75" },
+]
