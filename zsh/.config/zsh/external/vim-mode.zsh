@@ -1,9 +1,8 @@
 # Updates editor information when the keymap changes.
 bindkey -v
 
-# Remove mode switching delay.
-KEYTIMEOUT=5
-# export KEYTIMEOUT=2
+# Mode switching delay - needs 10ms minimum for escape sequences
+KEYTIMEOUT=10
 
 # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursors
 # block blinking: '\e[1 q'
@@ -65,6 +64,14 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 
 bindkey -M viins "^[[A" up-line-or-beginning-search
 bindkey -M viins "^[[B" down-line-or-beginning-search
+
+# Home/End keys in insert mode (stay in insert mode)
+bindkey -M viins "^[[H" beginning-of-line   # Home (xterm)
+bindkey -M viins "^[[F" end-of-line         # End (xterm)
+bindkey -M viins "^[[1~" beginning-of-line  # Home (linux/rxvt)
+bindkey -M viins "^[[4~" end-of-line        # End (linux/rxvt)
+bindkey -M viins "^[OH" beginning-of-line   # Home (application mode)
+bindkey -M viins "^[OF" end-of-line         # End (application mode)
 
 # "/" vi-history-search-backward
 # "?" vi-history-search-forward
