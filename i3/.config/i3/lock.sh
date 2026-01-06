@@ -5,7 +5,12 @@ lock() {
 
 # xsecurelock
 xlock() {
-    $DOTFILES/config/xsecurelock.sh
+	export XSECURELOCK_DISCARD_FIRST_KEYPRESS=0
+	export XSECURELOCK_PASSWORD_PROMPT=time_hex
+	export XSECURELOCK_SHOW_DATETIME=1
+	export XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0
+	export XSECURELOCK_SHOW_HOSTNAME=0
+	xsecurelock
 }
 
 

@@ -51,6 +51,11 @@ bindkey -M vicmd '^V' vi-insert    # Ctrl+V to go to insert mode
 zle -N zle-keymap-select
 zle -N zle-line-init
 
+# Load the history search widgets
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
 bindkey -M menuselect 'h' vi-backward-char
 # bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
