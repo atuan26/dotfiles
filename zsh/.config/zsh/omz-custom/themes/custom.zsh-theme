@@ -115,7 +115,7 @@ prompt_git() {
 
 # Dir: current folder name only with icon
 prompt_dir() {
-  prompt_segment blue $PRIMARY_FG '  %1~ '
+  prompt_segment blue $PRIMARY_FG '   %1~ '
 }
 
 # Status:
