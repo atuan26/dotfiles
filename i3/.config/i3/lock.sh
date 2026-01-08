@@ -1,11 +1,7 @@
 #!/bin/sh
 lock() {
-    i3lock-fancy -g
-}
-
-# xsecurelock
-xlock() {
-	export XSECURELOCK_DISCARD_FIRST_KEYPRESS=0
+    # i3lock-fancy -g
+    export XSECURELOCK_DISCARD_FIRST_KEYPRESS=0
 	export XSECURELOCK_PASSWORD_PROMPT=time_hex
 	export XSECURELOCK_SHOW_DATETIME=1
 	export XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0
@@ -16,7 +12,7 @@ xlock() {
 
 case "$1" in
     lock)
-        xlock
+        lock
         ;;
     logout)
         i3-msg exit

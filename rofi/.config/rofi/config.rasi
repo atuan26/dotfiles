@@ -7,6 +7,7 @@
  * ============================================================================= */
 
 configuration{
+    matching: "fuzzy";
     modi: "drun,run,window,clipboard:greenclip print";
     icon-theme: "Oranchelo";
     show-icons: true;
@@ -39,7 +40,7 @@ configuration{
     /* =========================================================================
      * Accept/Cancel
      * ========================================================================= */
-    kb-accept-entry: "Return,KP_Enter";
+    kb-accept-entry: "Return,KP_Enter,space";
     kb-cancel: "Escape,Super+Escape,Alt+Escape,Super+d";
     
     /* =========================================================================
