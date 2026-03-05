@@ -1,14 +1,55 @@
 {
-	// Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	"Print to console": {
-		"prefix": "pr",
-		"body": [
-			"print('$0: ', $0)",
-		],
-		"description": "Log output to console"
-	}
+    // Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+    "Print to console": {
+        "prefix": "pr",
+        "body": [
+            "print('$0: ', $0)",
+        ],
+        "description": "Log output to console"
+    },
+    "Breakpoint pdb": {
+        "prefix": "breakpoint",
+        "body": [
+            "import pdb;pdb.set_trace()",
+        ],
+        "description": ""
+    },
+    "Print Variable": {
+        "prefix": "pprintvar",
+        "body": [
+            "print(f'\\x1b[36m🔍 ${1:var} = \\x1b[32m{${1:var}}\\x1b[0m')"
+        ],
+        "description": "Print variable name and value"
+    },
+    "List Comprehension": {
+        "prefix": "listcomp",
+        "body": [
+            "[${1:x} for ${1:x} in ${2:iterable}]"
+        ],
+        "description": "Python list comprehension"
+    },
+    "Pretty Print Dictionary": {
+        "prefix": "pprintdict",
+        "body": [
+            "######################## DEBUG ###########################",
+            "import json;try: formatted = json.dumps(vars(${1:data}) if not isinstance(${1:data}, dict) else ${1:data}, indent=4, ensure_ascii=False)",
+            "except TypeError: formatted = json.dumps(${1:data}.__dict__, indent=4, ensure_ascii=False) if hasattr(${1:data}, '__dict__') else str(${1:data})",
+            "print(f'🔍{'\\x1b[33m' if isinstance(${1:data}, dict) else '\\x1b[34m'}{formatted}\\x1b[0m')",
+            "print('🔍${1:data}\\n{}\\n{}'.format(formatted, color_reset))",
+            "######################## DEBUG ###########################"
+        ],
+        "description": "Pretty print dictionary or object with ANSI colors (Compact Debug Format)"
+    }
 }

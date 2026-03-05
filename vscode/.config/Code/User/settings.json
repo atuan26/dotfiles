@@ -45,7 +45,7 @@
   "editor.guides.indentation": true,
   "editor.hover.delay": 300,
   "editor.lineNumbers": "relative",
-  "editor.minimap.autohide": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.minimap.renderCharacters": false,
   "editor.minimap.showSlider": "mouseover",
   "editor.occurrencesHighlight": "off",
@@ -57,7 +57,6 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "explorer.decorations.colors": false,
   "explorer.openEditors.visible": 1,
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
@@ -65,7 +64,6 @@
   "extensions.ignoreRecommendations": true,
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
-  "glassit.alpha": 1,
   "go.toolsManagement.autoUpdate": true,
   "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
   "liveServer.settings.donotShowInfoMsg": true,
@@ -81,6 +79,9 @@
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.startupPrompt": "never",
   "security.workspace.trust.untrustedFiles": "open",
+  "git.autofetch": true,
+  "git.autorefresh": true,
+  "git.autofetchPeriod": 5,
   "tailwindCSS.classAttributes": ["class", "className"],
   "terminal.integrated.fontFamily": "'Agave Nerd Font', Menlo, monospace",
   "terminal.integrated.defaultProfile.osx": "zsh",
@@ -158,6 +159,10 @@
     {
       "before": ["[", "b"],
       "commands": [":bp"]
+    },
+    {
+      "before": ["<leader>", "m", "d"],
+      "commands": [":delm!"]
     },
     {
       "before": ["<leader>", "f", "w"],
@@ -372,10 +377,8 @@
   "keyboard.dispatch": "keyCode",
   "vim.showMarksInGutter": true,
   "vim.foldfix": true,
-  "material-icon-theme.hidesExplorerArrows": true,
   "workbench.tree.renderIndentGuides": "none",
   "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": "none",
   "workbench.tips.enabled": false,
   "editor.showFoldingControls": "never",
   "editor.detectIndentation": false,
@@ -389,7 +392,6 @@
   "workbench.editor.editorActionsLocation": "hidden",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "gitlens.views.searchAndCompare.avatars": false,
-  "workbench.activityBar.location": "hidden",
   "gitlens.views.remotes.branches.layout": "list",
   "merge-conflict.diffViewPosition": "Beside",
   "vscode-color-picker.languages": [
@@ -406,10 +408,19 @@
   "workbench.view.showQuietly": {
     "workbench.panel.output": false
   },
-  "explorer.compactFolders": false,
   "inlineChat.holdToSpeech": false,
+  "window.menuBarVisibility": "compact",
   "workbench.navigationControl.enabled": false,
-  "window.menuBarVisibility": "compact"
-//   "roo-cline.allowedCommands": ["git log", "git diff", "git show"],
-//   "roo-cline.deniedCommands": []
+  "python.languageServer": "Default",
+  "git.blame.editorDecoration.enabled": false,
+  "agCockpit.profileHidden": true,
+  "python.createEnvironment.trigger": "off",
+  "explorer.compactFolders": false,
+  "explorer.incrementalNaming": "smart",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "workbench.editor.showTabs": "none",
+  "git.blame.statusBarItem.enabled": false,
+  "workbench.activityBar.location": "hidden"
+  //   "roo-cline.allowedCommands": ["git log", "git diff", "git show"],
+  //   "roo-cline.deniedCommands": []
 }
