@@ -48,32 +48,23 @@ make all
 sudo pacman -S --needed git base-devel
 
 # Install yay (AUR helper)
-git clone https://aur.archlinux.org/yay.git
-cd yay && makepkg -si
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+
+# Enable sshd
+sudo systemctl enable --now sshd
 
 **Display Manager Setup**
 
 ```bash
 # Install and enable ly display manager
-sudo pacman -S ly
-sudo systemctl enable ly.service
+sudo pacman -S ly && sudo systemctl enable ly@ttyN.service
 ```
 
 **Terminal Setup**
 
 ```bash
 # Install kitty terminal
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-# Add kitty to PATH and create desktop entries
-mkdir -p ~/.local/bin
-ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-echo 'kitty.desktop' > ~/.config/xdg-terminals.list
-
+yay -S kitty
 ```
 
 **Docker Setup**
@@ -81,13 +72,10 @@ echo 'kitty.desktop' > ~/.config/xdg-terminals.list
 ```bash
 # Install Docker
 sudo pacman -S --noconfirm docker docker-compose
-sudo systemctl start docker.service
-sudo systemctl enable docker.service
+sudo systemctl enable --now docker.service
 
 # Fix Docker permissions
-sudo usermod -aG docker $USER
-newgrp docker
-sudo chmod 777 /var/run/docker.sock
+sudo usermod -aG docker $USER && newgrp docker && sudo chmod 777 /var/run/docker.sock
 ```
 
 **Zsh Setup**
