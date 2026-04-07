@@ -25,3 +25,5 @@ elif [[ -f "/usr/local/bin/brew" ]]; then
 fi
 
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+source "$HOME/.zshrc"

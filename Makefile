@@ -17,7 +17,7 @@ STOW := stow -v -d $(STOW_DIR) -t $(STOW_TARGET)
 endif
 
 # Package lists
-CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons kitty
+CONFIG_PACKAGES := zsh tmux git vscode zed service i3 polybar config shell icons kitty rofi
 ALL_PACKAGES := $(CONFIG_PACKAGES)
 
 # Dependency files
@@ -30,7 +30,7 @@ export LC_ALL=C
 export LANG=C
 
 .PHONY: help install uninstall restow check deps aur-deps flatpak-deps pass-init
-.PHONY: zsh-install tmux-install git-install vscode-install zed-install service-install i3-install polybar-install config-install shell-install icons-install kitty-install
+.PHONY: zsh-install tmux-install git-install vscode-install zed-install service-install i3-install polybar-install config-install shell-install icons-install kitty-install rofi-install
 
 # Default target
 help:
@@ -149,6 +149,11 @@ icons-install:
 kitty-install:
 	@echo -e "$(GREEN)Installing kitty...$(NC)"
 	@$(STOW) kitty
+
+rofi-install:
+	@echo -e "$(GREEN)Installing rofi...$(NC)"
+	@$(STOW) rofi
+	@chmod +x $(HOME)/.config/rofi/scripts/*.sh
 
 # Dependency installation targets (unchanged from original)
 deps:
