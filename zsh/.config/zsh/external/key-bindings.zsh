@@ -118,9 +118,32 @@ bindkey -M viins '^f' fif-widget  # Alt+F: Search in files
 bindkey -M vicmd '^f' fif-widget  # Alt+F: Search in files
 
 # =============================================================================
-# DEBUGGING BINDINGS (Optional)
+# WORD NAVIGATION & DELETION (Ctrl+Left/Right/Backspace/Delete)
 # =============================================================================
 
-# Uncomment for debugging
-# bindkey -s '^B' 'echo "Debug: Current directory is $(pwd)"\n'
-# bindkey -s '^V' 'echo "Debug: ZSH version is $ZSH_VERSION"\n'
+# Word Navigation (Ctrl+Left/Right)
+bindkey -M viins "^[[1;5C" forward-word
+bindkey -M viins "^[[1;5D" backward-word
+bindkey -M vicmd "^[[1;5C" forward-word
+bindkey -M vicmd "^[[1;5D" backward-word
+
+# Word Deletion (Ctrl+Backspace/Delete)
+# Note: Ctrl+Backspace is mapped to ^W (Ctrl+W) in kitty configuration
+bindkey -M viins "^W" backward-kill-word
+bindkey -M vicmd "^W" backward-kill-word
+bindkey -M viins "^[[3;5~" kill-word
+bindkey -M vicmd "^[[3;5~" kill-word
+
+# Home/End Keys
+bindkey -M viins "^[[H" beginning-of-line
+bindkey -M viins "^[[F" end-of-line
+bindkey -M vicmd "^[[H" beginning-of-line
+bindkey -M vicmd "^[[F" end-of-line
+
+# Handle default backspace just in case
+bindkey -M viins "^H" backward-delete-char
+bindkey -M viins "^?" backward-delete-char
+
+# =============================================================================
+# DEBUGGING BINDINGS (Optional)
+# =============================================================================
