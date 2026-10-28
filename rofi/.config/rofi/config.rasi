@@ -8,7 +8,7 @@
 
 configuration{
     matching: "fuzzy";
-    modi: "drun,run,window,clipboard:greenclip print";
+    modi: "drun,run,window,calc,clipboard:greenclip print";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "alacritty";
@@ -19,6 +19,7 @@ configuration{
     display-drun: "󰵆  Apps";
     display-run: "  Run";
     display-window: "  Window";
+    display-calc: "󰃬  Calc";
     display-clipboard: "󱃔  Clip";
     display-combi: "󰍜  All";
     sidebar-mode: true;
@@ -243,4 +244,3 @@ textbox {
     padding:             12px;
     border-radius:       6px;
 }
-
